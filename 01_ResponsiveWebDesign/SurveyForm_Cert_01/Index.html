@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Survey Form</title><!--Your #title should not be empty.-->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+<!-- -->
+
+  <body>
+<h1 id="title">Survey Form</h1> <!--You should have an h1 element with an id of title.-->
+<p id="description" class="description" >First chalenge for a Certification on FreeCodeCamp 2023 - Carlos Reinis</p> <!--You should have a p element with an id of description. / Your #description should not be empty.-->
+
+<form id="survey-form"> <!--You should have a form element with an id of survey-form.-->
+<fieldset>
+  <label id="name-label" for="name">Name <input id="name" name="name" type="text" placeholder="Enter your Name" required /></label> <!--You should have an input element with an id of name / Your #name should have a type of text / Your #name should require input. / Your #name should be a descendant of #survey-form. / You should have a label element with an id of name-label. / Your #name-label should contain text that describes the input. / Your #name-label should be a descendant of #survey-form. / Your #name should have a placeholder attribute and value.-->
+  <label id="email-label" for="email">Email <input id="email" name="email" type="email" placeholder="Enter your Email" required /></label> <!--You should have an input element with an id of email. / Your #email should have a type of email. / Your #email should require input. / Your #email should be a descendant of #survey-form. / You should have a label element with an id of email-label. / Your #email-label should contain text that describes the input. / Your #email-label should be a descendant of #survey-form. / Your #email should have a placeholder attribute and value.-->
+  <label id="number-label" for="number">Number (optional) <input id="number" type="number" name="number" min="1" max="99" placeholder="Enter a number from 1 to 99" /></label> <!--You should have an input element with an id of number. / Your #number should be a descendant of #survey-form. /  Your #number should have a type of number. / Your #number should have a min attribute with a numeric value. / Your #number should have a max attribute with a numeric value. / You should have a label element with an id of number-label. / Your #number-label should contain text that describes the input. / Your #number-label should be a descendant of #survey-form. / Your #number should have a placeholder attribute and value.-->
+</fieldset>    
+<fieldset> <!--You should have a select field with an id of dropdown. / Your #dropdown should have at least two selectable (not disabled) option elements. / Your #dropdown should be a descendant of #survey-form.-->
+  <label for="dropdown">Please rate our service.
+          <select id="dropdown" name="dropdown">
+            <option value="">(select one)</option>
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+          </select>
+        </label>    
+  </fieldset>
+  <fieldset> <!--You should have at least two input elements with a type of radio (radio buttons). / You should have at least two radio buttons that are descendants of #survey-form. / All your radio buttons should have a value attribute and value. / All your radio buttons should have a name attribute and value. / Every radio button group should have at least 2 radio buttons.-->
+        <legend>Sexual orientation</legend>
+        <label for="male"><input id="male" type="radio" name="name" class="inline" value="1" /> Male</label>
+        <label for="female"><input id="female" type="radio" name="name" class="inline" value="2"/> Female</label>
+        <label for="other"><input id="other" type="radio" name="name" class="inline" value="3"/> Other</label>
+        <label for="no answer"><input id="no answer" type="radio" name="name" class="inline" value="4"/> Don't want to answer</label>
+      </fieldset>
+      <fieldset> <!--You should have at least two input elements with a type of checkbox (checkboxes) that are descendants of #survey-form. / All your checkboxes inside #survey-form should have a value attribute and value. / -->
+        <legend>Select your options</legend>
+        <label for="options"><input id="options" type="checkbox" name="options" class="inline" value="1" /> X</label>
+        <label for="options"><input id="options" type="checkbox" name="options" class="inline" value="2"/> Y</label>
+        <label for="options"><input id="options" type="checkbox" name="options" class="inline" value="3"/> Z</label>
+        <label for="options"><input id="options" type="checkbox" name="options" class="inline" value="4"/> W</label>
+        <label for="options"><input id="options" type="checkbox" name="options" class="inline" value="5"/> H</label>
+        <label for="options"><input id="options" type="checkbox" name="options" class="inline" value="6"/> K</label>
+      </fieldset> <!--You should have at least one textarea element that is a descendant of #survey-form. / -->
+      <label for="additional comments"> Additional comments: 
+          <textarea id="additional comments" name="additional comments" rows="3" cols="50" placeholder="Left a message if you want"></textarea></label>
+<input type="submit" value="Submit" /> <!--Your #submit should have a type of submit. / Your #submit should be a descendant of #survey-form.-->
+  </form>
+    </body>
