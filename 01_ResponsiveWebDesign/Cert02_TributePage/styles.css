@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  main {
+    margin: 0;
+    padding: 20px;
+    font-family: sans-serif;
+    background:white;
+  }
+  
+h1 {
+    text-align: center; 
+}
+
+figure {
+  justify-content: center; /*Your img element should be centered within its parent element*/ 
+  align-items: center;
+}
+
+img {
+     display: block; /*Your img element should have a display of block. */
+    width: 100%;
+    max-width: 100%;
+    height: auto; /*Your #image should have a height of auto.*/
+    object-fit: cover;
+
+    align-items: center;
+}
