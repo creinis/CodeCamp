@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color:black;
+    color: #f5f6f7;
+    font-family: Tahoma;
+    font-size: 12px;
+}
+#nav-bar {
+  position: fixed;
+  top: 0;
+display: flex;
+justify-content: space-evenly;
+flex-wrap: wrap;
+align-items: center;
+z-index: 1000;
+
+}
+
+#header-img { 
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  top: 1000px;
+  
+}
+
+a {
+  text-decoration: none;
+  color:white;
+  font-weight: bold;
+}
+#header-img {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    * {
+      scroll-behavior: smooth;
+    }
+  }

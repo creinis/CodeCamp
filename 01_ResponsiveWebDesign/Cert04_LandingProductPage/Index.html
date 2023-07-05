@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Product Landing Page</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <!--  -->
+
+  <header id="header"> <!-- Your product landing page should have a header element with a corresponding id="header" -->
+
+<img 
+src="https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png"
+alt="freecodecamp logo"
+loading="lazy" 
+id="header-img"
+ 
+> 
+<!-- You can see an image within the header element with a corresponding id="header-img" (A logo would make a good image here) -->
+
+<nav id="nav-bar" class="nav-bar">
+  <!-- Within the #header element, you can see a nav element with a corresponding id="nav-bar" -->
+
+    <a href="#aaa" class="nav-link">aaa</a> 
+    <a href="#bbb" class="nav-link">bbb</a>
+    <a href="#ccc" class="nav-link">ccc</a>
+    <a href="#ddd" class="nav-link">ddd</a>
+
+<!-- You can see at least three clickable elements inside the nav element, each with the class nav-link -->
+<!-- When you click a .nav-link button in the nav element, you are taken to the corresponding section of the landing page -->
+
+<section id="aaa">
+  <h3>aaa</h3>
+  <p>Lorem AAA, ipsum dolor sit amet consectetur adipisicing elit. Sequi tenetur veritatis non iste maiores, repellat dignissimos fuga illo, magnam temporibus, possimus velit quae id molestias ut similique assumenda at odio natus iusto ea harum facere corrupti? Corrupti perspiciatis est sint!</p>
+  
+  <section>
+    <section id="bbb">
+  <h3>bbb</h3>
+  <p>Lorem BBB, ipsum dolor sit amet consectetur adipisicing elit. Sequi tenetur veritatis non iste maiores, repellat dignissimos fuga illo, magnam temporibus, possimus velit quae id molestias ut similique assumenda at odio natus iusto ea harum facere corrupti? Corrupti perspiciatis est sint!</p>
+  <section>
+    <section id="ccc">
+  <h3>ccc</h3>
+  <p>Lorem CCC, ipsum dolor sit amet consectetur adipisicing elit. Sequi tenetur veritatis non iste maiores, repellat dignissimos fuga illo, magnam temporibus, possimus velit quae id molestias ut similique assumenda at odio natus iusto ea harum facere corrupti? Corrupti perspiciatis est sint!</p>
+  <section>
+    <section id="ddd">
+  <h3>ddd</h3>
+  <p>Lorem DDD, ipsum dolor sit amet consectetur adipisicing elit. Sequi tenetur veritatis non iste maiores, repellat dignissimos fuga illo, magnam temporibus, possimus velit quae id molestias ut similique assumenda at odio natus iusto ea harum facere corrupti? Corrupti perspiciatis est sint!</p>
+  <section>
+
+<video controls id="video" src="https://www.youtube.com/watch?v=8zAjqg3yAKo"></video>
+<!-- You can watch an embedded product video with id="video" -->
+
+<!-- Your landing page has a form element with a corresponding id="form" -->
+<form id="form" method="post" action='https://www.freecodecamp.com/email-submit' > <!-- When you click the #submit element, the email is submitted to a static page (use this mock URL: https://www.freecodecamp.com/email-submit) -->
+  <fieldset>
+    <!-- Within the form, there is an input field with id="email" where you can enter an email address -->
+    <!-- The #email input field should have placeholder text to let users know what the field is for -->
+    <!-- The #email input field uses HTML5 validation to confirm that the entered text is an email address -->
+  <input id="email" name="email" type="email" placeholder="Enter your Email"/>
+  <input type="submit" value="Submit" id="submit"/> <!-- Within the form, there is a submit input with a corresponding id="submit" -->
+</fieldset>  
+</form>
+  </nav>
+  </header>
+  </html>
+
+<!--  Build a Product Landing Page
+
+Objective: Build an app that is functionally similar to https://product-landing-page.freecodecamp.rocks
+
+User Stories:
+
+    Your product landing page should have a header element with a corresponding id="header"
+    You can see an image within the header element with a corresponding id="header-img" (A logo would make a good image here)
+    Within the #header element, you can see a nav element with a corresponding id="nav-bar"
+    You can see at least three clickable elements inside the nav element, each with the class nav-link
+    When you click a .nav-link button in the nav element, you are taken to the corresponding section of the landing page
+    You can watch an embedded product video with id="video"
+    Your landing page has a form element with a corresponding id="form"
+    Within the form, there is an input field with id="email" where you can enter an email address
+    The #email input field should have placeholder text to let users know what the field is for
+    The #email input field uses HTML5 validation to confirm that the entered text is an email address
+    Within the form, there is a submit input with a corresponding id="submit"
+    When you click the #submit element, the email is submitted to a static page (use this mock URL: https://www.freecodecamp.com/email-submit)
+    The navbar should always be at the top of the viewport
+    Your product landing page should have at least one media query
+    Your product landing page should utilize CSS flexbox at least once
+
+Fulfill the user stories and pass all the tests below to complete this project. Give it your own personal style. Happy Coding!
+
+Note: Be sure to add <link rel="stylesheet" href="styles.css"> in your HTML to link your stylesheet and apply your CSS
+Tests
+
+Passed: You should have a header element with an id of header.
+Passed: You should have an img element with an id of header-img.
+Passed: Your #header-img should be a descendant of the #header.
+Passed: Your #header-img should have a src attribute.
+Passed: Your #header-img’s src value should be a valid URL (starts with http).
+Passed: You should have a nav element with an id of nav-bar.
+Passed: Your #nav-bar should be a descendant of the #header.
+Passed: You should have at least 3 .nav-link elements within the #nav-bar.
+Passed: Each .nav-link element should have an href attribute.
+Passed: Each .nav-link element should link to a corresponding element on the landing page (has an href with a value of another element's id. e.g. #footer).
+Passed: You should have a video or iframe element with an id of video.
+Passed: Your #video should have a src attribute.
+Passed: You should have a form element with an id of form.
+Passed: You should have an input element with an id of email.
+Passed: Your #email should be a descendant of the #form.
+Passed: Your #email should have the placeholder attribute with placeholder text.
+Passed: Your #email should use HTML5 validation by setting its type to email.
+Passed: You should have an input element with an id of submit.
+Passed: Your #submit should be a descendant of the #form.
+Passed: Your #submit should have a type of submit.
+Passed: Your #form should have an action attribute of https://www.freecodecamp.com/email-submit.
+Passed: Your #email should have a name attribute of email.
+Passed: Your #nav-bar should always be at the top of the viewport.
+Failed: Your Product Landing Page should use at least one media query.
+Passed: Your Product Landing Page should use CSS Flexbox at least once.-->
