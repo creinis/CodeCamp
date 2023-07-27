@@ -1,0 +1,28 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  background-color: rgb(238, 137, 87);
+  padding-top: 10px;
+  text-align: center;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: rgb(238, 137, 87);
+}
+
+#editor {
+  min-width: 50%;
+  height: 30vh;
+  margin: auto;
+}
+
+#preview {
+  max-width: 70%;
+  height: 60vh;
+  margin: auto; 
+}
+
+
+
