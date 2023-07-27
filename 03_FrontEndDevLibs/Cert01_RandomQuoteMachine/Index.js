@@ -73,6 +73,6 @@ function App() {
     );
 }
 
-//Quote Machine copied from the site https://type.fit/api/quotes
+//Quote Machine Seed from the site https://type.fit/api/quotes
 
 ReactDOM.render(<App/>, document.getElementById('app'))
