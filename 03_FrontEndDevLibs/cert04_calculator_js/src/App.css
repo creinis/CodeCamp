@@ -1,0 +1,58 @@
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.calculator {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: 
+  "display display display display"
+  "clear clear delete add"
+  "seven eigth nine subtract"
+  "four five six multiply"
+  "one two three divide"
+  "zero decimal equals" ;
+  gap: 5px;
+  margin: auto;
+  padding-top: 10vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.equals {
+  grid-area: 2fr;
+}
+
+.calculator > * {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.zero {
+  grid-area: zero;
+}
+
+.row {
+  grid-column: 1/-1;
+}
+
+#display {
+  text-align: right;
+  background-color: black;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+}
+
+#clear {
+  text-align: right;
+  background-color: red;
+  
+}
+
+
