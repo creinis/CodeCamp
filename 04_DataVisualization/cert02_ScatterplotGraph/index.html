@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,21 +16,27 @@
        <link rel="stylesheet" href="./style.css">
 
 
-    <title>My Chart</title>
+    <title>Scatterplot Graph</title>
 </head>
 
 <body>
    
     <div id="app" class="container">
 
-        <svg id='bar chart' class="chart">
-            <text id='title' x='250' y='20'>United States GDP</text>
+        <svg id='chart' class="chart">
+            <text id='title' x='250' y='20'>Doping in Professional Bicycle Racing</text>
         </svg>
 
-    </div>
+        <div id="legend" >
+            YEAR (x) vs TIME (y) </br />
+            Red = Dopping
+            Blue = No Dopping
+        </div>
+        <div id="tooltip" >
 
-    
-    
+        </div>
+
+    </div>
 
 <!-- // need this type "text/babel" to see the correct output, 
 ./ indicates that the file is in the same folder, and src is pointing to the JS file -->
@@ -41,3 +48,4 @@
 
 </body>
 </html>
+

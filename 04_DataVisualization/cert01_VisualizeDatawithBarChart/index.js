@@ -1,6 +1,7 @@
 
+
 //dataset: CodeCamp Here is the dataset you will need to complete this project: 
-var url = 'https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json'
+var url = 'https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json'
 var req = new XMLHttpRequest()
 
 var data

@@ -1,0 +1,15 @@
+* {
+    background-color: gray;
+}
+
+.container .chart{
+    margin-top: 180px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+    border-radius: 20px;
+    background-color: azure;
+}
+
+
