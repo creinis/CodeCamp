@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js" integrity="sha256-tHoAPGoNdhIR28YHl9DWLzeRfdwigkH7OCBXMrHXhoM=" crossorigin="anonymous"></script>
+
+       <script src="https://d3js.org/d3.v5.min.js"></script>
+       <link rel="stylesheet" href="./style.css">
+
+    <title>Choropleth Map Data Visualizator</title>
+</head>
+
+<body>
+   
+        <!-- User Story #1 -->
+        <text id='title' x='350' y='30'>United States Educational Attainment</text>
+        
+        <!-- User Story #2 -->
+        <text id='description' x='250' y='30'>Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)</text>
+     
+    <div id="container" >
+        <svg id="canvas" >
+
+        </svg>
+        <div id="tooltip" > 
+
+        </div>
+
+  
+        <svg id="legend" > <!-- User Story #8 / User Story #9 -->
+           
+            <g>
+                <rect x="10" y="0" width="40" height="40" fill= "lightgreen" /> 
+                <text x="60" y="20"> 15% </text>
+            </g>
+            <g>
+                <rect x="10" y="40" width="40" height="40" fill="limegreen"></rect> 
+                <text x="60" y="60"> 30% </text>
+            </g>
+            <g>
+                <rect x="10" y="80" width="40" height="40" fill="green"></rect> 
+                <text x="60" y="100"> 45% </text>
+            </g>
+            <g>
+                <rect x="10" y="120" width="40" height="40" fill="darkolivegreen"></rect> 
+                <text x="60" y="140"> 60% </text>
+            </g>
+        </svg>
+    </div>
+</body>
+
+
+<script defer src="./index.js"> </script>
+
+<!-- freecodecamp testing -->
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+</html>
+

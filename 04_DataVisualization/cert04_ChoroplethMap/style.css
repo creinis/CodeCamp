@@ -1,0 +1,58 @@
+
+html, body{
+    min-height: 100%
+}
+
+body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: none;
+}
+
+svg{
+    background-color: white;
+    padding-left: 150px;
+    padding-right: 0;
+}
+
+#canvas{
+    min-height: 800px;
+    min-width: 1000px;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.county:hover{
+    fill: rgb(53, 52, 52)
+}
+
+#legend{
+    display: flex;
+    color: black;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+#title{
+    font-size: 60px;
+    color: black;
+    margin: 10px;
+}
+
+#description {
+    color: black;
+    text-align: center;
+    font-size: 28px;
+    margin: 10px;
+}
+
+
