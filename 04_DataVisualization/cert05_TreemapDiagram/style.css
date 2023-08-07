@@ -1,0 +1,66 @@
+
+
+body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+svg{
+    background-color: white;
+    box-shadow: 2px 15px 30px rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 25px;
+}
+
+#canvas{
+    min-height: 600px;
+    min-width: 1000px;
+    font-size: 11px;
+    box-shadow: 2px 15px 30px rgba(0,0,0,0.2);
+}
+
+.tile:hover{
+    fill: white
+}
+
+#tooltip{
+    width: 200px;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+#title{
+    font-size: 65px;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#description{
+    text-align: center;
+    color: black;
+    font-size: 28px;
+}
+
+#legend{
+    display: flex;
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    min-height: 280px;
+    min-width: 400px;
+    margin: 20px;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%
+}

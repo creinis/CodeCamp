@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+       <script src="https://d3js.org/d3.v5.min.js"></script>
+       <link rel="stylesheet" href="./style.css">
+
+    <title>Visualize Data with a Treemap Diagram</title>
+</head>
+
+
+<body>
+   
+        <!-- User Story #1 -->
+        <text id='title' x='350' y='30'>Video Game Sales</text>
+        
+        <!-- User Story #2 -->
+        <text id='description' x='250' y='30'>Top 100 Most Sold Video Games Grouped by Platform</text>
+     
+    <div id="container" >
+        <svg id="canvas" >
+
+        </svg>
+
+        <div id="tooltip" > 
+
+        </div>
+
+        <svg id="legend" > <!-- User Story #8 / User Story #9 -->
+           
+            <g>
+                <rect class="legend-item" x="10" y="0" width="40" height="40" fill= "lightgreen" /> 
+                <text x="60" y="20"> 3DS </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="10" y="40" width="40" height="40" fill= "pink" /> 
+                <text x="60" y="60"> Wii </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="10" y="80" width="40" height="40" fill="orange"></rect> 
+                <text x="60" y="100"> NES </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="10" y="120" width="40" height="40" fill= "coral" /> 
+                <text x="60" y="140"> GameBoy </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="10" y="160" width="40" height="40" fill="yellow"></rect> 
+                <text x="60" y="180"> DS </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="10" y="200" width="40" height="40" fill= "blue" /> 
+                <text x="60" y="220"> SNES </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="10" y="240" width="40" height="40" fill="burlywood"></rect> 
+                <text x="60" y="260"> N64 </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="150" y="0" width="40" height="40" fill= "red" /> 
+                <text x="200" y="20"> GBA </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="150" y="40" width="40" height="40" fill= "silver" /> 
+                <text x="200" y="60"> 2600 </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="150" y="80" width="40" height="40" fill="grey"></rect> 
+                <text x="200" y="100"> X360 </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="150" y="120" width="40" height="40" fill= "lightblue" /> 
+                <text x="200" y="140"> PS3 </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="150" y="160" width="40" height="40" fill="violet"></rect> 
+                <text x="200" y="180"> PS2 </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="150" y="200" width="40" height="40" fill= "tomato" /> 
+                <text x="200" y="220"> PS4 </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="150" y="240" width="40" height="40" fill="green"></rect> 
+                <text x="200" y="260"> PS </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="290" y="0" width="40" height="40" fill= "magenta" /> 
+                <text x="340" y="20"> XB </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="290" y="40" width="40" height="40" fill= "yellowgreen" /> 
+                <text x="340" y="60"> PC </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="290" y="80" width="40" height="40" fill="azure"></rect> 
+                <text x="340" y="100"> PSP </text>
+            </g>
+            <g>
+                <rect class="legend-item" x="290" y="120" width="40" height="40" fill= "brown" /> 
+                <text x="340" y="140"> xOne </text>
+            </g>
+            
+        </svg>
+    </div>
+</body>
+
+
+<script defer src="./index.js"> </script>
+
+<!-- freecodecamp testing -->
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+</html>
+
+
