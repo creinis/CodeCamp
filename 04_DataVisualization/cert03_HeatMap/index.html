@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+       <script src="https://d3js.org/d3.v5.min.js"></script>
+       <link rel="stylesheet" href="./style.css">
+
+
+    <title>Heat Map Data Visualizator</title>
+</head>
+
+<body>
+   
+
+        <text id='title' x='350' y='30'>Monthly Global Land-Surface Temperature</text>
+        <text id='description' x='250' y='30'>1753 - 2015: base temperature 8.66℃</text>
+     
+        <div id="tooltip" > 
+
+        </div>
+
+  
+        <svg id="legend" > <!-- User Story #14 / User Story #15 -->
+           
+            <g>
+                <rect x="10" y="0" width="40" height="40" fill= "navy" /> 
+                <text x="60" y="20"> -3 </text>
+            </g>
+            <g>
+                <rect x="10" y="40" width="40" height="40" fill="yellow"></rect> 
+                <text x="60" y="60"> -1 </text>
+            </g>
+            <g>
+                <rect x="10" y="80" width="40" height="40" fill="orange"></rect> 
+                <text x="60" y="100"> 1 </text>
+            </g>
+            <g>
+                <rect x="10" y="120" width="40" height="40" fill="tomato"></rect> 
+                <text x="60" y="140" > 3 </text>
+            </g>
+        </svg>
+
+</body>
+
+<!-- // need this type "text/babel" to see the correct output, 
+./ indicates that the file is in the same folder, and src is pointing to the JS file -->
+<script defer src="./index.js"> </script>
+
+<!-- freecodecamp testing -->
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+</html>
+
