@@ -2,23 +2,29 @@
 
 Number of lines:
 cat kitty_ipsum_1.txt | wc -l >> kitty_info.txt
+
 27
 
 Number of words:
 wc -w < kitty_ipsum_1.txt >> kitty_info.txt (using redirection)
 cat kitty_ipsum_1.txt | wc -w >> kitty_info.txt (using pipe method)
+
 332
 
 echo -e '\nNumber of characters:' >> kitty_info.txt (insert text line)
 Number of characters:
 wc -m < kitty_ipsum_1.txt >> kitty_info.txt
+
 1738
 
 Number of times meow or meowzer appears:
 grep -o meow[a-z]*  kitty_ipsum_1.txt | wc -l >> kitty_info.txt 
+
 7
 
 Lines that they appear on:
+grep -n 'meow[a-z]*'  kitty_ipsum_2.txt | sed -E 's/([0-9]+).*/\1/' >> kitty_info.txt 
+
 1
 4
 10
@@ -26,4 +32,60 @@ Lines that they appear on:
 23
 
 Number of times cat, cats, or catnip appears:
+
+
 7
+
+
+Lines that they appear on:
+1
+3
+7
+17
+21
+22
+26
+
+
+~~ kitty_ipsum_2.txt info ~~
+
+Number of lines:
+28
+
+Number of words:
+307
+
+Number of characters:
+1678
+
+Number of times meow or meowzer appears:
+grep -o meow[a-z]*  kitty_ipsum_2.txt | wc -l >> kitty_info.txt
+
+9
+
+Lines that they appear on:
+grep -n 'meow[a-z]*'  kitty_ipsum_2.txt | sed -E 's/([0-9]+).*/\1/' >> kitty_info.txt 
+
+4
+8
+12
+20
+24
+25
+28
+
+Number of times cat, cats, or catnip appears:
+grep -o cat[a-z]*  kitty_ipsum_2.txt | wc -l >> kitty_info.txt 
+
+8
+
+Lines that they appear on:
+grep -n 'cat[a-z]*'  kitty_ipsum_2.txt | sed -E 's/([0-9]+).*/\1/' >> kitty_info.txt
+
+10
+14
+19
+20
+25
+26
+28
