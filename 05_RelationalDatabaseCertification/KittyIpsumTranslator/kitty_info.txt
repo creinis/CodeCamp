@@ -1,0 +1,29 @@
+~~ kitty_ipsum_1.txt info ~~
+
+Number of lines:
+cat kitty_ipsum_1.txt | wc -l >> kitty_info.txt
+27
+
+Number of words:
+wc -w < kitty_ipsum_1.txt >> kitty_info.txt (using redirection)
+cat kitty_ipsum_1.txt | wc -w >> kitty_info.txt (using pipe method)
+332
+
+echo -e '\nNumber of characters:' >> kitty_info.txt (insert text line)
+Number of characters:
+wc -m < kitty_ipsum_1.txt >> kitty_info.txt
+1738
+
+Number of times meow or meowzer appears:
+grep -o meow[a-z]*  kitty_ipsum_1.txt | wc -l >> kitty_info.txt 
+7
+
+Lines that they appear on:
+1
+4
+10
+22
+23
+
+Number of times cat, cats, or catnip appears:
+7
