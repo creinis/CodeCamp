@@ -81,8 +81,11 @@ RENT_MENU() {
         SET_TO_FALSE_RESULT=$($PSQL "UPDATE bikes SET available='false' WHERE bike_id = '$BIKE_ID_TO_RENT'")
 
         # get bike info
-        # send to main menu
+        BIKE_INFO=$($PSQL "SELECT size, type FROM bikes WHERE bike_id='$BIKE_ID_TO_RENT'")
+        BIKE_INFO_FORMATTED=$(echo $BIKE_INFO | sed 's/ |/"/')
         
+        # send to main menu
+        MAIN_MENU "I have put you down for the $BIKE_INFO_FORMATTED Bike, $(echo $CUSTOMER_NAME | sed -E 's/^ *| *$//g')."
         
       fi
     fi
@@ -90,7 +93,20 @@ RENT_MENU() {
 }
 
 RETURN_MENU() {
-  echo "Return Menu"
+# get customer info
+echo -e "\nWhat's your phone number?"
+read PHONE_NUMBER
+CUSTOMER_ID=$($PSQL "SELECT customer_id FROM customers WHERE phone = '$PHONE_NUMBER'")
+# if not found
+if [[ -z $CUSTOMER_ID ]]
+then
+# send to main menu
+MAIN_MENU "I could not find a record for that phone number."
+else 
+# get customer's rentals
+# if no rentals
+# send to main menu
+fi
 }
 
 EXIT() {
