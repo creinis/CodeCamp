@@ -104,8 +104,25 @@ then
 MAIN_MENU "I could not find a record for that phone number."
 else 
 # get customer's rentals
+CUSTOMER_RENTALS=$($PSQL "SELECT bike_id, type, size FROM bikes INNER JOIN rentals USING(bike_id) INNER JOIN customers USING(customer_id) WHERE phone = '$PHONE_NUMBER' AND date_returned IS NULL ORDER BY bike_id")
+
 # if no rentals
+if [[ -z $CUSTOMER_RENTALS ]]
+then
 # send to main menu
+MAIN_MENU "You do not have any bikes rented."
+else
+# display rented bikes
+echo -e "\nHere are your rentals:"
+echo "$CUSTOMER_RENTALS" | while read BIKE_ID BAR TYPE BAR SIZE
+do
+echo "$BIKE_ID) $SIZE\" $TYPE Bike"
+done
+# ask for bike to return
+
+# if not a number
+# send to main menu
+fi
 fi
 }
 
