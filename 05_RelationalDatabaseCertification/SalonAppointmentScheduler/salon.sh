@@ -39,7 +39,10 @@ MAIN_MENU() {
      # echo -e "\nI could not find that service. What would you like today?"
      # MAIN_MENU
    # fi
-  PASS() {
+
+
+PASS() {
+  
 # service selected
 SERVICE_ID_SELECTED=$($PSQL "SELECT service_id FROM services WHERE service_id = '$SERVICE_ID_SELECTED'")
 
