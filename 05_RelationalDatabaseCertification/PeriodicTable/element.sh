@@ -7,48 +7,36 @@ MAIN() {
   then 
     echo "Please provide an element as an argument."
   else
-    echo $1
+    PART03_DISPLAY_DATA $1
   fi
 }
 
 PART03_DISPLAY_DATA() {
-
-}
-
+INPUT_DATA=$1
 #if input is not a number
-if [[ ! $SYMBOL =~ ^[0-9]+$ ]]
+if [[ ! $INPUT_DATA =~ ^[0-9]+$ ]]
 then
-  # if input is greater than 2 letters
-  LENGTH=$(echo -n "$SYMBOL" | wc -m)
-  if [[ $LENGTH -gt 2 ]]
-  then
-    # get data by full name
-      DATA=$($PSQL "SELECT * FROM elements INNER JOIN properties USING(atomic_number) INNER JOIN types USING(type_id) WHERE name='$SYMBOL'")
-      echo "$DATA" | while read BAR BAR ATOMIC_NUMBER BAR SYMBOL BAR NAME BAR ATOMIC_MASS BAR MELTING BAR BOILING BAR TYPE 
-      do
-      echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING celsius and a boiling point of $BOILING celsius."
-      done
-      echo $DATA
-  else
-      # get data by atomic symbol
-      DATA=$($PSQL "SELECT * FROM elements INNER JOIN properties USING(atomic_number) INNER JOIN types USING(type_id) WHERE symbol='$SYMBOL'")
-      echo "$DATA" | while read BAR BAR ATOMIC_NUMBER BAR SYMBOL BAR NAME BAR ATOMIC_MASS BAR MELTING BAR BOILING BAR TYPE 
-      do
-        echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING celsius and a boiling point of $BOILING celsius."
-        done
-        echo $DATA
-  fi
-
+    ATOMIC_NUMBER=$(echo $($PSQL "SELECT  atomic_number FROM elements WHERE symbol='$INPUT_DATA' OR name='$INPUT_DATA'; ") | sed 's/ //g')
 else
-  # get data by atomic number
-    DATA=$($PSQL "SELECT * FROM elements INNER JOIN properties USING(atomic_number) INNER JOIN types USING(type_id) WHERE atomic_number=$SYMBOL")
-      echo "$DATA" | while read BAR BAR ATOMIC_NUMBER BAR SYMBOL BAR NAME BAR ATOMIC_MASS BAR MELTING BAR BOILING BAR TYPE 
-      do
-      echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING celsius and a boiling point of $BOILING celsius."
-      done
-      echo $DATA
+    ATOMIC_NUMBER=$(echo $($PSQL "SELECT  atomic_number FROM elements WHERE atomic_number='$INPUT_DATA'; ") | sed 's/ //g')
+fi  
+
+if [[ -z $ATOMIC_NUMBER ]]
+then
+  echo "I could not find that element in the database."
+else
+TYPE_ID=$(echo $($PSQL "SELECT type_id FROM properties WHERE atomic_number=$ATOMIC_NUMBER;") | sed 's/ //g') 
+NAME=$(echo $($PSQL "SELECT name FROM elements WHERE atomic_number=$ATOMIC_NUMBER;") | sed 's/ //g') 
+SYMBOL=$(echo $($PSQL "SELECT symbol FROM elements WHERE atomic_number=$ATOMIC_NUMBER;") | sed 's/ //g') 
+ATOMIC_MASS=$(echo $($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number=$ATOMIC_NUMBER;") | sed 's/ //g') 
+MELTING=$(echo $($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number=$ATOMIC_NUMBER;") | sed 's/ //g') 
+BOILING=$(echo $($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number=$ATOMIC_NUMBER;") | sed 's/ //g') 
+TYPE=$(echo $($PSQL "SELECT type FROM elements FELT JOIN properties USING(atomic_number) LEFT JOIN types USING(type_id) WHERE atomic_number=$ATOMIC_NUMBER;") | sed 's/ //g') 
+
+echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING celsius and a boiling point of $BOILING celsius."
 
 fi
+}
 
 
 PART02_FIX_DATABASE() {
@@ -68,7 +56,9 @@ PART02_FIX_DATABASE() {
     echo "BOILING_NOT_NULL : $BOILING_NOT_NULL"
 #You should add the UNIQUE constraint to the symbol and name columns from the elements table
     SYMBOL_UNIQUE=$($PSQL "ALTER TABLE elements ADD UNIQUE(symbol);")
+    NAME_UNIQUE=$($PSQL "ALTER TABLE elements ADD UNIQUE(name);")
     echo "SYMBOL_UNIQUE : $SYMBOL_UNIQUE"
+    echo "NAME_UNIQUE : $NAME_UNIQUE"
 #Your symbol and name columns should have the NOT NULL constraint
     SYMBOL_NOT_NULL=$($PSQL "ALTER TABLE elements ALTER COLUMN symbol SET NOT NULL;")
     NAME_NOT_NULL=$($PSQL "ALTER TABLE elements ALTER COLUMN name SET NOT NULL;")
@@ -84,25 +74,57 @@ PART02_FIX_DATABASE() {
     ADD_COLUMN_TYPE_ID=$($PSQL "ALTER TABLE types ADD COLUMN type_id SERIAL PRIMARY KEY;")
     echo "ADD_COLUMN_TYPE_ID  : $ADD_COLUMN_TYPE_ID"
 #Your types table should have a type column that's a VARCHAR and cannot be null. It will store the different types from the type column in the properties table
-    =$($PSQL " ;")
+    ADD_COLUMN_TYPE=$($PSQL "ALTER TABLE types ADD COLUMN type VARCHAR(15) NOT NULL;")
+    echo "ADD_COLUMN_TYPE  : $ADD_COLUMN_TYPE"
 #You should add three rows to your types table whose values are the three different types from the properties table
-=$($PSQL " ;")
+    INSERT_INTO_TYPES_ROWS=$($PSQL "INSERT INTO types(type) SELECT DISTINCT(type) FROM properties;")
+    echo "INSERT_INTO_TYPES_ROWS  : $INSERT_INTO_TYPES_ROWS"
 #Your properties table should have a type_id foreign key column that references the type_id column from the types table. It should be an INT with the NOT NULL constraint
-=$($PSQL " ;")
+    ADD_TYPE_ID_IN_PROP_TABLE=$($PSQL "ALTER TABLE properties ADD COLUMN type_id INT;")
+    TYPE_ID_SET_FK=$($PSQL "ALTER TABLE properties ADD FOREIGN KEY(type_id) REFERENCES types(type_id) ;")
+    echo "ADD_TYPE_ID_IN_PROP_TABLE : $ADD_TYPE_ID_IN_PROP_TABLE"
+    echo "TYPE_ID_SET_FK  : $TYPE_ID_SET_FK"
 #Each row in your properties table should have a type_id value that links to the correct type from the types table
-=$($PSQL " ;")
+    UPDATE_TYPE_ID_VALUES=$($PSQL "UPDATE properties SET type_id = (SELECT type_id FROM types WHERE properties.type = types.type);")
+    TYPE_ID_NOT_NULL=$($PSQL "ALTER TABLE properties ALTER COLUMN type_id SET NOT NULL;")
+    echo "UPDATE_TYPE_ID_VALUES : $UPDATE_TYPE_ID_VALUES"
+    echo "TYPE_ID_NOT_NULL  : $TYPE_ID_NOT_NULL"
 #You should capitalize the first letter of all the symbol values in the elements table. Be careful to only capitalize the letter and not change any others
-=$($PSQL " ;")
+    UPDATE_CAPITALIZE_SYMBOLS=$($PSQL "UPDATE elements SET symbol=INITCAP(symbol);")
+    echo "UPDATE_CAPITALIZE_SYMBOLS : $UPDATE_CAPITALIZE_SYMBOLS"
 #You should remove all the trailing zeros after the decimals from each row of the atomic_mass column. You may need to adjust a data type to DECIMAL for this. The final values they should be are in the atomic_mass.txt file
-=$($PSQL " ;")
+    ALTER_ATOMIC_MASS=$($PSQL "ALTER TABLE properties ALTER COLUMN atomic_mass TYPE VARCHAR(9);")
+    UPDATE_FLOAT_ATOMIC_MASS=$($PSQL "UPDATE properties SET atomic_mass=CAST(atomic_mass AS FLOAT) ;")
+    echo "ALTER_ATOMIC_MASS : $ALTER_ATOMIC_MASS"
+    echo "UPDATE_FLOAT_ATOMIC_MASS  : $UPDATE_FLOAT_ATOMIC_MASS"
 #You should add the element with atomic number 9 to your database. Its name is Fluorine, symbol is F, mass is 18.998, melting point is -220, boiling point is -188.1, and it's a nonmetal
-=$($PSQL " ;")
+    INSERT_ELEMENT_F=$($PSQL "INSERT INTO elements(atomic_number, symbol, name) VALUES(9, 'F', 'Fluorine');")
+    INSERT_PROPERTIES_F=$($PSQL "INSERT INTO properties(atomic_number, type, melting_point_celsius, boiling_point_celsius, type_id, atomic_mass) VALUES(9, 'nonmetal', -220, -188.1, 3, '18.998') ;")
+    echo "INSERT_ELEMENT_F  : $INSERT_ELEMENT_F"
+    echo "INSERT_PROPERTIES_F : $INSERT_PROPERTIES_F"
 #You should add the element with atomic number 10 to your database. Its name is Neon, symbol is Ne, mass is 20.18, melting point is -248.6, boiling point is -246.1, and it's a nonmetal
-=$($PSQL " ;")
+    INSERT_ELEMENT_NE=$($PSQL "INSERT INTO elements(atomic_number, symbol, name) VALUES(10, 'Ne', 'Neon');")
+    INSERT_PROPERTIES_NE=$($PSQL "INSERT INTO properties(atomic_number, type, melting_point_celsius, boiling_point_celsius, type_id, atomic_mass) VALUES(10, 'nonmetal', -248.6, -246.1, 3, '20.18') ;")
+    echo "INSERT_ELEMENT_NE : $INSERT_ELEMENT_NE"
+    echo "INSERT_PROPERTIES_NE : $INSERT_PROPERTIES_NE"
 #You should delete the non existent element, whose atomic_number is 1000, from the two tables
-=$($PSQL " ;")
+    DELETE_1000_PROP_TABLE=$($PSQL "DELETE FROM properties WHERE atomic_number=1000;")
+    DELETE_1000_ELEMENTS_TABLE=$($PSQL "DELETE FROM elements WHERE atomic_number=1000;")
+    echo "DELETE_1000_PROP_TABLE  : $DELETE_1000_PROP_TABLE"
+    echo "DELETE_1000_ELEMENTS_TABLE  : $DELETE_1000_ELEMENTS_TABLE"
 #Your properties table should not have a type column
-=$($PSQL " ;")
+    DELETE_COLUMN_TYPE=$($PSQL "ALTER TABLE properties DROP COLUMN type;")
+    echo "DELETE_COLUMN_TYPE  : $DELETE_COLUMN_TYPE"
 }
 
+START() {
+CHECK=$($PSQL "SELECT * FROM elements WHERE atomic_number=1000;")
+if [[ $CHECK -gt 0 ]]
+then
+  PART02_FIX_DATABASE
+  clear
+fi
+MAIN $1
+}
 
+START $1
