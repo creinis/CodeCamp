@@ -2,13 +2,19 @@
 
 PSQL="psql -X --username=freecodecamp --dbname=number_guess --tuples-only -c"
 
-
+MAIN_PROGRAM() {
 # When you run your script, you should prompt the user for a username with Enter your username:, and take a username as input. Your database should allow usernames that are 22 characters
-
 echo -e "\nEnter your username:"
-read NAME
+read USERNAME
 
 # If that username has been used before, it should print Welcome back, <username>! You have played <games_played> games, and your best game took <best_game> guesses., with <username> being a users name from the database, <games_played> being the total number of games that user has played, and <best_game> being the fewest number of guesses it took that user to win the game
+USERNAME_CHECK=$($PSQL "SELECT  FROM  WHERE" )
+
+if [[ -z $USERNAME_CHECK ]]
+then
+  NEW_USER=$($PSQL "INSERT INTO  VALUES()")
+  echo "Welcome, $USERNAME! It looks like this is your first time here."
+else
 
 USERNAME
 GAMES_PLAYED
@@ -21,7 +27,6 @@ echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your bes
 echo "Welcome, $USERNAME! It looks like this is your first time here."
 
 
-GAME() {
 # The next line printed should be Guess the secret number between 1 and 1000: and input from the user should be read
 # Until they guess the secret number, it should print It's lower than that, guess again: if the previous input was higher than the secret number, and It's higher than that, guess again: if the previous input was lower than the secret number. Asking for input each time until they input the secret number.
 
@@ -55,7 +60,19 @@ if [[ $NUMBER_OF_GUESSES == 1 ]]
 then
   echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
 else
-  echo ""
+  echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
 fi
 }
 
+
+SAVE_USER() {
+
+
+}
+
+SAVE_GAME() {
+
+
+}
+
+MAIN_PROGRAM
