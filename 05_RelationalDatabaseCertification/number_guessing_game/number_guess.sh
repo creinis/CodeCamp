@@ -60,3 +60,4 @@ fi
 
 USER_ID=$($PSQL "SELECT user_id FROM users WHERE username = '$USERNAME'")
 SAVE_GAME=$($PSQL "INSERT INTO games(best_game, user_id) VALUES($NUMBER_OF_GUESSES, $USER_ID)")
+
