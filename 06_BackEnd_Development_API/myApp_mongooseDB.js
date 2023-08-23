@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 
 let mongoose = require('mongoose');
@@ -48,11 +47,27 @@ var createManyPeople = function(arrayOfPeople, done) {
   });
 };
 
+/* Person.find({name: 'Umberto'}, (error, data) => {
+  if(error){
+    console.log(error)
+  } else {
+    console.log(data)
+  }
+})  */
 
+var findPeopleByName = function(personName, done) {
 
-const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+Person.find({name: personName}, (error, arrayOfResults) => {
+    if(error){
+    console.log(error)
+  } else {
+    done(null, arrayOfResults)
+  }
+  });
 };
+
+
+
 
 const findOneByFood = (food, done) => {
   done(null /*, data*/);
