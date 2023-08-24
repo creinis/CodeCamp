@@ -58,7 +58,7 @@ app.post("/api/users", async (req, res) => {
       console.log(err)
     }
   
-});
+})
 
 
 /* You can POST to /api/users/:_id/exercises with form data description, duration, and optionally date. If no date is supplied, the current date will be used.
@@ -127,12 +127,19 @@ app.get("/api/users/:_id/logs", async (req, res) => {
 
   const exercises = await Exercise.find(filter).limit(+limit ?? 500)
 
+  const log = exercises.map(e => ({
+    description: e.description,
+    duration: e.duration,
+    date: e.date.toDateString()
+    
+  }))
+  
   res.json({
     username: user.username,
     count: exercises.length,
-    _id: user.id,
-    log: 
-  })
+    _id: user._id,
+    log
+  });
 
   
 })
