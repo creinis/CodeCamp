@@ -68,20 +68,21 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
   const id = req.params._id;
   const { description, duration, date } = req.body
 
-  try{
+  try {
     const user = await User.findById(id)
-      if(!user){
-        res.send("Couldn't find user")
+      if(!user) {
+        res.send("Could not find user")
       } else {
-        const exercObj = new Exercise({
+        const exerciseObj = new Exercise({
           user_id: user._id,
           description,
           duration,
           date: date ? new Date(date) : new Date()
         })
         /* Save */
-        const exercise = await exercObj.save()
+        const exercise = await exerciseObj.save()
         res.json({
+          _id: user._id,
           username: user.username,
           description: exercise.description,
           duration: exercise.duration,
