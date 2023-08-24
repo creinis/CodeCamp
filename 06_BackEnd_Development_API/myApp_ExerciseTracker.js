@@ -58,7 +58,7 @@ app.post("/api/users", async (req, res) => {
       console.log(err)
     }
   
-})
+});
 
 
 /* You can POST to /api/users/:_id/exercises with form data description, duration, and optionally date. If no date is supplied, the current date will be used.
@@ -88,13 +88,54 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
           date: new Date(exercise.date).toDateString()
         })
       }
-  }catch(err) {
+  } catch(err) {
     console.log(err)
     res.send("Error saving exercise. Try again!")
   }
   
 })
 
+
+/* You can make a GET request to /api/users/:_id/logs to retrieve a full exercise log of any user.
+Failed: A request to a user's log GET /api/users/:_id/logs returns a user object with a count property representing the number of exercises that belong to that user. */
+
+app.get("/api/users/:_id/logs", async (req, res) => {
+
+  const { from, to, limit } = req.query;
+  const id = req.params._id;
+  const user = await User.findById(id);
+  if(!user) {
+    res.send("User not found")
+    return;
+  }
+  
+  let dateObj = {}
+
+  if(from) {
+    dateObj["$gte"] = new Date(from)
+  }
+  if(to) {
+    dateObj["$lte"] = new Date(to)
+  }
+
+  let filter = {
+    user_id: id
+  }
+  if(from || to) {
+    filter.date = dateObj;
+  }
+
+  const exercises = await Exercise.find(filter).limit(+limit ?? 500)
+
+  res.json({
+    username: user.username,
+    count: exercises.length,
+    _id: user.id,
+    log: 
+  })
+
+  
+})
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {
