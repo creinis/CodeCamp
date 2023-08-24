@@ -56,7 +56,7 @@ app.post('/api/shorturl', function(req, res) {
 
 /* When you visit /api/shorturl/<short_url>, you will be redirected to the original URL. */
 
-app.get("/api/short_url/:short_url", async (req, res) => {
+app.get("/api/shorturl/:short_url", async (req, res) => {
   const shorturl = req.params.short_url
   const urlDoc = await urls.findOne({ short_url: +shorturl })
   res.redirect(urlDoc.url)
@@ -66,4 +66,3 @@ app.get("/api/short_url/:short_url", async (req, res) => {
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
-
