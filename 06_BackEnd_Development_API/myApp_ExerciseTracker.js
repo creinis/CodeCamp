@@ -52,7 +52,36 @@ app.post("/api/users", async (req, res) => {
 /* You can POST to /api/users/:_id/exercises with form data description, duration, and optionally date. If no date is supplied, the current date will be used.
 Waiting: The response returned from POST /api/users/:_id/exercises will be the user object with the exercise fields added. */
 
+app.post("/api/users/:_id/exercises", async (req, res) => {
+  const id = req.params._id;
+  const { description, duration, date } = req.body
 
+  try{
+    const user = await User.findById(id)
+      if(!user){
+        res.send("Couldn't find user")
+      } else {
+        const exercObj = new Exercise({
+          user_id: user._id,
+          description,
+          duration,
+          date: date ? new Date(date) : new Date()
+        })
+        /* Save */
+        const exercise = await exercObj.save()
+        res.json({
+          username: user.username,
+          description: exercise.description,
+          duration: exercise.duration,
+          date: new Date(exercise.date).toDateString()
+        })
+      }
+  }catch(err) {
+    console.log(err)
+    res.send("Error saving exercise. Try again!")
+  }
+  
+})
 
 
 
