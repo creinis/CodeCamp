@@ -29,6 +29,18 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+/* You can make a GET request to /api/users to get a list of all users.
+Failed: The GET request to /api/users returns an array. */
+
+app.get("/api/users", async (req, res) => {
+  const users = await User.find({}).select("_id username");
+  if (!users) {
+    res.send("No users");
+  } else {
+    res.json(users);
+  }
+})
+
 /* You can POST to /api/users with form data username to create a new user.
 Waiting: The returned response from POST /api/users with form data username will be an object with username and _id properties. */
 
