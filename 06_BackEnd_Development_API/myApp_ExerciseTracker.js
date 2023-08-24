@@ -1,1 +1,61 @@
+const express = require('express')
+const app = express()
+const cors = require('cors')
+require('dotenv').config()
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
+mongoose.connect(process.env.DB_URL)
+
+const UserSchema = new Schema({username: String, });
+
+const User = mongoose.model("User", UserSchema);
+
+const ExerciseSchema = new Schema({
+  user_id: { type: String, required: true },
+  description: String,
+  duration: Number,
+  date: Date,
+  
+});
+
+const Exercise = mongoose.model("Exercise", ExerciseSchema);
+
+app.use(cors())
+app.use(express.static('public'))
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/views/index.html')
+});
+
+/* You can POST to /api/users with form data username to create a new user.
+Waiting: The returned response from POST /api/users with form data username will be an object with username and _id properties. */
+
+app.post("/api/users", async (req, res) => {
+    console.log(req.body)
+    const userObj = new User({
+      username: req.body.username
+    })
+
+    try{
+        const user = await userObj.save()
+        console.log(user);
+        res.json(user)
+    } catch(err) {
+      console.log(err)
+    }
+  
+})
+
+
+/* You can POST to /api/users/:_id/exercises with form data description, duration, and optionally date. If no date is supplied, the current date will be used.
+Waiting: The response returned from POST /api/users/:_id/exercises will be the user object with the exercise fields added. */
+
+
+
+
+
+const listener = app.listen(process.env.PORT || 3000, () => {
+  console.log('Your app is listening on port ' + listener.address().port)
+})
