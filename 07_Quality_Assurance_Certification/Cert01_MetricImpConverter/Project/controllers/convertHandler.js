@@ -13,7 +13,7 @@ function checkDiv(possibleFraction) {
   return nums;
 }
 function ConvertHandler() {
-  this.getNum = function (input) {
+  this.getNum = function(input) {
     let result = numberStringSplitter(input)[0];
     let nums = checkDiv(result);
     if (!nums) {
@@ -28,7 +28,7 @@ function ConvertHandler() {
     return result;
   };
 
-  this.getUnit = function (input) {
+  this.getUnit = function(input) {
     let result = numberStringSplitter(input)[1].toLowerCase();
     switch (result) {
       case "km":
@@ -48,7 +48,7 @@ function ConvertHandler() {
     }
   };
 
-  this.getReturnUnit = function (initUnit) {
+  this.getReturnUnit = function(initUnit) {
     let unit = initUnit.toLowerCase();
 
     switch (unit) {
@@ -69,7 +69,7 @@ function ConvertHandler() {
     }
   };
 
-  this.spellOutUnit = function (initUnit) {
+  this.spellOutUnit = function(initUnit) {
     let unit = initUnit.toLowerCase();
 
     switch (unit) {
@@ -90,7 +90,7 @@ function ConvertHandler() {
     }
   };
 
-  this.convert = function (initNum, initUnit) {
+  this.convert = function(initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
@@ -122,7 +122,7 @@ function ConvertHandler() {
     return parseFloat(result.toFixed(5));
   };
 
-  this.getString = function (initNum, initUnit, returnNum, returnUnit) {
+  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
     // let preciseInitNum = parseFloat(initNum.toFixed(5));
     // let preciseReturnNum = parseFloat(returnNum.toFixed(5));
 
