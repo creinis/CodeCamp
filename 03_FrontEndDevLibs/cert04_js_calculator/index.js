@@ -66,6 +66,7 @@ function updateDisplay(input) {
 
 function clearDisplay() {
     let display = document.getElementById("display");
+    const display2 = document.getElementById("display2");
     tempResult = 0;
     display.innerHTML = 0;
     display2.innerHTML = '';
