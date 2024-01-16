@@ -557,4 +557,178 @@ def vigenere(message, key):
         key_index += 1
         offset = alphabet.index(key_char)
 
+# Step 64
+
+# And now, try to print encryption to see the actual output on the terminal.
+
+text = 'Hello Zaira'
+custom_key = 'python'
+
+def vigenere(message, key):
+    key_index = 0
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    encrypted_text = ''
+
+    for char in message.lower():
+    
+        # Append space to the message
+        if char == ' ':
+            encrypted_text += char
+        else:        
+            # Find the right key character to encode
+            key_char = key[key_index % len(key)]
+            key_index += 1
+
+            # Define the offset and the encrypted letter
+            offset = alphabet.index(key_char)
+            index = alphabet.find(char)
+            new_index = (index + offset) % len(alphabet)
+            encrypted_text += alphabet[new_index]
+    
+    return encrypted_text
+
+encryption = vigenere(text, custom_key)
+print(encryption)
+
+# Step 65
+
+# Encryption and decryption are opposite processes and your function can do both with a couple of tweaks.
+
+# Add a third parameter called direction to your function definition. 
+# Also, comment out the last two lines to avoid errors in the console.
+
+text = 'Hello Zaira'
+custom_key = 'python'
+
+def vigenere(message, key, direction):
+    key_index = 0
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    encrypted_text = ''
+
+    for char in message.lower():
+    
+        # Append space to the message
+        if char == ' ':
+            encrypted_text += char
+        else:        
+            # Find the right key character to encode
+            key_char = key[key_index % len(key)]
+            key_index += 1
+
+            # Define the offset and the encrypted letter
+            offset = alphabet.index(key_char)
+            index = alphabet.find(char)
+            new_index = (index + offset) % len(alphabet)
+            encrypted_text += alphabet[new_index]
+    
+    return encrypted_text
+    
+#encryption = vigenere(text, custom_key)
+#print(encryption)
+
+# Step 66
+
+#All you need to do is multiply the offset by the direction in the new_index assignment. 
+# The multiplication operator in Python is *.
+
+new_index = (index + offset*direction) % len(alphabet)
+
+# Step 68
+
+# Check if the function can decrypt the string back to the plain text.
+# Declare another variable called decryption and assign it vigenere(encryption, custom_key, -1).
+
+encryption = vigenere(text, custom_key, 1)
+print(encryption)
+decryption = vigenere(encryption, custom_key, -1)
+print(decryption)
+
+# Step 70
+
+# Now, your function can be used both to encrypt and decrypt a message. 
+# Clean up your code with better variable names.
+
+# Change each occurrence of encrypted_text into final_message.
+
+def vigenere(message, key, direction):
+    key_index = 0
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    final_message = ''
+
+    for char in message.lower():
+    
+        # Append space to the message
+        if char == ' ':
+            final_message += char
+        else:        
+            # Find the right key character to encode
+            key_char = key[key_index % len(key)]
+            key_index += 1
+
+            # Define the offset and the encrypted letter
+            offset = alphabet.index(key_char)
+            index = alphabet.find(char)
+            new_index = (index + offset*direction) % len(alphabet)
+            final_message += alphabet[new_index]
+    
+    return final_message
+
+# Step 75
+
+# The .isalpha() method returns True if all the character of the string on which it is called are letters. 
+# For example, the code below returns True:
+
+    # 'freeCodeCamp'.isalpha()
+    # True
+
+# Modify the if condition by calling .isalpha() on char.
+
+# Append space to the message
+if char.isalpha():
+    final_message += char
+
+# Step 76
+
+# The not operator is used to negate an expression. 
+# When placed before a truthy value — a value that evaluates to True — it returns False and vice versa.
+
+# Add the not operator to the if condition to check if the character is not alphabetic.
+
+# Append any non-letter character to the message
+if not char.isalpha():
+    final_message += char
+
+# Step 78
+
+# The pass keyword can be used as a placeholder for future code. 
+# It does not have any effect in your code but it can save you from errors you would get in case of incomplete code:
+
+def foo():
+    pass
+
+# Calling vigenere with 1 to encrypt and -1 to decrypt is fine but it might be a little bit cryptic. 
+# Create a new function called encrypt that takes message and key parameters, and use pass to fill the function body.
+
+def encrypt(message, key):
+    pass
+
+# Step 81
+
+# Next, modify your encryption and decryption variables by calling encrypt and decrypt, respectively.
+
+def encrypt(message, key):
+    return vigenere(message, key)
+    
+def decrypt(message, key):
+    return vigenere(message, key, -1)
+    
+encryption = encrypt(text, custom_key)
+print(encryption)
+decryption = decrypt(encryption, custom_key)
+print(decryption)
+
 # 
+
+
+
+
