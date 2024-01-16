@@ -84,5 +84,222 @@ alphabet = 'abcdefghijklmnopqrstuvwxyz'
 index = alphabet.find(text[0])
 print(index)
 
+# Step 14
+
+# find() returns the index of the matching character inside the string. If the character is not found, it returns -1. As you can see, the first character in text, uppercase "H", is not found, since alphabet contains only lowercase letters.
+# You can transform a string into its lowercase equivalent with the lower() function. Add another print() call to print text.lower() and see the output.
+
+print(text.lower())
+
+# Step 15
+
+# Remove the last print() call. Then, instead of text[0], pass text[0].lower() to find() and see the output.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+index = alphabet.find(text[0].lower())
+print(index)
+
+# Step 16
+
+# As you can see from the output, "h" is at index 7 in the alphabet string. Now you need to find the letter at index 7 plus the value of shift. For that, you can use the addition operator, +, in the same way you would use it for a mathematical addition.
+# Declare a variable named shifted and assign it the alphabet letter at index plus shift.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+index = alphabet.find(text[0].lower())
+print(index)
+shifted = alphabet[index + shift]
+print(shifted)
+
+# Step 18 - Loop
+
+# Repeating this process for each character in text can be tedious. Thankfully, you can simplify it using a loop. 
+# A loop allows you to systematically go through a sequence of elements and execute actions on each one.
+# In this case, you'll employ a for loop. Here's how you can iterate over text:
+
+        #  for i in text:
+
+# for is the keyword denoting the loop type. 
+# i is a variable that sequentially takes the value of the elements in text. The statement ends with a colon, :.
+# Remove everything after the alphabet line. Then write a for loop to iterate over text.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+# for i in text:
+
+# Step 19
+
+# The code to execute at each iteration — placed after the : — constitutes the body of the loop. This code must be indented. In Python, it is recommended to use 4 spaces per indentation level. This indented level is a code block.
+
+    # for i in text:
+    #     <code>
+
+# Give your for loop a body by adding a call to print(i). Remember to indent the loop body.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+for i in text:
+    print(i)
+
+# Step 22
+
+# The iteration variable can have any valid name, but it's convenient to give it a meaningful name.
+# Rename your i variable to char.
+
+for char in text:
+    print(char)
+
+# Step 23
+
+# Before printing the current character, declare a variable called index and assign the value returned by alphabet.find(char) to this variable.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+for char in text:
+    index = alphabet.find(char)
+    print(char)
+
+# Step 24
+
+# An argument is an object or an expression passed to a function — between the parentheses — when it is called. 
+# The print function can take multiple arguments, separated by a comma.
+# Add a second argument to print(char) so that it prints the character and its index inside the alphabet.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+for char in text:
+    index = alphabet.find(char)
+    print(char, index)
+
+# Step 25
+
+# find is again returning -1 for uppercase letters, and for the space character, too. 
+# You are going to take care of the space later on.
+# For now, instead of iterating over text, change the for loop to iterate over text.lower().
+
+
+for char in text.lower():
+    index = alphabet.find(char)
+    print(char, index)
+
+# Step 26
+
+# At the end of your loop body, declare a variable called new_index and assign the value of index + shift to this variable.
+
+for char in text.lower():
+    index = alphabet.find(char)
+    print(char, index)
+    new_index = index + shift
+
+# Step 30
+
+# Now you need to create a new_char variable at the end of your loop body. Set its value to alphabet[new_index].
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+for char in text.lower():
+    index = alphabet.find(char)
+    print(char, index)
+    new_index = index + shift
+    new_char = alphabet[new_index]
+    print(new_char)
+
+# Clean Output
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+for char in text.lower():
+    index = alphabet.find(char)
+    new_index = index + shift
+    new_char = alphabet[new_index]
+    print('char:', char, 'new char:', new_char)
+
+# Step 33
+
+# At the moment, the encrypted character is updated in every iteration. 
+# It would be better to store the encrypted string in a new variable. 
+# Before your for loop, declare a variable called encrypted_text and assign an empty string to this variable ('').
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+for char in text.lower():
+    index = alphabet.find(char)
+    new_index = index + shift
+    new_char = alphabet[new_index]
+    print('char:', char, 'new char:', new_char)
+
+# Step 34
+
+# Now, replace new_char with encrypted_text. Also, modify the print() call to reflect this change.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    index = alphabet.find(char)    
+    new_index = index + shift
+    encrypted_text = alphabet[new_index]
+    print('char:', char, 'encrypted text:', encrypted_text)
+
+# Step 35
+
+# Instead of assigning alphabet[new_index] to encrypted_text, assign the current value of encrypted_text plus alphabet[new_index] to this variable.
+
+for char in text.lower():
+    index = alphabet.find(char)
+    new_index = index + shift
+    encrypted_text = encrypted_text + alphabet[new_index]
+    print('char:', char, 'encrypted text:', encrypted_text)
+
+# Step 37
+
+# Comparison operators allow you to compare two objects based on their values. 
+# You can use a comparison operator by placing it between the objects you want to compare. 
+# They return a Boolean value — namely True or False — depending on the truthfulness of the expression.
+
+    # Python has the following comparison operators:
+    # Operator 	Meaning
+    # == 	Equal
+    # != 	Not equal
+    # > 	Greater than
+    # < 	Less than
+    # ≥ 	Greater than or equal to
+    # ≤ 	Less than or equal to
+
+# At the top of your loop, print the result of comparing char with an empty space. 
+# Use the equality operator == for that.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    print(char == ' ')
+    index = alphabet.find(char)
+    new_index = index + shift
+    encrypted_text += alphabet[new_index]
+    print('char:', char, 'encrypted text:', encrypted_text)
+
+
+# 
 
 
