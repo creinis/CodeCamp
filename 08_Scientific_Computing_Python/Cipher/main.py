@@ -300,6 +300,205 @@ for char in text.lower():
     print('char:', char, 'encrypted text:', encrypted_text)
 
 
+# Step 38 - if
+
+# Currently, spaces get encrypted as c. 
+# To maintain the original spacing in the plain message, you'll require a conditional if statement. 
+# This is composed of the if keyword, a condition, and a colon :.
+
+# if <condition>:
+#     <code>
+
+# At the top of your for loop, replace print(char == ' ') with an if statement. 
+# The condition of this if statement should evaluate to True if char is an empty space and False otherwise. 
+# Inside the if body, print the string space!. Remember to indent this line.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    if char == ' ':
+        print('space!')
+    index = alphabet.find(char)
+    new_index = index + shift
+    encrypted_text += alphabet[new_index]
+    print('char:', char, 'encrypted text:', encrypted_text)
+
+# Step 39
+
+# Now, instead of printing space!, use the addition assignment operator to add the space to the current value of encrypted_text.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    if char == ' ':
+        encrypted_text += char
+    index = alphabet.find(char)
+    new_index = index + shift
+    encrypted_text += alphabet[new_index]
+    print('char:', char, 'encrypted text:', encrypted_text)
+
+# Step 40
+
+# A conditional statement can also have an else clause. 
+# This clause can be added to the end of an if statement to execute alternative code if the condition is false:
+
+    # if condition:
+    #     <code>
+    # else:
+    #     <code>
+
+# As you can see in your output, when the loop iterations reach the space, a space is added to the encrypted string. 
+# Then the code outside the if block executes and a c is added to the encrypted string.
+# To fix it, add an else clause after encrypted_text += char and indent all the subsequent lines of code.
+
+text = 'Hello World'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    if char == ' ':
+        encrypted_text += char
+    else:
+        index = alphabet.find(char)
+        new_index = index + shift
+        encrypted_text += alphabet[new_index]
+        print('char:', char, 'encrypted text:', encrypted_text)
+
+# Step 42
+
+# When the loop reaches the letter Z, the sum index + shift exceeds the length of the string alphabet.
+# In this case, the modulo operator, %, can be used to return the remainder of the division between two numbers. 
+# For example: 5 % 2 is equal to 1, because 5 divided by 2 has a quotient of 2 and a remainder of 1.
+
+# Surround index + shift with parentheses, and modulo the expression with 26, which is the alphabet length.
+
+text = 'Hello Zaira'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    if char == ' ':
+        encrypted_text += char
+    else:
+        index = alphabet.find(char)
+        new_index = (index + shift)% 26
+        encrypted_text += alphabet[new_index]
+        print('char:', char, 'encrypted text:', encrypted_text)
+
+# Step 43
+
+# If you wish to incorporate additional characters into the alphabet string, 
+# such as digits or special characters, 
+# you'll find it's necessary to manually modify the right operand of the modulo operation.
+
+# Replace 26 with len(alphabet) to avoid this issue.
+ 
+text = 'Hello Zaira'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    if char == ' ':
+        encrypted_text += char
+    else:
+        index = alphabet.find(char)
+        new_index = (index + shift) % len(alphabet)
+        encrypted_text += alphabet[new_index]
+        print('char:', char, 'encrypted text:', encrypted_text)
+
+# Std Outuput
+
+text = 'Hello Zaira'
+shift = 3
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+encrypted_text = ''
+
+for char in text.lower():
+    if char == ' ':
+        encrypted_text += char
+    else:
+        index = alphabet.find(char)
+        new_index = (index + shift) % len(alphabet)
+        encrypted_text += alphabet[new_index]
+
+print('plain text:', text)
+print('encrypted text:', encrypted_text)
+
+# Step 46 - Function def
+
+# A function is essentially a reusable block of code. 
+# You have already met some built-in functions, like print(), find() and len(). 
+# But you can also define custom functions like this:
+
+    # def function_name():
+    #     <code>
+
+# A function declaration starts with the def keyword followed by the function name — a valid variable name — and a pair of parentheses. 
+# The declaration ends with a colon.
+# Right after your shift variable, declare a function called caesar and indent the following lines, so they become the function body.
+
+text = 'Hello Zaira'
+shift = 3
+def caesar():
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    encrypted_text = ''
+
+    for char in text.lower():
+        if char == ' ':
+            encrypted_text += char
+        else:
+            index = alphabet.find(char)
+            new_index = (index + shift) % len(alphabet)
+            encrypted_text += alphabet[new_index]
+    print('plain text:', text)
+    print('encrypted text:', encrypted_text)
+
+caesar()
+
+# Step 48
+
+# Now you should see the output again. 
+# Although this approach works, it doesn't significantly enhance the code's reusability. 
+# Repeatedly calling your function will result in the same outcome. 
+# However, functions can be declared with parameters to introduce versatility and customization:
+
+    # def function_name(param_1, param_2):
+    #     <code>
+
+# Parameters are variables that you can use inside your function. 
+# A function can be declared with different number of parameters. 
+# In the example above, param_1 and param_2 are parameters.
+
+# Modify your function declaration so that it takes two parameters called message and offset.
+
+text = 'Hello Zaira'
+shift = 3
+
+def caesar(message, offset):
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    encrypted_text = ''
+
+    for char in message.lower():
+        if char == ' ':
+            encrypted_text += char
+        else:
+            index = alphabet.find(char)
+            new_index = (index + offset) % len(alphabet)
+            encrypted_text += alphabet[new_index]
+    print('plain text:', message)
+    print('encrypted text:', encrypted_text)
+
+caesar(text, shift)
+
 # 
 
 
