@@ -727,8 +727,76 @@ print(encryption)
 decryption = decrypt(encryption, custom_key)
 print(decryption)
 
-# 
+# Step 83
 
+# Two or more strings can be concatenated by using the + operator. 
+# For example: 'Hello' + ' there!' results in 'Hello there!.
 
+# Modify print(encryption) to print Encrypted 
+# text: mrttaqrhknsw ih puggrur. Use the + operator to concatenate text to your string and pay attention to the spacing.
 
+encryption = encrypt(text, custom_key)
+print('Encrypted text: '+ text)
+print('Key: '+ custom_key)
+decryption = decrypt(encryption, custom_key)
+print('Decrypted text: ' + decryption)
+
+# Step 87
+
+# In Python, there's a way to easily format strings. 
+# f-strings enable you to interpolate values in your strings.
+
+# Interpolation means writing placeholders that will be replaced by the specified values when the program runs. 
+# For example, you can get the same result of 
+# 'Encrypted text: ' + text with f'Encrypted text: {text}'. 
+# You need to put an f before the quotes to create the f-string and write the variables or expressions you want to interpolate between curly braces.
+
+# Modify the first print() call to use an f-string.
+
+print(f'Encrypted text: {text}')
+print(f'Key: {custom_key}')
+decryption = decrypt(text, custom_key)
+print(f'Decrypted text: {decryption}')
+
+# Step 91
+
+# Wait a minute! You cannot decrypt anything with the wrong key. Try with happycoding.
+# With that, your cipher project is complete.
+
+text = 'mrttaqrhknsw ih puggrur'
+custom_key = 'happycoding'
+
+def vigenere(message, key, direction=1):
+    key_index = 0
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    final_message = ''
+
+    for char in message.lower():
+
+        # Append any non-letter character to the message
+        if not char.isalpha():
+            final_message += char
+        else:        
+            # Find the right key character to encode/decode
+            key_char = key[key_index % len(key)]
+            key_index += 1
+
+            # Define the offset and the encrypted/decrypted letter
+            offset = alphabet.index(key_char)
+            index = alphabet.find(char)
+            new_index = (index + offset*direction) % len(alphabet)
+            final_message += alphabet[new_index]
+    
+    return final_message
+
+def encrypt(message, key):
+    return vigenere(message, key)
+    
+def decrypt(message, key):
+    return vigenere(message, key, -1)
+
+print(f'\nEncrypted text: {text}')
+print(f'Key: {custom_key}')
+decryption = decrypt(text, custom_key)
+print(f'\nDecrypted text: {decryption}\n')
 
