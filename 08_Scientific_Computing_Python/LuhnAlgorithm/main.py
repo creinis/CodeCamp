@@ -175,9 +175,66 @@ def verify_card_number(card_number):
         sum_of_odd_digits += digit
         print(digit)
 
+# Step 21
+
+# Currently, your script throws a TypeError because you are trying to add a string to an integer. 
+# You can fix this by converting the digit variable to an integer before adding it to sum_of_odd_digits, 
+# using the built-in int function:
+
+my_string = '123'
+my_int = int(my_string)
+
+# Convert the digit variable to an integer before adding it to sum_of_odd_digits. 
+# Then, move the print call to the end of the verify_card_number function to print the value of sum_of_odd_digits.
+
+for digit in odd_digits:
+    
+    sum_of_odd_digits += int(digit)
+    print(sum_of_odd_digits)
+
+# Step 22
+
+# Below your print call, create a variable named sum_of_even_digits and assign it a value of 0.
+
+def verify_card_number(card_number):
+    sum_of_odd_digits = 0
+    card_number_reversed = card_number[::-1]
+    odd_digits = card_number_reversed[::2]
+
+    for digit in odd_digits:
+        sum_of_odd_digits += int(digit)
+    print(sum_of_odd_digits)
+    sum_of_even_digits = 0
+
+# Step 23
+
+# Create a variable even_digits and assign it the even digits of the reversed card number.
+
+    sum_of_even_digits = 0
+    even_digits = card_number_reversed[1::2]
+
+# Step 24
+
+# Loop over the even digits and print each to the console.
+
+    sum_of_even_digits = 0
+    even_digits = card_number_reversed[1::2]
+    for digit in even_digits:
+        print(digit)
+
+# Step 26
+
+# The next part of the Luhn Algorithm is to multiply all the even digits by 2.
+
+# Within the even digit for loop, replace the print call with a variable named number 
+# and assign it the value of digit multiplied by 2.
+
+    sum_of_even_digits = 0
+    even_digits = card_number_reversed[1::2]
+    for digit in even_digits:
+        number = int(digit) * 2
+
 # 
-
-
 
 
 
