@@ -235,7 +235,104 @@ def filter_expenses_by_category(expenses, category):
 # Fill the function body with the expenses list you created at the beginning of this project. 
 # You will use this list to store the expense records.
 
+def main():
+    expenses = []
 
+# Step 24 - While Loop
+
+# A while loop is another kind of loop that runs a portion of code until a specified condition is True:
+
+    # while condition:
+    #     <code>
+
+# Below the expense list, create a while loop. Use True for the condition, and print the string \nExpense Tracker inside the loop body to show the title of the program.
+
+def main():
+    expenses = []
+    while True:
+        print('\nExpense Tracker')
+
+# Step 25
+
+# The while loop you created in the previous step is an infinite loop that will allow the program 
+# to continuously present menu options until the user decides to exit.
+
+# After the print() call, add another one to print the string 1. Add an expense.
+
+while True:
+    print('\nExpense Tracker')
+    print('1. Add an expense')
+    print('2. List all expenses')
+    print('3. Show total expenses')
+    print('4. Filter expenses by category')
+    print('5. Exit')
+
+# Step 28
+
+# The input() function takes a user input and it returns the user input in the form of a string.
+
+# Inside your while loop, call the input() function passing the string Enter your choice: as the argument, 
+# and assign the result to a variable named choice.
+
+    def main():
+        expenses = []
+        while True:
+            print('\nExpense Tracker')
+            print('1. Add an expense')
+            print('2. List all expenses')
+            print('3. Show total expenses')
+            print('4. Filter expenses by category')
+            print('5. Exit')
+            choice = input('Enter your choice: ')
+
+# Step 29
+
+# You are going to use conditional statements to check the user's choice. 
+# If the choice is 1, it means the user wants to add an expense.
+
+# Still in the while loop, under the choice variable, write an if statement to check if choice equals the string 1. 
+# If it's true, it will be the starting point for adding a new expense.
+
+# Inside the if statement body, declare a variable amount and assign it an empty input() call.
+
+    choice = input('Enter your choice: ')
+    if choice == '1':
+        amount = input()
+
+# Step 30
+
+# Inside the if statement, you should ask the user to enter the amount for the expense and store it in a variable.
+
+# Pass the string Enter amount: to your empty input() call, so you can store the expense.
+
+    choice = input('Enter your choice: ')
+    
+    if choice == '1':
+        amount = input('Enter amount: ')
+
+# Step 31
+
+# The amount of the expense needs to be converted before performing any calculation. 
+# The float() function takes a string or an integer number as argument and returns a floating point number.
+
+# Pass input('Enter amount: ') to the float() function.
+
+    def main():
+        expenses = []
+        while True:
+            print('\nExpense Tracker')
+            print('1. Add an expense')
+            print('2. List all expenses')
+            print('3. Show total expenses')
+            print('4. Filter expenses by category')
+            print('5. Exit')
+            
+            choice = input('Enter your choice: ')
+            
+            if choice == '1':
+                amount = float(input('Enter amount: '))
+
+# 
 
 
 
