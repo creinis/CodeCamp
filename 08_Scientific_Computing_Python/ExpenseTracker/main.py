@@ -178,6 +178,65 @@ print(sum(map(test, [2, 3, 5, 8])))
 def total_expenses(expenses):
     lambda expense: expense['amount']
 
+# Step 17
+
+# Now, call map() passing your lambda function as the first argument and the expenses list as the second argument.
+
+def total_expenses(expenses):
+    map(lambda expense: expense['amount'], expenses)
+
+# Step 18
+
+# Finally, pass your map() call to the sum() function to obtain the total expenses and return the result.
+
+def total_expenses(expenses):
+    return sum(map(lambda expense: expense['amount'], expenses))
+
+# Step 19
+
+# Next, define a function named filter_expenses_by_category that takes two parameters: 
+# expenses and category. Use pass to fill the function body.
+
+def filter_expenses_by_category(expenses , category):
+    pass
+
+# Step 20
+
+# Within the filter_expenses_by_category function, replace pass with a lambda function. 
+# Use expense as the parameter and return the comparison between 
+# the value of the category key of the expense dictionary and category.
+
+def filter_expenses_by_category(expenses, category):
+    lambda expense: expense['category'] == category
+
+# Step 21
+
+# The filter() function allows you to select items from an iterable, such as a list, 
+# based on the output of a function:
+
+filter(my_function, my_list)
+
+# filter() returns an iterator in which the elements of my_list are included, 
+# for which my_function returns True. An iterator is a special object that enables 
+# you to iterate over the elements of a collection, like a list.
+
+# Within the filter_expenses_by_category function, call filter() passing the lambda function 
+# you wrote in the previous step as the first argument and the expenses list as the second argument.
+
+def filter_expenses_by_category(expenses, category):
+    return filter(lambda expense: expense['category'] == category, expenses)
+
+# Step 23
+
+# The next step is to define the main function, which will be the entry point of the interactive 
+# expense tracker program.
+
+# Define a function named main without parameters. 
+# Fill the function body with the expenses list you created at the beginning of this project. 
+# You will use this list to store the expense records.
+
+
+
 
 
 
