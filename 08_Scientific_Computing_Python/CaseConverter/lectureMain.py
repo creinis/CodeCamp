@@ -142,6 +142,71 @@ if __name__ == '__main__':
 
 # Remember to add the pass keyword to the function body to prevent the code from failing during the tests.
 
+# Step 17
+
+#Inside the space you left between the pair of square braces, you can describe the value that you would like 
+# to include in the list based on a given condition.
+
+snake_cased_char_list = [
+    '_' + char.lower() if char.isupper()
+]
+
+# Python will interpret this expression as "append '_' + char.lower() to the list if char is in uppercase" and this will convert the case for the capital letters in the input string.
+
+# Start by adding this line within the square braces.
+
+# Step 18
+
+# When you start a list comprehension with an if statement like this, 
+# Python requires you to also add an else clause to the expression.
+
+snake_cased_char_list = [
+    '_' + char.lower() if char.isupper()
+    else char
+]
+
+# Python will interpret this updated expression as "append '_' + char.lower() to the list if char is in uppercase, append char as is otherwise" and this covers the case for both the capital and lowercase letters in the input string.
+
+# Add an else clause inside the pair of square braces.
+
+# Step 19
+
+# The final piece of the puzzle is the input string itself. 
+# The list comprehension needs to know about the object it'll iterate upon.
+
+# In this case, you need to iterate upon all the characters of the string.
+
+snake_cased_char_list = [
+    '_' + char.lower() if char.isupper()
+    else char
+    for char in pascal_or_camel_cased_string
+]
+
+# And there you have it. These three lines of code do the same task as the for loop you worked on previously 
+# while being cleaner and somewhat faster.
+
+# Add this last line of code to iterate over the characters of the string in your list comprehension 
+# and make sure that you're writing it within the pair of square braces.
+
+# Step 20
+
+# You will still need to join the list elements into a string, strip off any dangling underscores and 
+# return the string. Even though you can do that like you did earlier, let's see a shorter alternative.
+
+# return ''.join(snake_cased_char_list).strip('_')
+
+# This single line of code will join the list of characters into a string, strip off any dangling underscores, 
+# and return the resulting string. Add this line on the same level as the snake_cased_char_list variable 
+# and inside the convert_to_snake_case() function.
+
+snake_cased_char_list = [
+    '_' + char.lower() if char.isupper()
+    else char
+    for char in pascal_or_camel_cased_string
+]
+return ''.join(snake_cased_char_list).strip('_')
+
+
 
 
 
