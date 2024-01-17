@@ -68,6 +68,116 @@ def add_expense(expenses, amount, category):
 
 # Fill the body of your new function with a pass statement.
 
+def print_expenses(expenses):
+    pass
+
+# Step 7
+
+# Inside the print_expenses function, create a for loop that iterates over each item in the expenses list. 
+# Use expense as the loop variable and move pass inside the loop body.
+
+def print_expenses(expenses):
+    for expense in expenses:
+        pass
+
+# Step 8
+
+# Next, you are going to display the details for each expense.
+
+# Inside the for loop, replace pass with a print() call and pass it the following 
+# f-string: f'Amount: {expense}, Category: {expense}'. 
+# Leave the placeholders empty for now.
+
+def print_expenses(expenses):
+    for expense in expenses:
+        print(f'Amount: {expense}, Category: {expense}')
+
+# Step 9
+
+# You can access values in a dictionary through its keys. 
+# You need to use the bracket notation and include the key between the square brackets:
+
+my_dict = {"amount": 50.0, "category": "Food"}
+my_dict["amount"] # 50.0
+
+# You are currently interpolating the expense dictionary in your f-string. 
+# Modify the f-string expression to access the value of the amount key and the category key 
+# in the expense dictionary.
+
+def print_expenses(expenses):
+    for expense in expenses:
+        print(f'Amount: {expense["amount"]}, Category: {expense["category"]}')
+
+# Step 10
+
+# You will need a function to calculate the total amount of expenses. 
+# Define a function named total_expenses that takes one parameter expenses. 
+# Fill the function body with a pass statement for now.
+
+def total_expenses(expenses):
+    pass
+
+# Step 11 - Lambda Function
+
+# Lambda functions are brief, anonymous functions in Python, ideal for simple, one-time tasks. 
+# They are defined by the lambda keyword, and they use the following syntax:
+
+lambda x: expr
+
+# In the example above, x is a parameter to be use in the expression expr. 
+# Create a test variable and assign it a lambda function that takes an x parameter and returns x * 2.
+
+test = lambda x: x*2
+
+# Step 12
+
+# To call a lambda function you can use the usual function syntax with a pair of parentheses 
+# after the variable name.
+
+# Call your test lambda function and pass 3 as the argument. Then, print the result.
+
+test = lambda x: x * 2
+print(test(3))
+
+# Step 13
+
+# Lambda functions can be valuably combined with the map() function, 
+# which executes a specified function for each element in a collection of objects, such as a list:
+
+map(lambda x: x * 2, [1, 2, 3])
+
+# The result of the example above would be [2, 4, 6], 
+# where each item in the list passed to map() has been doubled by the action of the lambda function.
+
+# Modify your print() call to print the result of calling map() with test as the first argument, 
+# and [2, 3, 5, 8] as the second argument.
+
+test = lambda x: x * 2
+print(map(test, [2, 3, 5, 8]))
+
+# Step 14
+
+# The sum() function returns the sum of the items in the iterable which is passed as its argument. 
+# You are going to use sum() together with map() and lambda functions to get the total amount of expenses.
+
+# For now, make a little test and modify your current print() call by passing sum(map(test, [2, 3, 5, 8])) as the argument.
+
+test = lambda x: x * 2
+print(sum(map(test, [2, 3, 5, 8])))
+
+# Step 15
+
+# Next, you are going to implement the same logic to the total_expenses function.
+# For now, delete both the test function and the print() call.
+
+# Step 16
+
+# Within your total_expenses function, replace pass with a lambda function. 
+# Use expense as the parameter and return the value of the amount key in the expense dictionary.
+
+def total_expenses(expenses):
+    lambda expense: expense['amount']
+
 
 
 
