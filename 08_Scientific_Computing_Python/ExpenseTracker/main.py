@@ -50,6 +50,24 @@ def add_expense(expenses, amount, category):
 
 # Create a dictionary with a key amount and value of the amount parameter and pass your new dictionary to the .append() call.
 
+def add_expense(expenses, amount, category):
+    expenses.append({'amount': amount})
+
+# Step 5
+
+# Add another key-value pair to the dictionary you are appending to the expense list. 
+# Use the string category as the key, and the category parameter as the value.
+
+def add_expense(expenses, amount, category):
+    expenses.append({'amount': amount, 'category': category})
+
+# Step 6
+
+# Start by defining a function named print_expenses that takes one parameter expenses. 
+# This function will later be used to display each expense in your list.
+
+# Fill the body of your new function with a pass statement.
+
 
 
 
