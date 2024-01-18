@@ -505,11 +505,98 @@ for constraint, pattern in constraints:
         if count == 4:
             break
 
-# 
+# Step 61
 
+# Instead of using a loop and a counter variable, you can achieve the same result with a different approach.
 
+# Replace your existing for loop and two if statements with a single if statement. 
+# For the if condition, use a list created with the list comprehension syntax.
 
+# The list stores the results of evaluating the expression 
+# constraint <= len(re.findall(pattern, password)) for each constraint-pattern tuple in the constraints list.
 
+# The code for the existing for loop and two if statements
+for constraint, pattern in constraints:
+    if constraint <= len(re.findall(pattern, password)):
+        count += 1
+            
+    if count == 4:
+
+# replaced by:
+    if [constraint <= len(re.findall(pattern, password)) for constraint,pattern in constraints]:
+    
+# Step 62
+
+# all() is a built-in Python function that returns True if all the elements inside a given iterable 
+# evaluate to True. Otherwise, it returns False.
+
+# You can combine the all() function with the list comphehension syntax to make your code more concise.
+
+# Modify your if condition by passing the list comprehension you created in the previous step to the all() function.
+
+if all([constraint <= len(re.findall(pattern, password)) for constraint, pattern in constraints]):
+
+# Step 63
+
+# Having all([expression for i in iterable]), means that a new list is created by evaluating expression 
+# for each i in iterable. After the all() function iterates over the newly created list, 
+# the list is deleted automatically, since it is no longer needed.
+
+# Memory can be saved by using a generator expression. 
+# Generator expressions follow the syntax of list comprehensions but they use parentheses instead of 
+# square brackets.
+
+# Change your list comprehension into a generator expression by removing the square brackets.
+
+        if all(
+            constraint <= len(re.findall(pattern, password))
+            for constraint, pattern in constraints
+        ):
+
+# Step 64
+
+# You don't need the count variable anymore. 
+# Delete this variable and its value.
+
+# Step 65
+
+# Now it's time to test your function. 
+# Uncomment the last two lines in your code and modify the function call passing 5 arguments. 
+# Use 8 for the length and 1 for the other four constraints.
+
+new_password = generate_password(8,1,1,1,1)
+print(new_password)
+
+# Step 66
+
+# It works, but there are still a couple of things you can improve. 
+# First of all, calling a function with 5 arguments can create confusion on which value will be assigned 
+# to which parameter.
+
+# You can call a function using keyword arguments, that is writing the parameter name explicitly followed 
+# by the assignment operator and the value. For example:
+
+def add(x, y):
+    return x + y
+
+spam(x=1, y=7) # 8
+
+# Modify your function call to use keyword arguments.
+
+new_password = generate_password(length=8, nums=1, special_chars=1, uppercase=1, lowercase=1)
+print(new_password)
+
+# Step 67
+
+# As long as all the arguments in a function call are keyword arguments, 
+# the order of the arguments doesn't matter.
+
+# To confirm this, try to change the order of length=8 and nums=1 in your function call.
+
+# Step 68
+
+# Modify your function declaration to take default parameters. 
+# Use 16 for the length and 1 for the other constraints.
 
 
 
