@@ -413,6 +413,108 @@ constraints = [
     (special_chars, r'[^a-zA-Z0-9]')
 ]    
 
+# Step 48
+
+# In the same way the [0-9] class is equivalent to \d, the [^0-9] class is equivalent to \D. 
+# Alphanumeric characters can be matched with \w and non-alphanumeric characters can be matched with \W.
+
+# Replace the [^a-zA-Z0-9] character class with \W.
+
+# Step 51
+
+# Since the underscore character is a valid character for variable names, it is included in the \w character class (equivalent to [a-zA-Z0-9_]), 
+# which can be conveniently used to match variable names.
+
+# Therefore, the \W character class is equivalent to [^a-zA-Z0-9_] with the underscore character that is 
+# not matched. For this reason you cannot use it to match all your special characters.
+# Delete the last three lines in your code.
+
+# Step 52
+
+# Now, combine your raw string with an f-string and interpolate your symbols variable inside the character class. 
+# Remember that you can interpolate a variable within an f-string using curly brackets { }.
+
+[(special_chars, fr'[{symbols}]')]
+
+# Step 53
+
+# Below the constraints list, add a comment saying Check constraints.
+
+# Step 54
+
+# After your new comment, write a for loop to iterate over the constraints list. 
+# Use constraint and pattern as the iterating variables.
+
+# Check constraints
+for constraint, pattern in constraints:
+    pass    
+
+# Step 55
+
+# Inside the for loop, call the findall() function passing pattern and password as the arguments.
+
+# Check constraints
+for constraint, pattern in constraints:
+    re.findall(pattern, password)
+
+# Step 56
+
+# You are interested in the number of elements in the list returned by the findall() function.
+
+# Pass your existent findall() call to the len() function.
+
+# Check constraints
+for constraint, pattern in constraints:
+    len(re.findall(pattern, password))  
+
+# Step 57
+
+# Inside your for loop, compare constraint and the length of the list returned by findall(). 
+# Use the <= operator for that.
+
+# Check constraints
+for constraint, pattern in constraints:
+    constraint <= len(re.findall(pattern, password))
+
+# Step 58
+
+# Right before your for loop, declare a count variable and assign the value zero to this variable.
+
+# Step 59
+
+#Turn the expression inside your for loop into an if statement. 
+# Use the expression you wrote in the previous step as the if condition. Inside the new conditional statement, 
+# increment the count value by 1.
+
+# Check constraints
+count = 0
+for constraint, pattern in constraints:
+    if constraint <= len(re.findall(pattern, password)):
+        count += 1
+
+# Step 60
+
+# Finally, after the for loop, create an if statement to check if count is equal to 4 and break out 
+# of the while loop by using the break statement.
+
+        # Check constraints
+        count = 0
+        for constraint, pattern in constraints:
+            if constraint <= len(re.findall(pattern, password)):
+                count += 1
+        if count == 4:
+            break
+
+# 
+
+
+
+
+
+
+
+
+
 
 
 
