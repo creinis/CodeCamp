@@ -207,17 +207,211 @@ def generate_password(length, nums, special_chars, uppercase, lowercase):
 
 # After your for loop, create a constraints variable and assign an empty list to this variable.
 
-# 
+# Step 26
 
+# A tuple is another built-in data structure in Python. 
+# Tuples are very much like lists, but they are defined with parentheses (), 
+# instead of square brackets. Also, tuples are immutable, unlike lists.
 
+my_tuple = ('larch', 1, True)
 
+# Your constraints list is going to store tuples. 
+# The first item of each tuple will be a constraint parameter.
 
+# Add a tuple to your list. 
+# Use nums as the first item and an empty string as the second item.
 
+constraints = [(nums, '')]
 
+# Step 27
 
+# The re module allows you to use regular expressions in your code. 
+# You will learn more about regular expressions very soon.
 
+# For now, add an import statement at the top of your code to import the re module.
 
+import re
+import secrets
+import string
 
+# Step 28
+
+# A regular expression, or regex, is a pattern used to match a specific combination of characters inside a string. 
+# It is a valid alternative to if/else conditional statements when you need to match or find patterns 
+# inside a string for validation purposes, character replacement, and others.
+
+#The compile() function from the re module compiles the string passed as the argument into 
+# a regular expression object that can be used by other re methods.
+
+#Declare a new pattern variable and assign the value of re.compile('i') to this variable.
+
+pattern = re.compile('i')
+
+# Step 29
+
+# The search() function from the re module analyzes the string passed as the argument looking for the 
+# first place where the regex pattern matches the string.
+
+# Declare a variable called quote and assign the string Not all those who wander are lost. to this variable. 
+# Then, print the result of pattern.search(quote).
+
+pattern = re.compile('i')
+quote = 'Not all those who wander are lost.'
+print(pattern.search(quote))
+
+# Step 30
+
+# The value None is returned since i is not found inside the parsed string.
+# Now, modify your pattern into l and see the result.
+
+# Step 31
+
+# As you can see from the output, now your regex matches the first l inside the string.
+
+# In your pattern, you can add a quantifier after a character to specify how many times that character 
+# should be repeated. For example, the + quantifier means it should repeat one or more times.
+
+# Add a + quantifier to your pattern.
+
+pattern = re.compile('l+')
+
+# Step 32
+
+# You can obtain the same result without using the compile() function. 
+# Modify your pattern variable into the literal string l+. 
+# Then, change the print() call to print re.search(pattern, quote).
+
+# To write a literal string that includes the characters "l+" in Python, 
+# you can use single or double quotes to define the string
+
+pattern = 'l+'
+quote = 'Not all those who wander are lost.'
+print(re.search(pattern, quote))
+
+# Step 33
+
+# To check that the generated password meets the required features, 
+# you are going to use the findall() function from the re module. 
+# It's similar to search but it returns a list with all the occurrences of the matched pattern.
+
+# Replace the search() call with findall() and check the output.
+
+print(re.findall(pattern, quote))
+
+# Step 34
+
+# A character class is indicated by square brackets and matches one character among those specified 
+# between the brackets. For example, ma[dnt] matches either mad, man, or mat.
+
+# Modify your pattern to match a w followed by either h or a.
+
+# Step 35
+
+# Now, turn the empty string in the constraint tuple into a regex pattern to match a single digit. 
+# Use a character class specifying each digit from 0 to 9.
+
+constraints = [
+    (nums, '[0123456789]')
+]  
+
+# Step 36
+
+# Character classes also allow you to indicate a range of characters to match. 
+# You need to specify the starting and the ending characters separated by an hyphen, -. 
+# Characters follow the Unicode order.
+
+# Modify your pattern variable to match any letter t preceded by a lowercase letter in the quote variable. 
+# Use the range of characters from a to z for that.
+
+pattern = '[a-z]t'
+
+# Step 37
+
+# Now, modify the pattern in your constraint tuple to indicate the range of all digits using square brackets.
+
+# Step 38
+
+# The caret, ^, placed at the beginning of the character class, matches all the characters 
+# except those specified in the class.
+
+# Add a ^ as the first character inside your character class and see what happens.
+
+# Step 39
+
+# Add a new tuple to the constraints list. 
+# Use lowercase as the first item and a regex pattern that matches a single lowercase letter as the second item.
+
+constraints = [
+(nums, '[0-9]'),(lowercase, '[a-z]')
+]        
+
+# Step 41
+
+# Add one last tuple to your list. 
+# Use the special_chars parameter as the first item and an empty string as the second item.
+
+constraints = [
+    (nums, '[0-9]'),
+    (lowercase, '[a-z]'),
+    (uppercase, '[A-Z]'),
+    (special_chars, '')
+]        
+
+# Step 42
+
+# The dot character is a wildcard that matches any character in a string — except for a newline character 
+# by default. Modify pattern to match the entire string. Use a . followed by the + quantifier.
+
+pattern = '.+'
+
+# Step 43
+
+# If you need to match a character that has a special meaning in the pattern, such as . or +, 
+# you can escape it by prepending a backslash character, \. 
+# For example, this matches a literal plus sign: \+.
+
+# Modify pattern so that it matches a single literal dot.
+
+# Step 44
+
+# Python provides a particular type of string called raw string. 
+# Raw strings are prefixed with a r. 
+# The key distinction from regular strings lies in how they handle the backslash character: 
+# in raw strings, backslashes are treated as literal characters rather than escape characters. 
+# When writing regular expressions, using raw strings is a good practice, since they can usually 
+# contain a lot of \ characters.
+
+# Turn your pattern string into a raw string by prefixing it with a r.
+
+pattern = r'\.'
+
+# Step 45
+
+# Now, turn the four patterns from the constraints list into raw strings.
+
+constraints = [
+    (nums, r'[0-9]'),
+    (lowercase, r'[a-z]'),
+    (uppercase, r'[A-Z]'),
+    (special_chars, r'')
+]        
+
+# Step 47
+
+# In a character class, you can combine multiple ranges by writing one range after another inside 
+# the square brackets (without any additional characters). 
+# For example: [a-d3-6] is the combination of [a-d] and [3-6].
+
+# Now, create your fourth pattern to match any non-alphanumeric character. 
+# Combine the a-z, A-Z, and 0-9 ranges into a single character class and add a ^ as the first character 
+# to negate the pattern.
+
+constraints = [
+    (nums, r'\d'),
+    (lowercase, r'[a-z]'),
+    (uppercase, r'[A-Z]'),
+    (special_chars, r'[^a-zA-Z0-9]')
+]    
 
 
 
