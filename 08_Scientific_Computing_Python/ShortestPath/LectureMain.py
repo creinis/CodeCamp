@@ -618,5 +618,53 @@ for node in targets_to_print:
 
 shortest_path(my_graph, 'A')
 
-# 
+# Step 51
+
+# Now it's better but you don't want to print the details about the starting node.
+
+# Before the print call, add an if statement to execute when node is equal to start and use the continue 
+# keyword to go to the next loop iteration.
+
+targets_to_print = [target] if target else graph
+for node in targets_to_print:
+    if node == start:
+        continue
+    print(f'\n{start}-{node} distance: {distances[node]}\nPath: {" -> ".join(paths[node])}')
+
+shortest_path(my_graph, 'A')
+
+# Step 52
+
+# Finally, at the very end of your function, return distances and paths.
+
+
+targets_to_print = [target] if target else graph
+for node in targets_to_print:
+    if node == start:
+        continue
+    print(f'\n{start}-{node} distance: {distances[node]}\nPath: {" -> ".join(paths[node])}')
+    
+# return distances, paths
+shortest_path(my_graph, 'A')
+
+# Step 53
+
+# Now, you are going to test your function with another graph. 
+# Change my_graph into the following graph:
+
+{
+    'A': [('B', 5), ('C', 3), ('E', 11)],
+    'B': [('A', 5), ('C', 1), ('F', 2)],
+    'C': [('A', 3), ('B', 1), ('D', 1), ('E', 5)],
+    'D': [('C', 1), ('E', 9), ('F', 3)],
+    'E': [('A', 11), ('C', 5), ('D', 9)],
+    'F': [('B', 2), ('D', 3)]
+}
+
+# Step 54
+
+# As a final step, modify your function call passing F as the third argument and check the output.
+
+# With that, the shortest path algorithm is complete.
+
 
