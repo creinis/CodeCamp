@@ -392,27 +392,172 @@ def make_allowed_move(rod1, rod2):
     # display our progress
     print(rods)
 
-# 
+# Step 34
 
+# Now call make_allowed_move() and pass in source and target as the arguments.
 
+if remainder == 1:
+    print(f'Move {i + 1} allowed between {source} and {target}')
+    make_allowed_move(source, target) 
 
+# Step 35
 
+# Call the make_allowed_move() function again inside the two elif clauses, and pass in the correct arguments.
 
+if remainder == 1:
+    print(f'Move {i + 1} allowed between {source} and {target}')
+    make_allowed_move(source, target)
+elif remainder == 2:
+    print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+    make_allowed_move(source, auxiliary)
+elif remainder == 0:
+    print(f'Move {i + 1} allowed between {auxiliary} and {target}')
+    make_allowed_move(auxiliary, target)
 
+# Step 36
 
+# It looks like it's working! But the output is not very readable. 
+# Print a new line character after printing the rods to fix that.
 
+    # display our progress
+    print(rods, '\n')
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods, '\n')
 
+# Step 37
 
+# The iterative solution of Tower of Hanoi might seem complete, but change the number of disks to 4 
+# and look at the output.
 
+# Step 38
 
+# The conditionals you wrote previously are only valid for odd numbers of disks.
+# Add a nested if to execute when n is odd, and add one indent level to your print() and make_allowed_move() calls.
 
+if remainder == 1:
+    if n % 2 != 0:
+        print(f'Move {i + 1} allowed between {source} and {target}')
+        make_allowed_move(source, target)
 
+# Step 39
 
+# If the number of disks is even and the remainder equals 1, the move is allowed between the source rod 
+# and the auxiliary rod. Add an else clause to print the allowed movement and call make_allowed_move() 
+# with the correct arguments.
 
+# If you look at the output, you can see that the execution stops at the third move because of an IndexError. 
+# This happens because the code is still incomplete and needs an else clause that you will be writing soon. 
+# To make it work, turn your make_allowed_move() call into a comment.
 
+        if remainder == 1:
+            if n % 2 != 0:
+                print(f'Move {i + 1} allowed between {source} and {target}')
+                make_allowed_move(source, target)
+            else:
+                print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+                # make_allowed_move(source, auxiliary)
 
+# Step 40
 
+# Now you need to do the same with your elif statement: put the print() and make_allowed_move() calls 
+# inside an if statement to execute when n is odd.
 
+# Also, turn the # make_allowed_move(source, auxiliary) comment into code.
+
+        else:
+            print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+            make_allowed_move(source, auxiliary)            
+
+elif remainder == 2:
+    if n % 2 != 0:
+        print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+        make_allowed_move(source, auxiliary)
+
+# Step 41
+
+# Finally, add an else clause that prints the allowed move and call make_allowed_move. 
+# Try to figure out the correct arguments.
+
+    elif remainder == 2:
+        if n % 2 != 0:
+            print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+            make_allowed_move(source, auxiliary)
+        else:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+            make_allowed_move(source, target)
+
+# Step 42
+
+# That's all for the iterative solution. 
+# From now on you are going to build a function that makes use of a recursive approach. 
+# Recursion is when a function calls itself. In this case, you are going to use recursion to calculate smaller 
+# versions of the same problem.
+
+# Delete the whole body of the move function except for the comment and the first print call. 
+# Leave the function declaration as is.
+
+# >>>> COMPLETO CODE BEFORE TRANSFORMING <<<<
+
+NUMBER_OF_DISKS = 4
+number_of_moves = 2 ** NUMBER_OF_DISKS - 1
+rods = {
+    'A': list(range(NUMBER_OF_DISKS, 0, -1)),
+    'B': [],
+    'C': []
+}
+
+def make_allowed_move(rod1, rod2):    
+    forward = False
+    if not rods[rod2]:
+        forward = True
+    elif rods[rod1] and rods[rod1][-1] < rods[rod2][-1]:
+        forward = True              
+    if forward:
+        print(f'Moving disk {rods[rod1][-1]} from {rod1} to {rod2}')
+        rods[rod2].append(rods[rod1].pop())
+    else:
+        print(f'Moving disk {rods[rod2][-1]} from {rod2} to {rod1}')
+        rods[rod1].append(rods[rod2].pop())
+    
+    # display our progress
+    print(rods, '\n')
+
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods, '\n')
+    for i in range(number_of_moves):
+        remainder = (i + 1) % 3
+        if remainder == 1:
+            if n % 2 != 0:
+                print(f'Move {i + 1} allowed between {source} and {target}')
+                make_allowed_move(source, target)
+            else:
+                print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+                make_allowed_move(source, auxiliary)
+        elif remainder == 2:
+            if n % 2 != 0:
+                print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+                make_allowed_move(source, auxiliary)
+            else:
+                print(f'Move {i + 1} allowed between {source} and {target}')
+                make_allowed_move(source, target)
+        elif remainder == 0:
+            print(f'Move {i + 1} allowed between {auxiliary} and {target}')
+            make_allowed_move(auxiliary, target)           
+
+# initiate call from source A to target C with auxiliary B
+move(NUMBER_OF_DISKS, 'A', 'B', 'C')
+
+# Step 42
+
+# That's all for the iterative solution. From now on you are going to build a function that makes use of a recursive approach. 
+# Recursion is when a function calls itself. In this case, you are going to use recursion to calculate smaller versions of the same problem.
+# Delete the whole body of the move function except for the comment and the first print call. Leave the function declaration as is.
+
+# Step 43
+
+# You won't need make_allowed_move and number_of_moves, either. Delete the whole function and the variable.
 
 
 
