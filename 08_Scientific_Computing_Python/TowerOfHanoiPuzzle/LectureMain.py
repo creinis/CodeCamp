@@ -559,36 +559,157 @@ move(NUMBER_OF_DISKS, 'A', 'B', 'C')
 
 # You won't need make_allowed_move and number_of_moves, either. Delete the whole function and the variable.
 
+# Step 44
+
+# To solve the puzzle with recursion, the first thing to do is break the original problem down into smaller sub-problems.
+
+# The final configuration with n disks piled up to the third rod in decreasing order can be obtained by moving:
+
+#    n - 1 disks from the source to the auxiliary rod
+#    the largest disk from the source to the target
+#    and then the n - 1 disks from the auxiliary rod to the target.
+
+# So, the first thing the move function should do is calling itself with n - 1 as the first argument. 
+# But if you try to do so without defining a base case, you will get a RecursionError. 
+# This happens because the function keeps calling itself indefinitely.
+
+# Before your comment and your print() call, add the recursive function call with n - 1 as the first argument 
+# and make sure the function body executes only when n is greater than zero. For now, leave the other arguments 
+# in the same order.
+
+def move(n, source, auxiliary, target):
+    if n > 0:
+        move(n-1, source, auxiliary, target)
+        # display starting configuration
+        print(rods, '\n')
+
+# Step 45
+
+# Before your recursive call, add a comment saying move n - 1 disks from source to auxiliary, 
+# so they are out of the way.
+
+# Step 46
+
+# The steps of moving n - 1 disks can be broken down further until only a single disk is considered. 
+# This will be the first move occurring. After the first move occurs, the following moves are generated 
+# by the unwinding of the recursive calls. Keep in mind that in each recursive step the role played by 
+# the rods changes between source, target, and auxiliary.
+
+# For now, each recursive call prints the rods dictionary without performing any changes to the lists. 
+# Before the print() call, remove the last element from the rods[source] list and append it to the rods[target] list.
+
+def move(n, source, auxiliary, target):
+    if n > 0:
+        # move n - 1 disks from source to auxiliary, so they are out of the way
+        move(n - 1, source, auxiliary, target)
+        rods[target].append(rods[source].pop())
+        # display starting configuration
+        print(rods, '\n')
+
+# Step 47
+
+# Before appending the last element to the target, add a comment saying move the nth disk from source to target.
+
+# Step 48
+
+# Now, change the comment above the print() call into display our progress.
+
+# Step 49
+
+# At first, the recursive call you have just added deals with the sub-problem of moving n - 1 disks to the second rod.
+
+# For that reason, the target argument corresponds to your second rod, while the auxiliary argument is 
+# the third rod. Keep in mind that those will keep swapping as the recursion proceeds.
+
+# Fix the arguments order exchanging target and auxiliary in your recursive call.
+
+def move(n, source, auxiliary, target):
+    if n > 0:
+        # move n - 1 disks from source to auxiliary, so they are out of the way
+        move(n - 1, source, target, auxiliary)
+        
+        # move the nth disk from source to target
+        rods[target].append(rods[source].pop())
+        
+        # display our progress
+        print(rods, '\n')
+
+# Step 50
+
+# In a previous step, you wrote the code to move the largest disk of the sub-problem to the target rod.
+
+# Now, all you need to do is add another recursive call to move the n - 1 disks you have already displaced. 
+# Copy the first recursive call and paste it at the end of the if block.
+
+# Note that the function arguments are not in the right order. Try to figure out the correct order.
+
+def move(n, source, auxiliary, target):
+    if n > 0:
+        # move n - 1 disks from source to auxiliary, so they are out of the way
+        move(n - 1, source, target, auxiliary)
+        
+        # move the nth disk from source to target
+        rods[target].append(rods[source].pop())
+        
+        # display our progress
+        print(rods, '\n')
+        
+        move(n - 1, auxiliary, source, target)
+
+# Step 51
+
+# Above the second move call, add one last comment saying move the n - 1 disks that we left on auxiliary onto target.
+
+# Step 52
+
+# Now, delete the rods dictionary and turn its keys into the variables A, B, and C, respectively, 
+# keeping their values. 
+# Refactor your code to reflect these changes. 
+# If you see the output on the terminal, you correctly did this step.
+
+NUMBER_OF_DISKS = 4
+A = list(range(NUMBER_OF_DISKS, 0, -1))
+B = []
+C = []
 
 
+def move(n, source, auxiliary, target):
+    if n > 0:
+        # move n - 1 disks from source to auxiliary, so they are out of the way
+        move(n - 1, source, target, auxiliary)
+        
+        # move the nth disk from source to target
+        target.append(source.pop())
+        
+        # display our progress
+        print(A, B, C, '\n')
+        
+        # move the n - 1 disks that we left on auxiliary onto target
+        move(n - 1,  auxiliary, source, target)
+              
+# initiate call from source A to target C with auxiliary B
+move(NUMBER_OF_DISKS, A, B, C)
 
+# Step 53
 
+# Although recursion could sometimes be less easy to understand, it gives you the power to create more concise code. In this case, you don't even need to differentiate between even and odd numbers of disks.
 
+# Set NUMBER_OF_DISKS to 5 and check the output.
 
+# Step 54
 
+# There's still one thing you can do to improve the readability of your code.
 
+# Modify your if to execute when n is less than or equal to zero and add a return statement 
+# to stop the function execution.
 
+def move(n, source, auxiliary, target):
+    if n <= 0:
+        return
 
+# Step 55
 
+# As a final step, reduce the indentation level of all the code after the return statement.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Well done. You have completed the Tower of Hanoi practice project.
 
