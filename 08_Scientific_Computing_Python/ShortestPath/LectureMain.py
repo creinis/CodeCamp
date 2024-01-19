@@ -477,16 +477,146 @@ def shortest_path(graph, start):
             if distance + distances[current] < distances[node]:
                 pass
 
+# Step 39
+
+# Inside your new if block, delete pass and reassign the neighbor node distance to the sum of the neighbor node 
+# distance plus the distance of current.
+
+            if distance + distances[current] < distances[node]:
+                distances[node] = distance + distances[current]
+
+# Step 40
+
+# Once the distance to a node is set inside the distances dictionary, 
+# you need to keep track of the path to that node, too. 
+# If the distance for the node in the processed tuple has been updated, the last item in its path 
+# is the node itself.
+
+# Inside your conditional, nest another if statement that triggers when the last element of 
+# paths[node] is equal to node.
+
+    while unvisited:
+        current = min(unvisited, key=distances.get)
+        for node, distance in graph[current]:
+            if distance + distances[current] < distances[node]:
+                distances[node] = distance + distances[current]
+                if paths[node][-1] == node:
+                    pass
+
+# Step 41
+
+# Now remove pass and assign paths[current] to paths[node].
+
+    while unvisited:
+        current = min(unvisited, key=distances.get)
+        for node, distance in graph[current]:
+            if distance + distances[current] < distances[node]:
+                distances[node] = distance + distances[current]
+                if paths[node][-1] == node:
+                    paths[node] = paths[current]
+
+# Step 42
+
+# Next, create an else statement and use the extend() function to add the current node path to the neighbor 
+# node path.
+
+                if paths[node][-1] == node:
+                    paths[node] = paths[current]
+                else:
+                    paths[node].extend(paths[current])
+
+# Step 43
+
+# Finally, outside the nested conditionals, append the neighbor node to its path.
+
+    while unvisited:
+        current = min(unvisited, key=distances.get)
+        for node, distance in graph[current]:
+            if distance + distances[current] < distances[node]:
+                distances[node] = distance + distances[current]
+                if paths[node][-1] == node:
+                    paths[node] = paths[current]
+                else:
+                    paths[node].extend(paths[current])
+                paths[node].append(node)
+
+# Step 44
+
+# Terminate the while loop by removing the current node from the unvisited list. 
+# Pay attention to the indentation.
+
+    while unvisited:
+        current = min(unvisited, key=distances.get)
+        for node, distance in graph[current]:
+            if distance + distances[current] < distances[node]:
+                distances[node] = distance + distances[current]
+                if paths[node][-1] == node:
+                    paths[node] = paths[current]
+                else:
+                    paths[node].extend(paths[current])
+                paths[node].append(node)
+        unvisited.remove(current)
+
+# Step 45
+
+# If you try to uncomment your function call, it won't work. 
+# You have a couple of bugs to fix. The first one happens because in the nested if you are trying to access 
+# that might not exist in your paths dictionary. So, you need to be sure that paths[node] is not empty before 
+# accessing paths[node][-1].
+
+# Add an additional condition to your nested if statement to ensure that paths[node] is non-empty 
+# before accessing paths[node][-1].
+
+if paths[node] and paths[node][-1] == node:
+    paths[node] = paths[current][:]
+
+# Step 47
+
+# The other bug is subtle. When a shorter distance is found for a neighbor node, paths[current] gets assigned 
+# to the neighbor node path, paths[node].
+
+# This means both variables point to the same list. Since lists are mutable, when you append the neighbor node 
+# to its path, both paths[node] and paths[current] are modified because they are the same list. 
+# This results in wrong paths, although the distances are correct.
+
+# Fix that bug by assigning a copy of paths[current] to the neighbor node path. 
+# Modify the existing assignment inside your if block.
+
+if paths[node] and paths[node][-1] == node:
+    paths[node] = paths[current][:]
+
+# Step 48
+
+# The algorithm is complete but you can improve the output. 
+# Also, you can provide the function with an additional argument to return only the path between two nodes.
+
+# Add target as the third parameter to your function declaration and give it the default value of an empty string.
+
+# Step 49
+
+# Python provides a concise way to write if/else conditionals by using the ternary syntax:
+
+    # val_1 if condition else val_2
+
+# The expression above evaluates to val_1 if condition is true, otherwise to val_2.
+
+# Delete your print call and create a variable called targets_to_print after your while loop. 
+# Use the ternary syntax to assign it [target] when target is truthy, and graph otherwise.
+
+    targets_to_print = [target] if target else graph
+    
+shortest_path(my_graph, 'A')
+
+# Step 50
+
+# Create a for loop to iterate over targets_to_print and print the following f-string: 
+# f'\n{start}-{node} distance: {distances[node]}\nPath: {" -> ".join(paths[node])}'.
+
+targets_to_print = [target] if target else graph
+for node in targets_to_print:
+    print(f'\n{start}-{node} distance: {distances[node]}\nPath: {" -> ".join(paths[node])}')
+
+shortest_path(my_graph, 'A')
+
 # 
-
-
-
-
-
-
-
-
-
-
-
 
