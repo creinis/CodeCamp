@@ -10,38 +10,235 @@
 
 # Start by creating an empty dictionary named rods to represent the rods.
 
+rods = {}
 
+# Step 2
 
+# The rods dictionary will represent the three rods with their disks. 
+# Give it the strings 'A', 'B', and 'C' as keys and set each of them to an empty list.
 
+rods = {'A': [], 'B': [], 'C': []}
 
+# Step 3
 
+# The puzzle starts with the disks piled up on the first rod, in decreasing size. 
+# You need to populate your first list with numbers representing the various disk sizes.
 
+# Instead of adding the items manually to the first list, generate a sequence of numbers from 3 to 1 
+# by using the range() function and assign it to rods['A'].
 
+# The syntax is range(x, y, h), where x is the starting integer (inclusive), y is the last integer (not inclusive), 
+# and h is the difference between a number and the next one in the sequence.
 
+rods = {
+    'A': range(3,0,-1),
+    'B': [],
+    'C': []
+}
 
+# Step 4
 
+# Now check the data type of your 'A' key by passing it to the type() function and print the result on the terminal.
 
+print(type(rods['A']))
 
+# Step 5
 
+# The range() function returns an immutable sequence of numbers. 
+# As you can see, the data type of rods['A'] is range, but you want it to be a list.
 
+# Pass your range() call to the list() function to do that.
 
+rods = {
+    'A': list(range(3, 0, -1)),
+    'B': [],
+    'C': []
+}
+print(type(rods['A']))
 
+# Step 6
 
+# Now that the type is list as required, you can remove the print() call.
 
+# Step 7
 
+#The goal of the Tower of Hanoi is moving all the disks to the last rod. 
+# To do that, you must follow three simple rules:
 
+#    You can move only top-most disks
+#    You can move only one disk at a time
+#    You cannot place larger disks on top of smaller ones
 
+#Below your existing code, declare an empty function named move. 
+# Later on, you will use that function to move the disks between the rods. For now, to avoid errors, 
+# use the pass keyword inside the function body.
 
+def move():
+    pass
 
+# Step 8
 
+# At the top of your code, declare a variable named NUMBER_OF_DISKS to store the number of disks and give it 
+# the value of 3. 
+# Then, replace the first argument passed in to the range() function with your new variable.
 
+NUMBER_OF_DISKS = 3
+rods = {
+    'A': list(range(NUMBER_OF_DISKS, 0, -1)),
+    'B': [],
+    'C': []
+}
 
+# Step 9
 
+# The Tower of Hanoi puzzle can be solved in 2n - 1 moves, where n is the number of disks. 
+# Declare a variable named number_of_moves and assign the total number of moves to this variable.
 
+# The power operator in Python is **.
 
+NUMBER_OF_DISKS = 3
+number_of_moves = 2**NUMBER_OF_DISKS -1
 
+# Step 10
 
+# Print the variable you declared in the previous step and feel free to change the number of disks 
+# to see how fast the required minimum number of moves increases.
 
+print(number_of_moves)
+
+# Step 11
+
+# Now you can remove your print() call. 
+# Then, inside the move() function, remove the pass keyword and print the content of your rods dictionary.
+
+# Step 12
+
+# Now call your function and see the output on the terminal.
+
+NUMBER_OF_DISKS = 3
+number_of_moves = 2**NUMBER_OF_DISKS - 1
+rods = {
+    'A': list(range(NUMBER_OF_DISKS, 0, -1)),
+    'B': [],
+    'C': []
+}
+def move():
+    print(rods)
+move()
+
+# Step 13
+
+# In the Tower of Hanoi puzzle, you can identify the three rods according to their purpose:
+
+#    The first rod is the source, where all the disks are stacked on top of each other at the beginning of the game.
+#    The second rod is an auxiliary rod, and it helps in moving the disks to the target rod.
+#    The third rod is the target, where all the disks should be placed in order at the end of the game.
+
+# Currently, the move() function does not take any parameters. Change the function declaration to take 4 parameters: n, source, auxiliary, and target. Then, pass NUMBER_OF_DISKS and the strings 'A', 'B', and 'C' as arguments to your function call. The order matters.
+
+def move(n, source, auxiliary, target):
+    print(rods)
+
+move(NUMBER_OF_DISKS, 'A', 'B', 'C')
+
+# Step 14
+
+# Before your function call, write a comment saying initiate call from source A to target C with auxiliary B.
+
+# Step 16
+
+# At the end of this project, you will create a recursive solution to the Tower of Hanoi puzzle, 
+# but now you are going to explore an iterative approach to this problem.
+
+# Start by adding a for loop to your function that iterates through the number of moves and prints 
+# the current iteration number.
+
+def move(n, source, auxiliary, target):
+    for move in range(number_of_moves):
+        print(move)
+    # display starting configuration
+    print(rods)
+
+# Step 17
+
+# The allowed disk movements between the rods exhibit a repetitive pattern occurring every three moves. 
+# For example, movements between rod A and rod C are allowed on the first, the fourth and the seventh move, 
+# where the remainder of the division between the move number and 3 is equal to 1.
+
+# Inside the previously created for loop, replace the existing print() call with an if statement that is 
+# triggered when (i + 1) % 3 == 1. 
+# Within this if statement, print f'Move {i + 1} allowed between {source} and {target}' using an f-string. 
+# Please, note that i + 1 is the move number since i is zero during the first iteration.
+
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods)
+    for i in range(number_of_moves):
+        if (i + 1) % 3 == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+
+# Step 18
+
+# Since you are going to use the expression (i + 1) % 3 multiple times, it is convenient to store it in a variable.
+
+# Just above your if statement, declare a remainder variable and assign the value (i + 1) % 3 to this variable.
+
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods)
+    for i in range(number_of_moves):
+        remainder = (i + 1) % 3
+        if (i + 1) % 3 == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+
+# Step 19
+
+# Now, replace the expression in the if condition with the remainder variable.
+
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods)
+    for i in range(number_of_moves):
+        remainder = (i + 1) % 3
+        if remainder == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+
+# Step 20
+
+# When the remainder of the move number divided by 3 is equal to 2, the movement is allowed between 
+# A and B (the source and the auxiliary rods).
+
+# Add an elif statement for that. Then, print the appropriate string if the condition is met.
+
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods)
+    for i in range(number_of_moves):
+        remainder = (i + 1) % 3
+        if remainder == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+        elif remainder == 2:
+            print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+
+# Step 21
+
+# Finally, when the move number divided by 3 has no remainder, the movement is allowed between B and C.
+
+# Add an elif statement for that. Then, print the appropriate string if the condition is met.
+
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods)
+    for i in range(number_of_moves):
+        remainder = (i + 1) % 3
+        if remainder == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+        elif remainder == 2:
+            print(f'Move {i + 1} allowed between {source} and {auxiliary}')
+        elif remainder == 0:
+            print(f'Move {i + 1} allowed between {auxiliary} and {target}')
+
+# 
 
 
 
