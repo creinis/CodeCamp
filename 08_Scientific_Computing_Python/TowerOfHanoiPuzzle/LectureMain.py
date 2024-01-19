@@ -238,7 +238,196 @@ def move(n, source, auxiliary, target):
         elif remainder == 0:
             print(f'Move {i + 1} allowed between {auxiliary} and {target}')
 
+# Step 23
+
+# When target is empty, the disk should be moved necessarily from source to target.
+
+# After the declaration of forward, add an if statement to check if rods[target] is empty. If it is, 
+# change forward to True.
+
+        if remainder == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+            forward = False
+            if rods[target] == []:
+                forward = True
+ 
+#  Step 24
+
+# The other case in which you have to move the disk necessarily from source to target is when the source 
+# list is not empty and the last disk in source is lower than the last disk in target.
+
+# Add an elif statement to check this condition. Then, set the forward variable to True if the condition is met.
+
+            if rods[target] == []:
+                forward = True
+            elif rods[source] and rods[source][-1] < rods[target][-1]:
+                forward = True
+
+# Step 25
+
+# Next, below the nested elif statement, add another if statement that should be executed when forward is True. 
+# Inside this conditional, print the following f-string: f'Moving disk {rods[source][-1]} from {source} to {target}'.
+
+        if remainder == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+            forward = False
+            if not rods[target]:
+                forward = True
+            elif rods[source] and rods[source][-1] < rods[target][-1]:
+                forward = True
+            if forward == True:
+                print(f'Moving disk {rods[source][-1]} from {source} to {target}')
+
+# Step 26
+
+# After printing the move, you need to remove the last element from the source rod and append it to target rod. 
+# Use the .pop() method and the .append() method for that.
+
+        if remainder == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+            forward = False
+            if not rods[target]:
+                forward = True
+            elif rods[source] and rods[source][-1] < rods[target][-1]:
+                forward = True
+            if forward:
+                print(f'Moving disk {rods[source][-1]} from {source} to {target}')
+                rods[target].append(rods[source].pop())
+
+# Step 27
+
+# When forward is False, the disk has to be moved in the opposite direction. 
+# Write an else clause for that. Print the move and change the content of the lists accordingly.
+
+            if forward:
+                print(f'Moving disk {rods[source][-1]} from {source} to {target}')
+                rods[target].append(rods[source].pop())
+            else:
+                print(f'Moving disk {rods[target][-1]} from {target} to {source}')
+                rods[source].append(rods[target].pop())
+
+# Step 28
+
+# Outside the else block, add a comment saying display our progress and print the content of the lists to check that everything is working.
+
+            if forward:
+                print(f'Moving disk {rods[source][-1]} from {source} to {target}')
+                rods[target].append(rods[source].pop())
+            else:
+                print(f'Moving disk {rods[target][-1]} from {target} to {source}')
+                rods[source].append(rods[target].pop())
+            # display our progress
+            print(rods)
+            
+# Step 29
+
+# As you can see, disk 1 is going back and forth every three moves. 
+# This happens because you still need to take care of movements between the other rods. 
+# Instead of repeating the same code you wrote during the previous few steps and changing the rods, 
+# it would be better to move that code inside a function to call in each conditional statement. 
+# Declare an empty function named make_allowed_move() and don't forget the pass keyword.
+
+def make_allowed_move():
+    pass
+
+# Step 30
+
+# Add two parameters called rod1 and rod2 to your new function.
+
+def make_allowed_move(rod1, rod2):
+    pass
+
+# Step 31
+
+# It's time to move some code from the move() function to the make_allowed_move() function. 
+# Move the code nested inside the first if statement (except the first print() call) to your new function. 
+# Pay close attention to the indentation. Don't forget to remove the pass keyword.
+
+def make_allowed_move(rod1, rod2):
+    forward = False
+    if not rods[target]:
+        forward = True
+    elif rods[source] and rods[source][-1] < rods[target][-1]:
+        forward = True              
+    if forward:
+        print(f'Moving disk {rods[source][-1]} from {source} to {target}')
+        rods[target].append(rods[source].pop())
+    else:
+        print(f'Moving disk {rods[target][-1]} from {target} to {source}')
+        rods[source].append(rods[target].pop())
+    
+    # display our progress
+    print(rods)
+
+def move(n, source, auxiliary, target):
+    # display starting configuration
+    print(rods)
+    for i in range(number_of_moves):
+        remainder = (i + 1) % 3
+        if remainder == 1:
+            print(f'Move {i + 1} allowed between {source} and {target}')
+
+# Step 32
+
+# make_allowed_move() takes in rod1 and rod2 as parameters. You need a little refactoring here. 
+# Change every occurrence of source into rod1.
+
+# Step 33
+
+# Now change each occurrence of target into rod2.
+
+def make_allowed_move(rod1, rod2):    
+    forward = False
+    if not rods[rod2]:
+        forward = True
+    elif rods[rod1] and rods[rod1][-1] < rods[rod2][-1]:
+        forward = True              
+    if forward:
+        print(f'Moving disk {rods[rod1][-1]} from {rod1} to {rod2}')
+        rods[rod2].append(rods[rod1].pop())
+    else:
+        print(f'Moving disk {rods[rod2][-1]} from {rod2} to {rod1}')
+        rods[rod1].append(rods[rod2].pop())
+    
+    # display our progress
+    print(rods)
+
 # 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
