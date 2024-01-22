@@ -410,45 +410,186 @@ def find_empty_cell(self):
 #    row: representing the row index.
 #    num: representing the number to be checked.
 
-#Also, don't forget to add the pass keyword in the function body.
+# Also, don't forget to add the pass keyword in the function body.
+
+def valid_in_row(self, row, num):
+    pass
+
+# Step 38
+
+# If num is not in the row, the expression evaluates to True and it means the number is valid for insertion.
+
+# If num is in the row, the expression evaluates to False and insertion would violate the rules.
+
+# Return the value from the expression you wrote in the previous step, so that the validity of a number 
+# can be checked.
+
+def valid_in_row(self, row, num):
+    return num not in self.board[row]
+
+# Step 39
+
+# Next, you will create a method that checks if a number can be inserted in a specified column of the 
+# sudoku board by checking if the number is not already present in that column for any row.
+
+# For that, within the Board class, create a method named valid_in_col.
+
+# It should take three parameters:
+
+#    self: representing the instance of the class.
+#    col: representing the column index.
+#    num: representing the number to be checked.
+
+def valid_in_col(self, col, num):
+    pass
+
+# Step 40
+
+# Now, you need to check if a given number is not equal to the number in the specified column of the current row.
+
+# For that, first, iterate over the rows of the 2D list self.board using a for loop in the range 0 to 8. 
+# Use row as the iteration variable.
+
+def valid_in_col(self, col, num):
+    for row in range(9):
+        pass
+
+# Step 41
+
+# For each element in the specified column (col) of the current row (row), check whether the value at 
+# the current position in the 2D list is not equal to the provided num.
+
+def valid_in_col(self, col, num):
+    self.board[row][col] != num
+
+# Step 42
+
+# This expression generates a list of boolean values representing whether the condition 
+# self.board[row][col] != num is True or False for each element in the specified column across all rows.
+
+# Pass this generator expression to the all() function to check if all the elements in the column are different 
+# from num.
+
+# Recall that the syntax of the all function is as follows:
+
+all(
+    self.board[row][col] != num
+    for row in range(9)
+    )
+
+# Step 43
+
+# Return the result of the all() function call.
 
 
+def valid_in_col(self, col, num):
+    return all(
+        self.board[row][col] != num
+        for row in range(9)
+    )
 
+# Step 44
 
+# Next, you will work on a method that checks if a number can be inserted in the 3x3 square.
 
+# Inside the Board class, create a method named valid_in_square.
 
+# It should take four parameters:
 
+#    self: represents the instance of the class.
+#    row: represents the row index.
+#    col: represents the column index.
+#    num: represents the number to be checked.
 
+def valid_in_square(self, row, col, num):
+    pass
 
+# Step 45
 
+# Now you need to calculate the starting row index for the 3x3 block in the board grid.
 
+# For that, ensure that the starting row index for each 3x3 block is a multiple of 3.
 
+# This can be achieved by this mathematical operation: (row // 3) * 3. 
+# Assign the result of this calculation to row_start.
 
+# Step 46
 
+# Next, you need to calculate the starting column index for the 3x3 block in the board grid.
 
+# For that, ensure that the starting row index for each 3x3 block is a multiple of 3.
 
+# Similar to the previous step, this can be achieved by this mathematical operation: (col // 3) * 3. 
+# Assign the result of this calculation to col_start.
 
+def valid_in_square(self, row, col, num):
+        row_start = (row // 3) * 3
+        col_start = (col // 3) * 3
 
+# Step 47
 
+# Create a for loop that starts at row_start and ends just before row_start + 3. 
+# You can use the range() function to generate the sequence. 
+# As an example, if row_start is 3, the loop will iterate over the numbers 3, 4, and 5.
 
+def valid_in_square(self, row, col, num):
+    row_start = (row // 3) * 3
+    col_start=(col // 3) * 3
+    for i in range(row_start, row_start + 3):
+        pass
 
+# Step 48
 
+# Inside the loop created in the previous step, nest another for loop to iterate over a sequence of 
+# three elements starting at col_start. Again, use the range() function to generate the sequence.
 
+        for row_no in range(row_start, row_start + 3):
+            for col_no in range(col_start, col_start + 3):
+                pass
 
+# Step 49
 
+# The next step is to check if the specified number (num) is already present in the current cell of the 3x3 square.
 
+# Inside the inner for loop, create an if statement that checks if the current cell in self.board is equal to num.
 
+            for col_no in range(col_start, col_start + 3):
+                if self.board[row_no][col_no] == num:
+                    pass
 
+# Step 50
 
+# Inside the if block, return False to indicate that the number cannot be inserted into the square.
 
+# Step 51
 
+# If the number is not present, it can be inserted into the square without violating the rules of sudoku.
 
+# Return True in that case, and pay attention to the indentation.
 
+    def valid_in_square(self, row, col, num):
+        row_start = (row // 3) * 3
+        col_start=(col // 3) * 3
+        for row_no in range(row_start, row_start + 3):
+            for col_no in range(col_start, col_start + 3):
+                if self.board[row_no][col_no] == num:
+                    return False
+        return True
 
+# Step 52
 
+# Within the Board class, create another method is_valid. It would take three parameters:
 
+#    self (representing the instance of the class),
+#    empty (a tuple representing the row and column indices of an empty cell)
+#   num (representing the number to be checked).
 
+#This method checks if a given number is a valid choice for an empty cell in the sudoku board by validating its compatibility with the row, column, and 3x3 square of the specified empty cell.
 
+def is_valid(self, empty, num):
+    pass
+
+# 
 
 
 
