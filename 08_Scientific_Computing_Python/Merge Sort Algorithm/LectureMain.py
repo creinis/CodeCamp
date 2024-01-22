@@ -104,13 +104,208 @@ def merge_sort(array):
 # Create three variables: left_array_index, right_array_index, and sorted_index and set their values to 0. 
 # These variables will help you keep track of each index during the sorting process.
 
+    left_array_index = 0
+    right_array_index = 0
+    sorted_index = 0
+
+# Step 11
+
+# Inside your function, create a while loop that compares an element in left_part to an element in right_part, 
+# and merges the smaller element to the main array list.
+
+# Create two conditions for the loop: one that checks whether the left_array_index is less than the length of 
+# left_part and another condition that checks whether right_array_index is less than the length of right_part.
+
+    while left_array_index < len(left_part) and right_array_index < len(right_part):
+        pass
+
+# Step 12
+
+# Within the while loop, replace pass with an if statement that checks if the index of left_part is 
+# less than the index of right_part.
+
+# Use the pass keyword in the body of the if statement.
+
+    while left_array_index < len(left_part) and right_array_index < len(right_part):
+        if left_part[left_array_index] < right_part[right_array_index]:
+            pass
+
+# Step 13
+
+# When the if condition evaluates to True, it means that the element in the left_part list is smaller than 
+# the element it is being compared to in the right_part list.
+
+# In that case, you can assign the left_part index to the sorted array.
+
+# Inside the if block, remove pass and assign left_part[left_array_index] to array[sorted_index].
+
+    while left_array_index < len(left_part) and right_array_index < len(right_part):
+        if left_part[left_array_index] < right_part[right_array_index]:
+            array[sorted_index] = left_part[left_array_index]
+
+# Step 14
+
+# After assigning the left_part index to the sorted array, increment left_array_index by 1.
+
+        if left_part[left_array_index] < right_part[right_array_index]:
+            array[sorted_index] = left_part[left_array_index]
+            left_array_index += 1
+
+# Step 15
+
+# In a previous step, you assigned the element in the left_part to the array list because it was smaller. 
+# But this will not always be the case. In some comparison cases, the element on the right could be smaller.
+
+# Create an else clause to execute when the left_part index is not less than the right_part index.
+
+# Inside the else block, assign right_part[right_array_index] to array[sorted_index].
+
+# Step 16
+
+# Still within the else block, increment right_array_index by 1.
 
 
+        if left_part[left_array_index] < right_part[right_array_index]:
+            array[sorted_index] = left_part[left_array_index]
+            left_array_index += 1
+        else:
+            array[sorted_index] = right_part[right_array_index]
+            right_array_index += 1
 
+# Step 17
 
+# The if and else statements you created in the previous steps will assign elements to the sorted array.
 
+# Each element assigned to the sorted array takes up an index in the list. 
+# So you have to move to the next index without an element.
 
+# Below the if/else block, but still within the while loop increment sorted_index by 1. 
+# This should not be in the body of the if or else statement
 
+    while left_array_index < len(left_part) and right_array_index < len(right_part):
+        if left_part[left_array_index] < right_part[right_array_index]:
+            array[sorted_index] = left_part[left_array_index]
+            left_array_index += 1
+        else:
+            array[sorted_index] = right_part[right_array_index]
+            right_array_index += 1
+        sorted_index += 1
+
+# Step 18
+
+# The while loop you created compares one element from left_part with another in right_part, 
+# then adds the smaller element to the main array list.
+
+# It will continue this operation until there are no elements left to be compared. 
+# But left_part may still have elements left while right_part has none, and vice versa.
+
+# Create another while loop to copy the remaining elements in left_part into the array list. 
+# Use left_array_index < len(left_part) for the while condition.
+
+    while left_array_index < len(left_part):
+        pass
+
+# Step 19
+
+# Remove the pass keyword. 
+# For the while loop's code block, assign left_part[left_array_index] to array[sorted_index].
+
+    while left_array_index < len(left_part):
+        array[sorted_index] = left_part[left_array_index]
+
+# Step 20
+
+# Still within the while loop, increment the value of left_array_index by 1.
+
+    while left_array_index < len(left_part):
+        array[sorted_index] = left_part[left_array_index]
+        left_array_index += 1
+
+# Step 21
+
+# The last thing to do for the while loop is to move to the next index in the sorted array.
+
+# Using the augmented assignment addition operator, add 1 to the value of sorted_index.
+
+    while left_array_index < len(left_part):
+        array[sorted_index] = left_part[left_array_index]
+        left_array_index += 1
+        sorted_index += 1
+
+# Step 22
+
+# Now, you are going to replicate the same while loop logic for right_part.
+
+# Create a while loop that runs when right_array_index is less than len(right_part), and use the pass keyword 
+# in the body of the loop.
+
+    while right_array_index < len(right_part):
+        pass
+
+# Step 23
+
+# Within the while loop, assign right_part[right_array_index] to array[sorted_index].
+
+# Step 24
+
+# Now, use the += operator to increment right_array_index by 1.
+
+# Step 25
+
+# For the last step in the while loop, increment sorted_index by 1.
+
+    while right_array_index < len(right_part):
+        array[sorted_index] = right_part[right_array_index]
+        right_array_index += 1
+        sorted_index += 1
+
+# Step 26
+
+# Before testing the merge_sort() function, you need to create a base case that stops the function execution 
+# when the length of array is less than or equal to 1.
+
+# This base case will stop the recursion call. 
+# Without it, the merge sort operation would continue to run even when the list has been sorted or has 
+# no element in it.
+
+# Right after the function declaration, create an if statement with this condition: len(array) <= 1. 
+# Use the pass keyword in the function's body.
+
+def merge_sort(array):
+    if len(array) <= 1:
+        pass
+
+# Step 27
+
+# Replace the pass keyword within the if statement with a return statement. 
+# This will stop the execution of the merge_sort function when the given condition is true.
+
+def merge_sort(array):
+    if len(array) <= 1:
+        return array
+
+# Step 28
+
+# You can use the __name__ variable to determine if a Python script is being run as the main program or if it is 
+# being imported as a module (code written in another Python file).
+
+# If the value of __name__ is set to '__main__', it implies that the current script is the main program, 
+# and not a module.
+
+# In this project, you'll use the current script as the main program.
+
+# Create an if statement that checks whether the value of __name__ is '__main__'.
+
+# Use the pass keyword in the body of the if statement.
+
+if __name__ == '__main__':
+    pass
+
+# Step 29
+
+# It's time to test the merge_sort function!
+
+# Replace pass with a list called numbers, and assign this list to it: [4, 10, 6, 14, 2, 1, 8, 5]
 
 
 
