@@ -307,9 +307,39 @@ if __name__ == '__main__':
 
 # Replace pass with a list called numbers, and assign this list to it: [4, 10, 6, 14, 2, 1, 8, 5]
 
+if __name__ == '__main__':
+    numbers = [4, 10, 6, 14, 2, 1, 8, 5]
 
+# Step 30
 
+# Use the print() function to print the string Unsorted array:.
 
+# Step 31
 
+# Call the print() function again to print the numbers list. 
+# This will print the unsorted list in the console.
 
+# Step 32
 
+# After your print() calls, call the merge_sort function and pass in the numbers list as an argument.
+
+# Step 33
+
+# At this point, the numbers list has been sorted. 
+# Call the print function to print string Sorted array: and the sorted list.
+
+# To do that, concatenate 'Sorted array: ' and str(numbers) in the print() call.
+
+# With that, the merge sort algorithm is complete.
+
+if __name__ == '__main__':
+    numbers = [4, 10, 6, 14, 2, 1, 8, 5]
+    print('Unsorted array: ')
+    print(numbers)
+    merge_sort(numbers)
+    print('Sorted array: ' + str(numbers))
+
+# output:
+#>>> Unsorted array: 
+#>>> [4, 10, 6, 14, 2, 1, 8, 5]
+#>>> Sorted array: [1, 2, 4, 5, 6, 8, 10, 14]
