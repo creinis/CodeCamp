@@ -658,19 +658,236 @@ def is_valid(self, empty, num):
 def solver(self):
         pass
 
-# 
+# Step 60 Passed
 
+# First, check if there are any empty cells left in the sudoku board.
 
+# Use the find_empty_cell function call on self.
 
+# Also, use the walrus operator (:=) to assign the result of self.find_empty_cell() to the variable next_empty.
 
+# By using the walrus operator, you can combine the assignment and the conditional check into a single line, making the code more concise and readable.
 
+def solver(self):
+    (next_empty := self.find_empty_cell())
 
+# Step 61
 
+# Place the condition in an if statement and check if it is None
 
+def solver(self):
+    if (next_empty := self.find_empty_cell()) is None:
+        pass
 
+# Step 62
 
+# If there are no empty cells (i.e., next_empty is None), the puzzle is solved. So, return True.
 
+def solver(self):
+    if (next_empty := self.find_empty_cell()) is None:
+        return True
 
+# Step 63
 
+# Create an else block to cater the case where there are empty cells and the puzzle is unsolved.
+
+def solver(self):
+    if (next_empty := self.find_empty_cell()) is None:
+        return True
+    else:
+        return False
+
+# Step 64
+
+# If still there are empty cells, create a loop in the else block that iterates over numbers from 1 to 9 (inclusive).
+
+def solver(self):
+    if (next_empty := self.find_empty_cell()) is None:
+        return True
+    else:
+        for num in range(1, 10):
+            pass
+
+# Step 65
+
+# For each number (guess), check if the number is a valid choice for the current empty cell using 
+# self.is_valid(next_empty, guess)
+
+def solver(self):
+    if (next_empty := self.find_empty_cell()) is None:
+        return True
+    else:
+        for guess in range(1, 10):
+            guess = self.is_valid(next_empty, guess)
+
+# Step 66
+
+# If the guess is valid, the method updates the sudoku board with the guess by assigning guess to the 
+# cell specified by next_empty.
+
+# Unpack the next_empty tuple to row, col.
+
+def solver(self):
+    if (next_empty := self.find_empty_cell()) is None:
+        return True
+    else:
+        for guess in range(1, 10):
+            if self.is_valid(next_empty, guess):
+                row, col = next_empty
+
+# Step 67
+
+# Access the cell at the given row and column in the sudoku board, and assign it the value of guess.
+
+            if self.is_valid(next_empty, guess):
+                row, col = next_empty
+                self.board[row][col] = guess
+
+# Step 68
+
+# While staying in the if block, recursively call self.solver() to try to solve the rest of the sudoku.
+
+# Step 69
+
+# If the recursive call to self.solver() returns True, it means the sudoku is solved.
+
+# If the recursive call returns True, return True from the method.
+
+                if self.is_valid(next_empty, guess):
+                    row, col = next_empty
+                    self.board[row][col] = guess
+                    if self.solver():
+                        return True
+
+# Step 70
+
+# If self.solver() returns False, this means the guess led to an unsolvable sudoku.
+
+# Outside the innermost if block, undo the guess by setting the cell value back to 0.
+
+                if self.is_valid(next_empty, guess):
+                    row, col = next_empty
+                    self.board[row][col] = guess
+                    if self.solver():
+                        return True
+                    self.board[row][col] = 0
+
+# Step 71
+
+# Make your method return False when none of the guesses leads to a solution.
+
+    def solver(self):
+        if (next_empty := self.find_empty_cell()) is None:
+            return True
+        else:
+            for guess in range(1, 10):
+                if self.is_valid(next_empty, guess):
+                    row, col = next_empty
+                    self.board[row][col] = guess
+                    if self.solver():
+                        return True
+                    self.board[row][col] = 0
+            return False
+
+# Step 72
+
+# Outside the class definition, create a function to print and solve the sudoku board.
+
+# Name it solve_sudoku. It should take a single parameter board that is a 2D list.
+
+def solve_sudoku(board):
+    pass
+
+# Step 73
+
+# Inside the solve_sudoku function, create a gameboard variable and assign it an instance of the Board class 
+# passing board as the argument.
+
+# This initializes the sudoku board with the given initial state.
+
+def solve_sudoku(board):
+    gameboard = Board(board)
+
+# Step 74
+
+# Now, add another print() call passing gameboard as the argument to print the current state of the sudoku board.
+
+# Add a print call to print the following: f'\nPuzzle to solve:\n{gameboard}'.
+
+# Step 75
+
+# Create an if statement that checks if the solver() method call from the gameboard object returns True.
+
+# Then, add a print() call inside the if block passing the following string: '\nSolved puzzle:'.
+
+def solve_sudoku(board):
+    gameboard = Board(board)
+    print(f'\nPuzzle to solve:\n{gameboard}')
+    if gameboard.solver():
+        print('\nSolved puzzle:')
+
+# Step 76
+
+# Add another print call to print the current state of the board.
+
+    if gameboard.solver():
+        print('\nSolved puzzle:')
+        print(gameboard)
+
+# Step 77
+
+# Create an else clause and print the following string inside the new else block: 
+# '\nThe provided puzzle is unsolvable.'.
+
+def solve_sudoku(board):
+    gameboard = Board(board)
+    print(f'\nPuzzle to solve:\n{gameboard}')
+    if gameboard.solver():
+        print('\nSolved puzzle:')
+        print(gameboard)
+    else:
+        print('\nThe provided puzzle is unsolvable.')
+
+# Step 78
+
+# In the end, return your instance of the Board class, which represents the final state of the sudoku board 
+# after attempting to solve it.
+
+def solve_sudoku(board):
+    gameboard = Board(board)
+    print(f'\nPuzzle to solve:\n{gameboard}')
+    if gameboard.solver():
+        print('\nSolved puzzle:')
+        print(gameboard)
+
+    else:
+        print('\nThe provided puzzle is unsolvable.')
+    return gameboard
+
+# Step 79
+
+# Now it's time to play the game!
+
+# A puzzle has been given in the code.
+
+# Call the solve_sudoku method with puzzle as input.
+
+# Now, you can see the solved puzzle as the output.
+
+# With this, you are finished with building the sudoku solver!
+
+puzzle = [
+  [0, 0, 2, 0, 0, 8, 0, 0, 0],
+  [0, 0, 0, 0, 0, 3, 7, 6, 2],
+  [4, 3, 0, 0, 0, 0, 8, 0, 0],
+  [0, 5, 0, 0, 3, 0, 0, 9, 0],
+  [0, 4, 0, 0, 0, 0, 0, 2, 6],
+  [0, 0, 0, 4, 6, 7, 0, 0, 0],
+  [0, 8, 6, 7, 0, 4, 0, 0, 0],
+  [0, 0, 0, 5, 1, 9, 0, 0, 8],
+  [1, 7, 0, 0, 0, 6, 0, 0, 5]
+]
+
+solve_sudoku(puzzle)
 
 
