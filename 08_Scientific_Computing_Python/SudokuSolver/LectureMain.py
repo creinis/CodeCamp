@@ -342,6 +342,108 @@ class Board:
 # It takes self as a parameter, representing the instance of the class. 
 # Include the pass keyword inside the function body.
 
+    def find_empty_cell(self):
+        pass
+
+# Step 29
+
+# Inside the find_empty_cell method, create a for loop and use the enumerate() function to iterate over each row 
+# in the sudoku board.
+
+# Use row for the index of the current row and contents for the elements of the current row.
+
+    def find_empty_cell(self):
+        for row, contents in enumerate(self.board):
+            pass
+
+# Step 30
+
+# In the body of the for loop, add a try block.
+
+# Step 31
+
+# In the try block, attempt to find the index of the first occurrence of 0 in the current row using 
+# contents.index(0). Store the results in the variable col.
+
+# Step 32
+
+# If 0 is found, the code immediately returns a tuple (row, col) with the row index and column index of the 
+# empty cell.
+
+# Return the row and col values
+
+# Step 33
+
+# Create an except block to handle the ValueError exception that is thrown if 0 is not found.
+
+# Step 34
+
+# If the value 0 is not present in the current row, an exception would be thrown and the except block would 
+# execute.
+
+# The except block should pass and continue to the next row. Achieve this by using pass.
+
+# Step 35
+
+# If the loop completes without finding any empty cells, the method should return None to indicate that 
+# the sudoku board is filled.
+
+# Return None outside the for loop block.
+
+def find_empty_cell(self):
+    for row, contents in enumerate(self.board):
+        try:
+            col = contents.index(0)
+            return row, col
+        except ValueError:
+            pass
+    return None
+
+# Step 36
+
+# Next, you will work on a method that checks if a given number can be inserted into a specified row of 
+# the sudoku board.
+
+# Create a method named valid_in_row. It should take three parameters:
+
+#    self: representing the instance of the class.
+#    row: representing the row index.
+#    num: representing the number to be checked.
+
+#Also, don't forget to add the pass keyword in the function body.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
