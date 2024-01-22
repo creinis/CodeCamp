@@ -589,7 +589,82 @@ def valid_in_square(self, row, col, num):
 def is_valid(self, empty, num):
     pass
 
+# Step 53
+
+# Inside the method, unpack the empty tuple into row and col.
+
+    def is_valid(self, empty, num):
+        row, col = empty
+
+# Step 54
+
+# Check if the number is valid for insertion in the specified row by calling self.valid_in_row(row, num) 
+# Assign the result to valid_in_row
+
+    def is_valid(self, empty, num):
+        row, col = empty
+        valid_in_row = self.valid_in_row(row, num)
+
+# Step 55
+
+# Check if the number is valid for insertion in the specified column by calling self.valid_in_col(col, num)
+
+# Assign the result to valid_in_col.
+
+    def is_valid(self, empty, num):
+        row, col = empty
+        valid_in_row = self.valid_in_row(row, num)
+        valid_in_col = self.valid_in_col(col, num)
+
+# Step 56
+
+# Check if the number is valid for insertion in the 3x3 square that contains the specified cell by calling 
+# self.valid_in_square(row, col, num).
+
+# Assign the result to valid_in_square.
+
+    def is_valid(self, empty, num):
+        row, col = empty
+        valid_in_row = self.valid_in_row(row, num)
+        valid_in_col = self.valid_in_col(col, num)
+        valid_in_square = self.valid_in_square(row, col, num)
+
+# Step 57
+
+# Insert valid_in_row, valid_in_col, and valid_in_square into a list and pass it to the all() function. 
+# This will verify that all the function calls return True.
+
+# Step 58
+
+# Now, return the result of the all() call.
+
+    def is_valid(self, empty, num):
+        row, col = empty
+        valid_in_row = self.valid_in_row(row, num)
+        valid_in_col = self.valid_in_col(col, num)
+        valid_in_square = self.valid_in_square(row, col, num)
+        return all(
+            [valid_in_row, valid_in_col, valid_in_square]
+        )
+
+# Step 59
+
+# Next, you will work on a method that attempts to solve the sudoku in-place, meaning it would modify 
+# the existing sudoku board rather than creating a new one.
+
+# Within the board class, create a method solver that takes one argument(self, representing the instance of 
+# the class).
+
+def solver(self):
+        pass
+
 # 
+
+
+
+
+
+
 
 
 
