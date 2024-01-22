@@ -153,43 +153,194 @@ def __str__(self):
 # Use square_no and part as the iterating variable and the enumerate() function. For now, leave the enumerate() 
 # call empty.
 
+        for index, line in enumerate(self.board):
+          row_list = []
+          for square_no, part in enumerate():
+              pass
 
+# Step 13
 
+# Now, you need to create the three line segments to pass to the enumerate function.
 
+# Use list slicing to create the three lists of equal length representing the line segment of each 3x3 square 
+# and pass them to the enumerate() call. 
+# Add start = 1 to start the enumeration from 1 instead of 0.
 
+        for index, line in enumerate(self.board):
+            row_list = []
+            for square_no, part in enumerate([line[:3], line[3:6], line[6:]], start = 1):
 
+# Step 14
 
+# Now, you would join the elements of the segment (part) with the pipe character (|).
 
+# For that, first, use a for loop for item in part to access all elements.
 
+# Then, use the join() method on the | character to join the elements of the segment (part).
 
+# After that, convert each element to a string using str(item).
 
+                for square_no, part in enumerate([line[:3], line[3:6], line[6:]], start=1):
+                    '|'.join(str(item) for item in part)
 
+# Step 15
 
+# Assign the joined string to the variable row_square.
 
+# Step 16
 
+# Extend the row_list with the elements of the row_square string.
 
+            for square_no, part in enumerate([line[:3], line[3:6], line[6:]], start=1):
+                row_square = '|'.join(str(item) for item in part)
+                row_list.extend(row_square)
 
+# Step 17
 
+# Within the innermost loop, create an if statement to check if the current segment (square_no) is not the 
+# last one (i.e., not equal to 3)
 
+# Step 18
 
+# Inside the if block, append a ║ character at the end of row_list.
 
+                if square_no != 3:
+                    row_list.append('║')
 
+# Step 19
 
+# Next, you will create a string representation of the row with spaces between each element.
 
+# For that, outside the innermost for loop body, create a string row. 
+# Assign the following formatted string f'║ {" ".join(row_list)} ║\n' to it to join the elements of row_list 
+# with a space in between.
 
+# Step 20
 
+# When you would pass your input puzzle board, 0 would be used for empty cells.
 
+# For a better visual representation, replace the empty cells in a row with a space using the replace method.
 
+# The replace() method takes two arguments, the first one is the character to be replaced and the second one 
+# is the character to be replaced with.
 
+# After replacing, assign the result to a variable row_empty.
 
+            row = f'║ {" ".join(row_list)} ║\n'
+            row_empty = row.replace('0', ' ')
 
+# Step 21
 
+# board_string is gradually built up as the loop iterates over each row, creating the full ASCII art 
+# representation of the sudoku board.
 
+# Add the modified row_empty string to the board_string.
 
+            row = f'║ {" ".join(row_list)} ║\n'
+            row_empty = row.replace('0', ' ')
+            board_string += row_empty
 
+# Step 22
 
+# Within the outermost for loop, create an if statement that checks if the current row index is less than 8. 
+# This is because the last row of the sudoku board has an index of 8, and you want to handle the last 
+# row differently.
 
+        if index < 8:
+            pass
 
+# Step 23
+
+# Now, you need to verify if the row is the last row inside a 3x3 square. 
+# This occurs when index % 3 is equal to 2.
+
+# Inside your existing if block, nest another if to check that condition.
+
+            if index < 8:
+                if index % 3 == 2:
+                    pass
+
+# Step 24
+
+# If the current row is the last row of a 3x3 square, in order to create a visually appealing border you need 
+# to append a different border string to board_string .
+
+# Inside the if statement, add the following string to the current value of board_string: 
+# f'╠═══{"╪═══"*2}{"╬═══"}{"╪═══"*2}{"╬═══"}{"╪═══"*2}╣\n'.
+
+                if index % 3 == 2:
+                    board_string += f'╠═══{"╪═══"*2}{"╬═══"}{"╪═══"*2}{"╬═══"}{"╪═══"*2}╣\n'
+
+# Step 25
+
+# Now, to handle other rows, if the inner condition is False, meaning the current row is not the last row of a 
+# 3x3 square, append the middle_lines string to board_string. Include this in an else block.
+
+# Recall that middle_lines represents the middle borders of the sudoku board and includes horizontal separators.
+
+                if index % 3 == 2:
+                    board_string += f'╠═══{"╪═══"*2}{"╬═══"}{"╪═══"*2}{"╬═══"}{"╪═══"*2}╣\n'
+                else:
+                    board_string += middle_lines
+
+# Step 26
+
+# Now, you need to handle the last row of the entire board.
+
+# lower_lines represents the bottom border of the entire sudoku board.
+
+# Create an else block to append the lower_lines string to board_string when the outer if condition is false.
+
+            if index < 8:
+                if index % 3 == 2:
+                    board_string += f'╠═══{"╪═══"*2}{"╬═══"}{"╪═══"*2}{"╬═══"}{"╪═══"*2}╣\n'
+                else:
+                    board_string += middle_lines
+            else:
+                board_string += lower_lines
+
+# Step 27
+
+# After the outer loop completes for all rows, return the final board_string. 
+# This string contains the complete visual representation of the sudoku board in ASCII art style, 
+# including borders and separators.
+
+class Board:
+    def __init__(self, board):
+        self.board = board
+
+    def __str__(self):
+        upper_lines = f'\n╔═══{"╤═══"*2}{"╦═══"}{"╤═══"*2}{"╦═══"}{"╤═══"*2}╗\n'
+        middle_lines = f'╟───{"┼───"*2}{"╫───"}{"┼───"*2}{"╫───"}{"┼───"*2}╢\n'
+        lower_lines = f'╚═══{"╧═══"*2}{"╩═══"}{"╧═══"*2}{"╩═══"}{"╧═══"*2}╝\n'
+        board_string = upper_lines
+        for index, line in enumerate(self.board):
+            row_list = []
+            for square_no, part in enumerate([line[:3], line[3:6], line[6:]], start=1):
+                row_square = '|'.join(str(item) for item in part)
+                row_list.extend(row_square)
+                if square_no != 3:
+                    row_list.append('║')
+
+            row = f'║ {" ".join(row_list)} ║\n'
+            row_empty = row.replace('0', ' ')
+            board_string += row_empty
+
+            if index < 8:
+                if index % 3 == 2:
+                    board_string += f'╠═══{"╪═══"*2}{"╬═══"}{"╪═══"*2}{"╬═══"}{"╪═══"*2}╣\n'
+                else:
+                    board_string += middle_lines
+            else:
+                board_string += lower_lines
+        return board_string
+    
+# Step 28
+
+# Now you will work on a method that finds the empty cells in the sudoku board. 
+# For that, within the Board class, create a method named find_empty_cell. 
+# It takes self as a parameter, representing the instance of the class. 
+# Include the pass keyword inside the function body.
 
 
 
