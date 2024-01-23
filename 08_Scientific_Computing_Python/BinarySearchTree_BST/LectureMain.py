@@ -470,24 +470,154 @@ class BinarySearchTree:
 # This condition checks if there is a left child. 
 # As long as there is a left child, the loop continues and there is a smaller value to be found.
 
+    def _min_value(self, node):
+        while node.left is not None:
+            pass
 
+# Step 42
 
+# Inside the while loop body, replace pass with node and assign it the left child of the node.
 
+    def _min_value(self, node):
+        while node.left is not None:
+            node = node.left
 
+# Step 43
 
+# Once the leftmost node is found (that is, when node.left becomes None), the loop exits.
 
+# After the while loop, return the key of the leftmost node, which represents the minimum value in the 
+# given subtree.
 
+# With this, you are able to get the value that will replace the node after it is deleted.
 
+    def _min_value(self, node):
+        while node.left is not None:
+            node = node.left
+        return node.key
 
+# Step 44
 
+# The inorder_traversal method is responsible for performing an in-order traversal of the binary search tree. 
+# It returns the keys of the nodes in sorted order.
 
+# In-order traversal is a depth-first binary tree traversal algorithm that visits the left subtree, the current 
+# node, and then the right subtree.
 
+# Create an inorder_traversal method that takes self as the only parameter.
 
+    def inorder_traversal(self):
+        pass
 
+# Step 45
 
+#Inside the method, replace pass with an empty list named result that will store the keys of the nodes in sorted order.
 
+    def inorder_traversal(self):
+        result = []
 
+# Step 46
 
+# Within the inorder_traversal method, start the in-order traversal by calling the helper method 
+# _inorder_traversal and pass the BST root and the result list as the arguments.
+
+# This will start the traversal from the root of the binary search tree (self.root), and the result 
+# list will be passed to accumulate the keys during the traversal.
+
+    def inorder_traversal(self):
+        result = []
+        self.root = self._inorder_traversal(self.root, result)
+
+# Step 47
+
+# Finally, return the sorted list of keys.
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_traversal(self.root, result)
+        return result
+
+# Step 48
+
+# Define the _inorder_traversal method and give it three parameters: self, node and result. 
+# Where node is the current node being considered during the traversal and result is the list to which the 
+# keys are appended in sorted order.
+
+    def _inorder_traversal(self, node, result):
+        pass
+
+# Step 49
+
+# Replace pass with an if statement that checks if the current node (node) is not empty. 
+# Then, recursively call _inorder_traversal with node.left and result as the arguments.
+
+    def _inorder_traversal(self, node, result):
+        if node:
+            node.left = self._inorder_traversal(node.left, result)
+
+# Step 50
+
+# Still inside the if block, append the key of the current node to the result list.
+
+    def _inorder_traversal(self, node, result):
+        if node:
+            self._inorder_traversal(node.left, result)
+            result.append(node.key)
+
+# Step 51
+
+# Finally, recursively call the _inorder_traversal method on the right child of the current node.
+
+# This recursive call explores the entire right subtree in an in-order manner.
+
+    def _inorder_traversal(self, node, result):
+        if node:
+            self._inorder_traversal(node.left, result)
+            result.append(node.key)
+            self._inorder_traversal(node.right, result)
+
+# Step 52
+
+# Now it's time to put everything into use.
+
+# Create an instance of the BinarySearchTree class and assign it to the variable bst.
+
+bst = BinarySearchTree()
+
+# Step 53
+
+# Below the BinarySearchTree instance, create a list named nodes with the following 
+# integer values: 50, 30, 20, 40, 70, 60, 80.
+
+bst = BinarySearchTree()
+nodes = [50, 30, 20, 40, 70, 60, 80]
+
+# Step 54
+
+# Write a for loop to iterate over the nodes list. 
+# Inside the for loop body, call the insert method of the bst object, passing the node at the current 
+# iteration to insert all values orderly into the binary search tree.
+
+for node in nodes:
+    bst.insert(node)
+
+# Step 55
+
+# Below the loop, call the print() function and pass it the string Inorder traversal: as the first argument 
+# and the bst.inorder_traversal() call as the second argument to print the result of the inorder traversal.
+
+bst = BinarySearchTree()
+nodes = [50, 30, 20, 40, 70, 60, 80]
+
+for node in nodes:
+    bst.insert(node)
+print('Inorder traversal:', bst.inorder_traversal())
+
+# Step 56
+
+# Below your print() call, add another print() call to test the search functionality. 
+# This time, pass the string Search for 40: as the first argument. 
+# For the second argument, call the search method of bst and pass 40 as the argument.
 
 
 
