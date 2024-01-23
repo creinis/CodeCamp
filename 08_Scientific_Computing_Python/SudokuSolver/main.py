@@ -89,6 +89,7 @@ def solve_sudoku(board):
     else:
         print('\nThe provided puzzle is unsolvable.')
     return gameboard
+
 puzzle = [
   [0, 0, 2, 0, 0, 8, 0, 0, 0],
   [0, 0, 0, 0, 0, 3, 7, 6, 2],
