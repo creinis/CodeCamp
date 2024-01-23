@@ -619,5 +619,65 @@ print('Inorder traversal:', bst.inorder_traversal())
 # This time, pass the string Search for 40: as the first argument. 
 # For the second argument, call the search method of bst and pass 40 as the argument.
 
+bst = BinarySearchTree()
+nodes = [50, 30, 20, 40, 70, 60, 80]
 
+for node in nodes:
+    bst.insert(node)
+
+print("Inorder traversal:", bst.inorder_traversal())
+print('Search for 40:', bst.search(40))
+
+# Step 57
+
+# The result from the previous step is an object like this: <__main__.TreeNode object at 0x7fecd9cc66b0>. 
+# This is default string representation when printing an instance of a class.
+
+# To change that to print a useful value, define another method named __str__ in the TreeNode class. 
+# It takes a single argument self.
+
+def __str__(self):
+    pass
+
+# Step 58
+
+# In the body of the __str__ method, delete pass and return the result of calling the str() function with 
+# self.key as the argument. This is the attribute of the current node object that stores the value associated 
+# with the node.
+
+    def __str__(self):
+        return str(self.key)
+
+# Step 59
+
+# As you can see, now you get a readable output in the console.
+
+# After the print() calls, call the delete method of bst and delete 40 from the binary search tree.
+
+print("Inorder traversal:", bst.inorder_traversal())
+print("Search for 40:", bst.search(40))
+bst.delete(40)
+
+# Step 60
+
+# Corfirm that 40 has been deleted by printing the tree. 
+# After deleting 40, call print() passing the string Inorder traversal after deleting 40: as the first 
+# argument and an inorder_traversal() call as the second argument.
+
+print("Inorder traversal:", bst.inorder_traversal())
+print("Search for 40:", bst.search(40))
+bst.delete(40)
+print("Inorder traversal after deleting 40:", bst.inorder_traversal())
+
+# Step 61
+
+# As a last step, search for 40 again. It should be deleted. You can copy and paste the previous print() call.
+
+# With this, you have finished the implementation of the binary search tree. Great work!
+
+print("Inorder traversal:", bst.inorder_traversal())
+print("Search for 40:", bst.search(40))
+bst.delete(40)
+print("Inorder traversal after deleting 40:", bst.inorder_traversal())
+print("Search for 40:", bst.search(40))
 
