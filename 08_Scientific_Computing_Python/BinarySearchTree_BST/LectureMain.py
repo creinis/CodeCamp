@@ -328,6 +328,160 @@ class BinarySearchTree:
 
 # Therefore, return node from your if block.
 
+    def _delete(self, node, key):
+        if node is None:
+            return node
+
+# Step 31
+
+# After your existing if, write another one that checks if the target key is less than the current node key.
+
+# Step 32
+
+# Within the if block, replace pass with a call to the _delete method, passing the left child of the current 
+# node and the key as arguments. Assign the function call to the left node.
+
+    def _delete(self, node, key):
+        if node is None:
+            return node
+        if key < node.key:
+            node.left = self._delete(node.left, key)
+
+# Step 33
+
+# Write an elif statement that checks if key > node.key.
+
+# Inside your elif block, call the _delete method with the right child of the current node and key as the 
+# arguments and assign the result to the right node.
+
+    def _delete(self, node, key):
+        if node is None:
+            return node
+        if key < node.key:
+            node.left = self._delete(node.left, key)
+        elif key > node.key:
+            node.right = self._delete(node.right, key)
+
+# Step 34
+
+# The conditionals you wrote in the previous steps are valid for nodes with either zero or one child. 
+# The upcoming conditionals will be valid if there are 2 children.
+
+# For that, add an else clause to the conditional.
+
+    def _delete(self, node, key):
+        if node is None:
+            return node
+        if key < node.key:
+            node.left = self._delete(node.left, key)
+        elif key > node.key:
+            node.right = self._delete(node.right, key)
+        else:
+            pass  
+
+# Step 35
+
+# Inside the else block, replace pass with an if statement to check if the left child of the current node is None.
+
+# When node.left is None, there is no left child. Therefore, return the right child from the new if block as a 
+# replacement.
+
+        if node.left is None:
+            return node.right
+
+# Step 36
+
+# Below the if statement, add an elif clause to check if the right child of the current node (node.right) is None.
+
+# If the previous condition is met, it means there is no right child. So, return the left child of the current 
+# node from the elif block as a replacement.
+
+        if node.left is None:
+            return node.right
+        elif node.right is None:
+            return node.left
+
+# Step 37
+
+# If neither one of the previous conditions is met, it means the node has both left and right children.
+
+# To choose the successor, you need to find the minimum value in the right subtree. 
+# The smallest value will be the in-order successor of the current node.
+
+# Later on, you are going to define a helper method called _min_value that finds the smallest value in a given 
+# subtree.
+
+# For now, add a _min_value call after your elif block, passing node.right as the argument. 
+# Assign it to the current node key.
+
+        if node.left is None:
+            return node.right
+        elif node.right is None:
+            return node.left      
+        node.key = self._min_value(node.right)    
+
+# Step 38
+
+# After finding the minimum value, you will need to recursively delete the node with the minimum value from the 
+# right subtree.
+
+# This step ensures that the node with the minimum value is removed from the tree while maintaining the binary 
+# search tree (BST) property.
+
+# Step 39
+
+# Finally, after your else clause, return the current node.
+
+    def _delete(self, node, key):
+        if node is None:
+            return node
+        if key < node.key:
+            node.left = self._delete(node.left, key)
+        elif key > node.key:
+            node.right = self._delete(node.right, key)
+        else:
+            if node.left is None:
+                return node.right
+
+            elif node.right is None:
+                return node.left
+
+            node.key = self._min_value(node.right)
+            node.right = self._delete(node.right, node.key)
+        return node
+
+# Step 40
+
+# When the node you want to delete has two children, you need to choose the replacement node from the children. 
+# The in-order successor method chooses the smallest element from the right subtree and places that element 
+# in place of the deleted node.
+
+# Define the _min_value method and give it two parameters: self and node.
+
+    def _min_value(self, node):
+        pass
+
+# Step 41
+
+# To find the smallest value in the right subtree, you need to iterate through the left children of the given 
+# node until you reach the leftmost (smallest) node in the subtree.
+
+# To do this, write a while loop that runs when node.left is not None and move pass inside the while block. 
+# This condition checks if there is a left child. 
+# As long as there is a left child, the loop continues and there is a smaller value to be found.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
