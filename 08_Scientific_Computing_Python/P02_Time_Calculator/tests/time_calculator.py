@@ -1,0 +1,43 @@
+def add_time(start, duration, day_of_week=None):
+  # Convert start time to minutes
+  start_hour, start_minute = map(int, start[:-3].split(':'))
+  if start[-2:] == 'PM':
+    start_hour += 12
+  start_minutes = start_hour * 60 + start_minute
+
+  # Convert duration to minutes
+  duration_hour, duration_minute = map(int, duration.split(':'))
+  duration_minutes = duration_hour * 60 + duration_minute
+
+  # Calculate the end time in minutes and convert back to hour and minutes
+  end_minutes = start_minutes + duration_minutes
+  end_hour, end_minute = divmod(end_minutes, 60)
+  end_hour %= 24
+
+  # Determine Am or PM
+  end_am_pm = 'AM' if end_hour < 12 else 'PM'
+  if end_hour > 12:
+    end_hour -= 12
+  elif end_hour == 0:
+    end_hour = 12
+
+  # Calculate the number of days later
+  days_later = end_minutes // (24 * 60)
+  days_later_str = ''
+  if days_later == 1:
+    days_later_str = ' (next day)'
+  elif days_later > 1:
+    days_later_str = f' ({days_later} days later)'
+
+  # If days of week is given, calculate the end day of the week
+  if day_of_week is not None:
+    days_of_week = [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+        "Sunday"
+    ]
+    day_of_week_index = days_of_week.index(day_of_week.capitalize())
+    end_day_of_week_index = (day_of_week_index + days_later) % 7
+    end_day_of_week = days_of_week[end_day_of_week_index]
+    return f"{end_hour}:{end_minute:02d} {end_am_pm}, {end_day_of_week}{days_later_str}"
+  else:
+    return f"{end_hour}:{end_minute:02d} {end_am_pm}{days_later_str}"
