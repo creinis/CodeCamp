@@ -1,0 +1,14 @@
+Introduction to Data Analysis
+
+Auto-managed closed tools:
+    Qlik
+    Tableau
+    Lokker 
+    Zoho Analytics 
+
+Programming Languages:
+    Python 
+    R 
+    Julia
+
+
