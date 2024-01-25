@@ -11,4 +11,60 @@ Programming Languages:
     R 
     Julia
 
+Process 
+    Data Extraction >> Data Cleaning >> Data Wrangling >> Analysis >> Action 
+
+Data Extraction:
+    SQL 
+    Scrapping 
+    File Format (CSV, JSON, XML)
+    Consultinf APIs 
+    Buying Data 
+    Distributed Databases 
+
+Data Cleaning: 
+    Missing values and empty data 
+    Data imputation
+    Incorrect types 
+    Incorrect or invalid values 
+    Outliers and non relevant data 
+    Statistical sanitization
+
+Data Wrangling:
+    Hieranchical Data 
+    Handling categorical data 
+    Reshaping and transforming structures 
+    Indexing data for quick access 
+    Merging, combining and joining data 
+
+Analysis:
+    Exploration
+    Building statistical models 
+    Visualization and representations 
+    Correlations vs Causation analysis 
+    Reporting 
+
+Action:
+    Building Machine Learning Models 
+    Feature Engeneering 
+    Moving ML info production 
+    Building ETL pipelines 
+    Live dashboard and reporting 
+    Decision making and real-time tests 
+
+
+Python Ecosystem: (libraries)
+    PANDAS: the cornertone of our Data Analysis job with Python 
+    Matplotlib: The fundational library for visualizations. Other libraries we'll use will be built on top of matplotlib 
+    Numpy: The numeric library that serves as the foundation of all calculations in Python 
+    Seaborn: A statistical visualization tool built on top of matplotlib 
+    Statsmodels: A library with many advanced statiscal functions 
+    Scipy: Advanced scientific computing, including functions for optimization, linear algebra, imagem processing and much more 
+    Scikit-learn: The most popular machine learning library for Python(not deep learning) 
+
+************************************************************************
+
+Data Analysis Example A
+
+
 
