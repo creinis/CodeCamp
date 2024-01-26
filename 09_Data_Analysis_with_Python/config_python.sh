@@ -19,4 +19,5 @@ pip install XeLaTeX
 pip install Pyarrow
 pip install seaborn
 pip install ipython
+pip install sqlalchemy
 
