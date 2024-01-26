@@ -64,7 +64,12 @@ Python Ecosystem: (libraries)
 
 ************************************************************************
 
-Data Analysis Example A
+Numpy 
+
+Numeric computing library 
+
+
+
 
 
 
