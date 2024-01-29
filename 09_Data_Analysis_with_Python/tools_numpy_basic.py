@@ -25,3 +25,26 @@ z = np.ones((5, 5))
 z[2, 2] = 5
 
 output[1:-1, 1:-1] = z
+
+# copy array
+a = np.array([1,2,3])
+b = a.copy()
+b[0] = 99
+
+print(a)
+print(b)
+
+# Statistics
+
+stats = np.array([[1,2,3],[4,5,6]])
+
+print('exemple array: ', stats)
+
+print('minimum value: ', np.min(stats))
+
+print('maximum value: ', np.max(stats))
+
+print('SUM >>np.sum(stats) will sum all the values: ', np.sum(stats))
+
+print('SUM >>np.sum(stats, axis=0) will sum all the values in the same position: ', np.sum(stats, axis=0))
+
