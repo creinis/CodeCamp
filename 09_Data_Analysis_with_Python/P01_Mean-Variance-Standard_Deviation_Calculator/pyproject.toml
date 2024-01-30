@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "repl-nix-boilerplate-mean-variance-standard-deviation-calculator-3"
+version = "0.1.0"
+description = ""
+authors = ["Replit user <<>>"]
+readme = "README.md"
+packages = [{include = "repl_nix_boilerplate_mean_variance_standard_deviation_calculator_3"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.26.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

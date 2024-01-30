@@ -48,3 +48,12 @@ print('SUM >>np.sum(stats) will sum all the values: ', np.sum(stats))
 
 print('SUM >>np.sum(stats, axis=0) will sum all the values in the same position: ', np.sum(stats, axis=0))
 
+a = np.array(([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
+b = np.max(a, axis=1).sum()
+print(b)
+
+# Load data from file:
+
+
+
+
