@@ -1,7 +1,6 @@
 #! bin/bash
 
 #! Install scrypt 
-
 pip install jupyterlab 
 pip install notebook  
 pip install voila
