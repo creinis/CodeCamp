@@ -97,7 +97,109 @@ Use the helmet.noCache() method on your server. */
 
 app.use(helmet.noCache());
 
+/* This challenge highlights one promising new defense that can significantly reduce the risk and impact of many 
+type of attacks in modern browsers. By setting and configuring a Content Security Policy you can prevent the 
+injection of anything unintended into your page. This will protect your app from XSS vulnerabilities, 
+undesired tracking, malicious frames, and much more. CSP works by defining an allowed list of content sources 
+which are trusted. You can configure them for each kind of resource a web page may need (scripts, stylesheets, 
+fonts, frames, media, and so on…). There are multiple directives available, so a website owner can have a granular 
+control. See HTML 5 Rocks, KeyCDN for more details. Unfortunately CSP is unsupported by older browsers.
 
+By default, directives are wide open, so it’s important to set the defaultSrc directive as a fallback. 
+Helmet supports both defaultSrc and default-src naming styles. 
+The fallback applies for most of the unspecified directives.
+
+In this exercise, use helmet.contentSecurityPolicy(). 
+Configure it by adding a directives object. 
+In the object, set the defaultSrc to ["'self'"] (the list of allowed sources must be in an array), 
+in order to trust only your website address by default. 
+Also set the scriptSrc directive so that you only allow scripts to be downloaded from your website ('self'), 
+and from the domain 'trusted-cdn.com'.
+
+Hint: in the 'self' keyword, the single quotes are part of the keyword itself, so it needs to be enclosed in 
+double quotes to be working.
+ */
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "trusted-cdn.com"],
+    },
+  }),
+);
+
+
+/* app.use(helmet()) will automatically include all the middleware introduced above, except noCache(), 
+and contentSecurityPolicy(), but these can be enabled if necessary. 
+You can also disable or configure any other middleware individually, using a configuration object.
+
+Example:
+
+app.use(helmet({
+  frameguard: {         // configure
+    action: 'deny'
+  },
+  contentSecurityPolicy: {    // enable and configure
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ['style.com'],
+    }
+  },
+  dnsPrefetchControl: false     // disable
+}))
+
+We introduced each middleware separately for teaching purposes and for ease of testing. 
+Using the ‘parent’ helmet() middleware is easy to implement in a real project.
+ */
+app.use(
+  helmet({
+    frameguard: {
+      // configure
+      action: "deny",
+    },
+    contentSecurityPolicy: {
+      // enable and configure
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "style.com"],
+      },
+    },
+    dnsPrefetchControl: false, // disable
+  }),
+);
+
+/* BCrypt hashes are very secure. 
+A hash is basically a fingerprint of the original data- always unique. 
+This is accomplished by feeding the original data into an algorithm and returning a fixed length result. 
+To further complicate this process and make it more secure, you can also salt your hash. 
+Salting your hash involves adding random data to the original data before the hashing process which makes 
+it even harder to crack the hash.
+
+BCrypt hashes will always look like $2a$13$ZyprE5MRw2Q3WpNOGZWGbeG7ADUre1Q8QO.uUUtcbqloU0yvzavOm 
+which does have a structure. The first small bit of data $2a is defining what kind of hash algorithm was used. 
+The next portion $13 defines the cost. Cost is about how much power it takes to compute the hash. 
+It is on a logarithmic scale of 2^cost and determines how many times the data is put through the hashing algorithm. 
+For example, at a cost of 10 you are able to hash 10 passwords a second on an average computer, 
+however at a cost of 15 it takes 3 seconds per hash... and to take it further, at a cost of 31 it would take 
+multiple days to complete a hash. 
+A cost of 12 is considered very secure at this time. The last portion of your hash 
+$ZyprE5MRw2Q3WpNOGZWGbeG7ADUre1Q8QO.uUUtcbqloU0yvzavOm, looks like one large string of numbers, periods, 
+and letters but it is actually two separate pieces of information. The first 22 characters is the salt in plain text, 
+and the rest is the hashed password!
+
+Add all your code for these lessons in the server.js file between the code we have started you off with. 
+Do not change or delete the code we have added for you.
+
+BCrypt has already been added as a dependency, so require it as bcrypt in your server.
+ */
+
+
+/* 
+Install bcrypt
+npm install bcrypt
+Verify installation in the package.json file.
+Then, go in the server.js file, and require it by adding const bcrypt = require('bcrypt'); .
+ */
 
 
 
