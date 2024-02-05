@@ -3,7 +3,8 @@
 	"version": "0.0.1",
 	"description": "InfoSec project for freeCodeCamp",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server.js",
+		"test": "mocha --ui tdd ./tests/2_functional-tests.js"
 	},
 	"dependencies": {
 		"body-parser": "^1.20.2",
@@ -14,7 +15,9 @@
 		"express": "^4.14.0",
 		"helmet": "^3.23.3",
 		"mocha": "^10.2.0",
-		"mongodb": "^6.3.0"
+		"mongodb": "^6.3.0",
+		"request": "^2.88.2",
+		"zombie": "^6.1.4"
 	},
 	"repository": {
 		"type": "git",
