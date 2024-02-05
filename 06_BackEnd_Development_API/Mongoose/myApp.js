@@ -4,7 +4,7 @@ require('dotenv').config();
 /* mongoose.connect(process.env.MONGO_URI); */
 /* ## 1 */
 let mongoose = require('mongoose');
-let uri = 'mongodb+srv://carlosreinis:UsfnSWUxDiS9R83t@cluster0.alkwcws.mongodb.net/freecodecamp_db_1?retryWrites=true&w=majority'; 
+let uri = 'mongodb+srv://carlosreinis:RrH41LrPRe3vJnm7z0mfHU6N@cluster0.alkwcws.mongodb.net/freecodecamp_db_1?retryWrites=true&w=majority'; 
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
