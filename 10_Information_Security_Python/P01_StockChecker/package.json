@@ -28,5 +28,8 @@
 		"node",
 		"express"
 	],
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"@types/helmet": "^4.0.0"
+	}
 }
