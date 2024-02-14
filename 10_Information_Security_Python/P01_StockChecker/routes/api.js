@@ -1,23 +1,23 @@
 'use strict';
 
-var expect = require('chai').expect;
-const { request } = require('express');
-let mongodb = require('mongodb')
-let mongoose = require('mongoose')
-let XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
+const mongoose = require('mongoose');
+const objectId = mongoose.Types.ObjectId;
+const mongodb = require('mongodb');
+const request = require('request-promise-native');
+
 
 
 // db schema model
 let stockSchema = new mongoose.Schema({
   code: String,
-  likes: {type: [String], default: []}
+  likes: {type: [Number], default: []}
 })
 
-let stock = mongoose.model('stock', stockSchema)
+let Stock = mongoose.model('stock', stockSchema)
 
 // save stock
 function saveStock(code, like, ip) {
-  return stock.findOne({ code: code})
+  return Stock.findOne({ code: code})
   .then(stock => {
     if(!stock) {
       let newStock = new Stock({ code: code, likes: like ? [ip]:[]})
@@ -33,11 +33,16 @@ function saveStock(code, like, ip) {
 
 // Parse Data
 function parseData(data){
+
+  console.log(data);
+
   let i = 0;
   let stockData = [];
   let likes = [];
   while (i < data.length) {
-    let stock = { stock: data[i].code, price: parseFloat(data[i+1])};
+    let stock = { stock: data[i].code, price: JSON.parse(data[i+1]).close};
+    console.log(typeof(data[i+1]));
+    console.log(JSON.parse(data[i+1]))
     likes.push(data[i].likes.length);
     stockData.push(stock);
     i += 2;
@@ -49,17 +54,15 @@ function parseData(data){
     stockData[0].likes = likes[0];
     stockData = stockData[0];
   }
+  console.log(stockData);
   return stockData;
 }
-
-
 
 module.exports = function (app) {
   
   app.get('/api/testing', (req, res) => {
     res.json({ IP: req.ip })
   })
-
 
   app.route('/api/stock-prices')
     .get(function (req, res){
@@ -68,17 +71,21 @@ module.exports = function (app) {
       if (!Array.isArray(code)) {
         code = [code];
       }
-      let promise = [];
+      let promises = [];
       code.forEach(code => {
         promises.push(saveStock(code.toUpperCase(), req.query.like, req.ip));
-        let url = ''
+        let url = `https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${code.toUpperCase()}/quote`
         promises.push(request(url))
       });
-      Promise.all(promises).then(data => {
+      Promise.all(promises)
+      .then(data => {
         let stockData = parseData(data);
         res.json({ stockData })
       })
-      .catch
-
+      .catch(err => {
+        console.log(err);
+        res.send(err);
       })
+
+      });
     };
