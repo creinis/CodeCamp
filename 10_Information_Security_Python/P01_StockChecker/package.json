@@ -15,10 +15,10 @@
 		"express": "^4.14.0",
 		"helmet": "^3.23.3",
 		"mocha": "^3.2.0",
+		"mongodb": "^6.3.0",
 		"mongoose": "^8.1.1",
 		"node-fetch": "^2.6.1",
-		"nodemon": "^3.0.3",
-		"xmlhttprequest": "^1.8.0"
+		"request-promise-native": "^1.0.9",
 	},
 	"repository": {
 		"type": "git",

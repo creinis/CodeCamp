@@ -1,141 +1,84 @@
 'use strict';
 
 var expect = require('chai').expect;
+const { request } = require('express');
 let mongodb = require('mongodb')
 let mongoose = require('mongoose')
 let XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 
+
+// db schema model
+let stockSchema = new mongoose.Schema({
+  code: String,
+  likes: {type: [String], default: []}
+})
+
+let stock = mongoose.model('stock', stockSchema)
+
+// save stock
+function saveStock(code, like, ip) {
+  return stock.findOne({ code: code})
+  .then(stock => {
+    if(!stock) {
+      let newStock = new Stock({ code: code, likes: like ? [ip]:[]})
+      return newStock.save()
+    } else {
+      if(like && stock.likes.indexOf(ip) === -1) {
+        stock.likes.push(ip)
+      }
+      return stock.save()
+    }
+  })
+}
+
+// Parse Data
+function parseData(data){
+  let i = 0;
+  let stockData = [];
+  let likes = [];
+  while (i < data.length) {
+    let stock = { stock: data[i].code, price: parseFloat(data[i+1])};
+    likes.push(data[i].likes.length);
+    stockData.push(stock);
+    i += 2;
+  }
+  if(likes.length > 1) {
+    stockData[0].rel_likes = likes[0] - likes[1];
+    stockData[1].rel_likes = likes[1] - likes[0];
+  } else {
+    stockData[0].likes = likes[0];
+    stockData = stockData[0];
+  }
+  return stockData;
+}
+
+
+
 module.exports = function (app) {
   
-  let stockSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    likes: {type: Number, default: 0},
-    ips: [String]
+  app.get('/api/testing', (req, res) => {
+    res.json({ IP: req.ip })
   })
-  
-  let Stock = mongoose.model('Stock', stockSchema)
-  
+
+
   app.route('/api/stock-prices')
     .get(function (req, res){
     
-      let responseObject = {}
-      responseObject['stockData'] = {}
-
-      // Variable to determine number of stocks
-      let twoStocks = false
-
-      /* Output Response */
-      let outputResponse = () => {
-          return res.json(responseObject)
+      let code = req.query.stock || '';
+      if (!Array.isArray(code)) {
+        code = [code];
       }
+      let promise = [];
+      code.forEach(code => {
+        promises.push(saveStock(code.toUpperCase(), req.query.like, req.ip));
+        let url = ''
+        promises.push(request(url))
+      });
+      Promise.all(promises).then(data => {
+        let stockData = parseData(data);
+        res.json({ stockData })
+      })
+      .catch
 
-      /* Find/Update Stock Document */
-      let findOrUpdateStock = (stockName, documentUpdate, nextStep) => {
-        Stock.findOneAndUpdate(
-            {name: stockName},
-            documentUpdate,
-            {new: true, upsert: true},
-            (error, stockDocument) => {
-                if(error){
-                console.log(error)
-                }else if(!error && stockDocument){
-                    if(twoStocks === false){
-                      return nextStep(stockDocument, processOneStock)
-                    }else{
-                      return nextStep(stockDocument, processTwoStocks)
-                    }
-                }
-            }
-        )
-      }
-
-      /* Like Stock */
-      let likeStock = (stockName, nextStep) => {
-         Stock.findOne({name: stockName}, (error, stockDocument) => {
-            if(!error && stockDocument && stockDocument['ips'] && stockDocument['ips'].includes(req.ip)){
-                return res.json('Error: Only 1 Like per IP Allowed')
-            }else{
-                let documentUpdate = {$inc: {likes: 1}, $push: {ips: req.ip}}
-                nextStep(stockName, documentUpdate, getPrice)
-            }
-        })
-      }
-
-      /* Get Price */
-      let getPrice = (stockDocument, nextStep) => {
-        let xhr = new XMLHttpRequest()
-        let requestUrl = 'https://stock-price-checker-proxy--freecodecamp.repl.co/v1/stock/' + stockDocument['name'] + '/quote'
-        xhr.open('GET', requestUrl, true)
-        xhr.onload = () => {
-          let apiResponse = JSON.parse(xhr.responseText)
-          stockDocument['price'] = apiResponse['latestPrice'].toFixed(2)
-          nextStep(stockDocument, outputResponse)
-        }
-        xhr.send()
-      }
-
-      /* Build Response for 1 Stock */
-      let processOneStock = (stockDocument, nextStep) => {
-        responseObject['stockData']['stock'] = stockDocument['name']
-        responseObject['stockData']['price'] = stockDocument['price']
-        responseObject['stockData']['likes'] = stockDocument['likes']
-        nextStep()
-      }
-
-      let stocks = []        
-      /* Build Response for 2 Stocks */
-      let processTwoStocks = (stockDocument, nextStep) => {
-        let newStock = {}
-        newStock['stock'] = stockDocument['name']
-        newStock['price'] = stockDocument['price']
-        newStock['likes'] = stockDocument['likes']
-        stocks.push(newStock)
-        if(stocks.length === 2){
-          stocks[0]['rel_likes'] = stocks[0]['likes'] - stocks[1]['likes']
-          stocks[1]['rel_likes'] = stocks[1]['likes'] - stocks[0]['likes']
-          responseObject['stockData'] = stocks
-          nextStep()
-        }else{
-          return
-        }
-      }
-
-      /* Process Input*/  
-      if(typeof (req.query.stock) === 'string'){
-        /* One Stock */
-        let stockName = req.query.stock
-        
-        let documentUpdate = {}
-        if(req.query.like && req.query.like === 'true'){
-            likeStock(stockName, findOrUpdateStock)
-        }else{
-            findOrUpdateStock(stockName, documentUpdate, getPrice)
-        }
-
-
-      } else if (Array.isArray(req.query.stock)){
-        twoStocks = true
-        
-        /* Stock 1 */
-        let stockName = req.query.stock[0]
-        if(req.query.like && req.query.like === 'true'){
-            likeStock(stockName, findOrUpdateStock)
-        }else{
-            let documentUpdate = {}
-            findOrUpdateStock(stockName, documentUpdate, getPrice)
-        }
-
-        /* Stock 2 */
-        stockName = req.query.stock[1]
-        if(req.query.like && req.query.like === 'true'){
-            likeStock(stockName, findOrUpdateStock)
-        }else{
-            let documentUpdate = {}
-            findOrUpdateStock(stockName, documentUpdate, getPrice)
-        }
-
-
-      }
-    });
-    
-};
+      })
+    };
