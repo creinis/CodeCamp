@@ -13,26 +13,23 @@ chai.use(chaiHttp);
 
 suite('Functional Tests', function() {
     suite("Functional get request tests", function(){
-      this.timeout(5000)
       test("Test 01 - Viewing one stock: GET request to /api/stock-prices/", function (done) {
         chai
           .request(server)
           .get("/api/stock-prices/")
-          .set("content-type", "application/json")
           .query({ stock: "MSFT" })
-          .end(function (err, res) {
+          .end(function(err, res) {
             assert.equal(res.status, 200);
-            assert.equal(res.body.stockData.stock, "MSFT");
-            assert.exists(res.body.stockData.price, "MSFT has a price");
+            assert.property(res.body.stockData, 'stock');
+            assert.property(res.body.stockData, 'latestPrice');
+            assert.property(res.body.stockData, 'likes');
             done();
           });
       });
-      this.timeout(5000)
       test("Test 02 - Viewing one stock and liking it: GET request to /api/stock-prices/", function (done) {
         chai
           .request(server)
           .get("/api/stock-prices/")
-          .set("content-type", "application/json")
           .query({ stock: "COMP", like: true })
           .end(function (err, res) {
             assert.equal(res.status, 200);
@@ -42,12 +39,10 @@ suite('Functional Tests', function() {
             done();
           });
       });
-      this.timeout(5000)
       test("Test 03 - Viewing the same stock and liking it again: GET request to /api/stock-prices/", function (done) {
         chai
           .request(server)
           .get("/api/stock-prices/")
-          .set("content-type", "application/json")
           .query({ stock: "COMP", like: true })
           .end(function (err, res) {
             assert.equal(res.status, 200);
@@ -57,12 +52,10 @@ suite('Functional Tests', function() {
             done();
           });
       });
-      this.timeout(5000)
       test("Test 04 - Viewing two stocks: GET request to /api/stock-prices/", function (done) {
         chai
           .request(server)
           .get("/api/stock-prices/")
-          .set("content-type", "application/json")
           .query({ stock: ["GME", "AMC"] })
           .end(function (err, res) {
             assert.equal(res.status, 200);
@@ -73,12 +66,10 @@ suite('Functional Tests', function() {
             done();
           });
       });
-      this.timeout(5000)
       test("Test 05 - Viewing two stocks and liking them: GET request to /api/stock-prices/", function (done) {
         chai
           .request(server)
           .get("/api/stock-prices/")
-          .set("content-type", "application/json")
           .query({ stock: ["GME", "AMC"], like: true })
           .end(function (err, res) {
             assert.equal(res.status, 200);
@@ -91,8 +82,5 @@ suite('Functional Tests', function() {
             done();
           });
       });
-
     })
-    
-
 });

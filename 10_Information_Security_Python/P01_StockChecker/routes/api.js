@@ -1,77 +1,90 @@
-// "use strict" não foi alterado, mantendo o mesmo comportamento
+'use strict';
+const axios = require("axios");
+const mongoose = require('mongoose');
 
-const mongoose = require("mongoose");
-const mongodb = require("mongodb");
-const request = require("request-promise-native");
 
-// Definição do Esquema do Banco de Dados
-let stockSchema = new mongoose.Schema({
-  name: { type: String, required: true }, 
-  likes: { type: [Number], default: [] },
+// db Schema
+const stockSchema = new mongoose.Schema({
+  name: {type: String, required: true},
+  likes: {type: [Number], default: []}
 });
+// creating a model based on the defined Schema
+const Stock = mongoose.model("Stock", stockSchema);
 
-let Stock = mongoose.model("stock", stockSchema);
-
-// Função para salvar ações
-function saveStock(name, like, ip) {
-  return Stock.findOne({ name: name }).then((stock) => {
-    if (!stock) {
-      let newStock = new Stock({ name: name, likes: like ? [ip] : [] });  
-      return newStock.save();
+// function to save stockData in db
+async function saveStock(name, like, ip) {
+  try {
+    let stock = await Stock.findOne({name}); // first search if the stock already exists in db
+    if(!stock) {
+      //if the stock doesn't exists in db => the function will create it
+      stock = new Stock({ name, likes: like ? [ip]:[]});
     } else {
-      if (like && stock.likes.indexOf(ip) === -1) {
+      //if the stock already exists in db => manage like only
+      if(like && !stock.likes.includes(ip)) {
         stock.likes.push(ip);
       }
-      return stock.save();
     }
-  });
+    // Save changes in db
+    await stock.save();
+    return stock;
+  } catch (error) {
+    throw new Error("Saving Error: The information has not been saved in db");
+  }
 }
 
-// Função para analisar os dados recebidos
+// function to GET stockData from API using axios libraries
+async function getStockData(name) {
+  try {
+    const response = await axios.get(`https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${name}/quote`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Fetch Error: Couldn't get stock ${name} data from the API");
+  }
+}
+
+// function to analyse the data from the API
 function parseData(data) {
-  let i = 0;
-  let stockData = [];
-  let likes = [];
-  while (i < data.length) {
-    let stock = { stock: data[i].name, price: JSON.parse(data[i + 1]).close };
-    likes.push(data[i].likes.length);
+  const stockData = [];
+
+  for (let i = 0; i < data.length; i += 2) {
+    const stock = {
+      stock: data[i+1].symbol,
+      price: parseFloat(data[i + 1].close),
+      likes: parseInt(data[i].likes.length),
+    };
+    console.log(data[i+1].symbol)
+    console.log("typeof stock", typeof(data[i+1].symbol))
+    console.log(data[i + 1].close)
+    console.log("typeof price", typeof(parseFloat(data[i + 1].close)));
+    console.log(data[i].likes)
+    console.log("typeof likes", typeof(parseInt(data[i].likes)));
     stockData.push(stock);
-    i += 2;
   }
-  if (likes.length > 1) {
-    stockData[0].rel_likes = likes[0] - likes[1];
-    stockData[1].rel_likes = likes[1] - likes[0];
-  } else {
-    stockData[0].likes = likes[0];
-    stockData = stockData[0];
+  if (stockData.length === 2) {
+    stockData[0].rel_likes = stockData[0].likes - stockData[1].likes;
+    stockData[1].rel_likes = stockData[1].likes - stockData[0].likes;
   }
-  console.log(stockData);
-  return stockData;
+  return stockData.length === 1 ? stockData[0] : stockData;
 }
 
 module.exports = function (app) {
-  app.get("/api/testing", (req, res) => {
-    res.json({ IP: req.ip });
-  });
 
-  app.route("/api/stock-prices").get(function (req, res) {
-    let name = req.query.stock || "";
-    if (!Array.isArray(name)) {
-      name = [name];
+  app.get('/api/stock-prices', async function (req, res) {
+    try {
+      let names = req.query.stock || "";
+      if(!Array.isArray(names)) {
+        names = [names];
+      }
+      const promises = [];
+      for (let name of names) {
+        promises.push(saveStock(name.toUpperCase(), req.query.like, req.ip));
+        promises.push(getStockData(name.toUpperCase()));
+      }
+      const data = await Promise.all(promises);
+      const stockData = parseData(data);
+      res.json({ stockData });
+    } catch (error) {
+      req.status(500).json({error: error.message});
     }
-    let promises = [];
-    name.forEach((name) => {
-      promises.push(saveStock(name.toUpperCase(), req.query.like, req.ip));
-      let url = `https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${name.toUpperCase()}/quote`;
-      promises.push(request(url));
-    });
-    Promise.all(promises)
-      .then((data) => {
-        let stockData = parseData(data);
-        res.json({ stockData });
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  });
+  })
 };

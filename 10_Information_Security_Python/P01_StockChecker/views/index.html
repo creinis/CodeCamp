@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Stock Price Checker</title>
     <link id="favicon" rel="icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png" type="image/x-icon" />
@@ -23,25 +23,33 @@
     <code>{"stockData":[{"stock":"MSFT","price":62.30,"rel_likes":-1},{"stock":"GOOG","price":786.90,"rel_likes":1}]}</code>
 </div>
 <hr class="p-50" />
-<div id="testui">
-    <h2 class="text-align-left">Front-End:</h2>
-    <h3>Get single price and total likes</h3>
-    <form id="testForm2" class="border">
-        <input type="text" name="stock" placeholder="GOOG" required="" />
-        <input type="checkbox" name="like" value="true" /> Like?
-        <br />
-        <button type="submit">Get Price!</button>
-    </form>
-    <h3>Compare and get relative likes</h3>
-    <form id="testForm" class="border">
-        <input type="text" name="stock" placeholder="GOOG" required="" />
-        <input type="text" name="stock" placeholder="MSFT" required="" />
-        <input type="checkbox" name="like" value="true" /> Like both?
-        <br />
-        <button type="submit">Get Price!</button>
-    </form>
-    <code id="jsonResult"></code>
+<div id="testUI">
+  <h2 class="text-align-left">Front-End:</h2>
+  <h3>Get single price and total likes</h3>
+  <form id="testForm2" class="border" >
+      <label for="stock">Insert Stock Symbol: </label>
+      <br />
+      <input type="text" id="stock" name="stock" placeholder="GOOG" required="" />
+      <input type="checkbox" id="like" name="like" value="true"/>
+      <label for="like">Like?</label>
+      <br />
+      <button type="submit">Get Price!</button>
+  </form>
+  <h3>Compare and get relative likes</h3>
+  <form id="testForm" class="border">
+      <label for="stock1">Insert 2 Stock Symbols:</label>
+      <br />
+      <input type="text" id="stock1" name="stock1" placeholder="GOOG" required="" />
+      <label for="stock2">:</label>
+      <input type="text" id="stock2" name="stock2" placeholder="MSFT" required="" />
+      <input type="checkbox" id="likeBoth" name="likeBoth" value="true" />
+      <label for="likeBoth">Like both?</label>
+      <br />
+      <button type="submit">Get Price!</button>
+  </form>
+  <code id="jsonResult"></code>
 </div>
+
 <hr class="m-50 mt-200" />
 <script>
   document.getElementById('testForm2').addEventListener('submit', e => {
@@ -51,8 +59,12 @@
     fetch(`https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${stock}/quote`)
       .then(res => res.json())
       .then(data => {
-        console.log('Received response from form 1:', data);
-        document.getElementById('jsonResult').innerText = JSON.stringify(data);
+        const result = {
+          stockData: 
+            { stock: data.symbol, price: data.latestPrice }
+        };
+        console.log('Received response from form:', result);
+        document.getElementById('jsonResult').innerText = JSON.stringify(result);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
