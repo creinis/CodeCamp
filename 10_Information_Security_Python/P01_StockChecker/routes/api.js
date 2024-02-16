@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 // db Schema
 const stockSchema = new mongoose.Schema({
   name: {type: String, required: true},
-  likes: {type: [Number], default: []}
+  likes: {type: [String], default: []}
 });
 // creating a model based on the defined Schema
 const Stock = mongoose.model("Stock", stockSchema);
@@ -28,7 +28,7 @@ async function saveStock(name, like, ip) {
     await stock.save();
     return stock;
   } catch (error) {
-    throw new Error("Saving Error: The information has not been saved in db");
+    throw new Error(`Saving Error: ${name}: ${error.message}`);
   }
 }
 
@@ -38,12 +38,12 @@ async function getStockData(name) {
     const response = await axios.get(`https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${name}/quote`);
     return response.data;
   } catch (error) {
-    throw new Error("Fetch Error: Couldn't get stock ${name} data from the API");
+    throw new Error(`Fetch Error: Couldn't get stock ${name} data from the API. ${error.message}`);
   }
 }
 
 // function to analyse the data from the API
-function parseData(data) {
+function parseData(data, like) {
   const stockData = [];
 
   for (let i = 0; i < data.length; i += 2) {
@@ -52,18 +52,23 @@ function parseData(data) {
       price: parseFloat(data[i + 1].close),
       likes: parseInt(data[i].likes.length),
     };
-    console.log(data[i+1].symbol)
-    console.log("typeof stock", typeof(data[i+1].symbol))
-    console.log(data[i + 1].close)
-    console.log("typeof price", typeof(parseFloat(data[i + 1].close)));
-    console.log(data[i].likes)
-    console.log("typeof likes", typeof(parseInt(data[i].likes)));
+    if(like) {
+      stock.likes++;
+    }
+    // The stockData property includes the stock symbol as a string, the price as a number, and likes as a number.
+    //console.log(data[i+1].symbol, "typeof stock", typeof(data[i+1].symbol));
+    //console.log(data[i + 1].close, "typeof price", typeof(parseFloat(data[i + 1].close)));
+    //console.log(data[i].likes, "typeof likes", typeof(parseInt(data[i].likes)));
     stockData.push(stock);
   }
   if (stockData.length === 2) {
-    stockData[0].rel_likes = stockData[0].likes - stockData[1].likes;
-    stockData[1].rel_likes = stockData[1].likes - stockData[0].likes;
+    const likesDiff = stockData[0].likes - stockData[1].likes;
+    stockData[0].rel_likes = likesDiff;
+    stockData[1].rel_likes = -likesDiff;
+    delete stockData[0].likes;
+    delete stockData[1].likes;
   }
+  // Returns only one object when there is only one item in the array stockData
   return stockData.length === 1 ? stockData[0] : stockData;
 }
 
@@ -81,10 +86,10 @@ module.exports = function (app) {
         promises.push(getStockData(name.toUpperCase()));
       }
       const data = await Promise.all(promises);
-      const stockData = parseData(data);
+      const stockData = parseData(data, req.query.like);
       res.json({ stockData });
     } catch (error) {
-      req.status(500).json({error: error.message});
+      res.status(500).json({error: `Error processing the request: ${error.message}`});
     }
   })
 };
