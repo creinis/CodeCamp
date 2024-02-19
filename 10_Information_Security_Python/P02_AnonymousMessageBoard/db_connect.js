@@ -1,21 +1,13 @@
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-require('dotenv').config();
 
-const connectDB = async() => {
-    try {
-        await mongoose.connect(process.env.DB, {
-            useNewParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-            useFindAndModify: false,
-        });
-        console.log('db successfully connected');
-    } catch (err) {
-        console.error('Error in db connection', err);
-        process.exit(1);
-    }
-};
+const db = mongoose.connect(process.env.DB, {});
 
-mongoose.connection.on('disconnected', connectDB);
+// Check connection
+const connection = mongoose.connection;
+connection.on("error", console.error.bind(console, "DB connection error:"));
+connection.once("open", () => {
+    console.log("App is connected to the DB.");
+});
 
-module.exports = connectDB;
+module.exports = db;
