@@ -29,6 +29,7 @@ const Thread = mongoose.model('Thread', threadSchema)
 
 module.exports = function (app) {
   
+  // THREADS
   app.route('/api/threads/:board')
     .post((req, res) => {
       // POST: You can send a POST request to /api/replies/{board} with form data including text, 
@@ -43,7 +44,7 @@ module.exports = function (app) {
         .catch(err => console.log(err))
     })
     .get((req, res) => {
-      // You can send a GET request to /api/threads/{board}. 
+      // GET: You can send a GET request to /api/threads/{board}. 
       // Returned will be an array of the most recent 10 bumped threads on the board with only the 
       // most recent 3 replies for each. The reported and delete_password fields will not be sent 
       // to the client.
@@ -52,7 +53,7 @@ module.exports = function (app) {
       .catch(err => console.log(err))
     })
     .delete((req, res) => {
-      // You can send a DELETE request to /api/threads/{board} and pass along the thread_id & delete_password 
+      // DELETE: You can send a DELETE request to /api/threads/{board} and pass along the thread_id & delete_password 
       // to delete the thread. Returned will be the string incorrect password or success.
       let deleteThread = req.body
       Thread.findOneAndDelete({_id: deleteThread.thread_id, delete_password: deleteThread.deleteData},
@@ -65,7 +66,7 @@ module.exports = function (app) {
         })
     })
     .put((req, res) => {
-      // You can send a PUT request to /api/threads/{board} and pass along the thread_id. 
+      // PUT: You can send a PUT request to /api/threads/{board} and pass along the thread_id. 
       // Returned will be the string reported. The reported value of the thread_id will be changed to true.
       let putThread = req.body
       Thread.findOneAndUpdate({_id: putThread.thread_id}, {$set: {reported: true}})
@@ -75,14 +76,13 @@ module.exports = function (app) {
       })
     })
 
-
-
+  // REPLIES
   app.route('/api/replies/:board')
     .post((req, res) => {
-      // You can send a POST request to /api/replies/{board} with form data including text, delete_password, 
+      // POST: You can send a POST request to /api/replies/{board} with form data including text, delete_password, 
       // & thread_id. This will update the bumped_on date to the comment's date. In the thread's replies array, 
       // an object will be saved with at least the properties _id, text, created_on, delete_password, & reported.
-      let postThread = req.body  // verificar put ou post?
+      let postThread = req.body 
       let postParams = req.params.board
       let newReplies = {
         _id: new mongodb.ObjectId(),
@@ -100,5 +100,37 @@ module.exports = function (app) {
       .then(() => res.redirect('/b/' + postParams + '/' + postThread.thread_id))
       .catch(err => console.log(err))
     })
+    .get((req, res) => {
+      // GET: You can send a GET request to /api/replies/{board}?thread_id={thread_id}. 
+      // Returned will be the entire thread with all its replies, also excluding the same fields from the 
+      // client as the previous test.
+      let postThread = req.query.thread_id;
+      Thread.findOne({_id: postThread}, {delete_password: 0, reported: 0, __v: 0, "replies.delete_password": 0, "replies.reported": 0})
+      .then((d) => res.json(d))
+      .catch(err => console.log(err))
+    })
+    .delete((req, res) => {
+      // DELETE: You can send a DELETE request to /api/replies/{board} and pass along the thread_id, reply_id, 
+      // & delete_password. Returned will be the string incorrect password or success. On success, the text of 
+      // the reply_id will be changed to [deleted].
+      let deleteThread = req.body
+      Thread.findOneAndUpdate({_id: mongodb.ObjectId(deleteThread.thread_id), 'replies._id': mongodb.ObjectId(deleteThread.reply_id), 'replies.delete_password': deleteThread.delete_password}, {$set: {"replies.$.text": '[deleted]'}})
+      .then((d) => {
+        if(d){
+          return res.json('success')
+        } else {
+          return res.json('incorrect password')
+        }
+      }).catch(() => res.status(400).json('cannot delete this reply'))
+    })
+    .put((req, res) => {
+      // You can send a PUT request to /api/replies/{board} and pass along the thread_id & reply_id. 
+      // Returned will be the string reported. The reported value of the reply_id will be changed to true.
+      let putThread = req.body
+      Thread.findOneAndUpdate({_id: putThread.thread_id, 'replies_id': mongodb.ObjectId(putThread.reply_id)}, {$set: {'replies.$.reported': true}})
+        .then(() => res.json('success'))
+        .catch(() => { return res.status(400).json('cannot report this reply');})
+    })
+
 
 };
