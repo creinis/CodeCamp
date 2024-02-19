@@ -60,6 +60,8 @@ module.exports = function (app) {
         function(err, data) {
           if(err) {
             return res.status(400).json('cannot delete this thread')
+          } else if(data) {
+            return res.json('success')
           } else {
             return res.json('incorrect password')
           }
