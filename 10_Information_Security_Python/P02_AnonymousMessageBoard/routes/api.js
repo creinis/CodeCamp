@@ -3,14 +3,10 @@
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
 require('../db_connect');
-const dotenv = require('dotenv').config();
 
 // DB Schema
 const Schema = mongoose.Schema
 
-// You can send a POST request to /api/threads/{board} with form data including text and delete_password. 
-// The saved database record will have at least the fields _id, text, created_on(date & time), 
-// bumped_on(date & time, starts same as created_on), reported (boolean), delete_password, & replies (array).
 const threadSchema = new Schema({
   text: {type: String, required: true},
   reported: {type: Boolean, required: true, default: false},
@@ -70,10 +66,12 @@ module.exports = function (app) {
             return res.status(400).json('cannot delete Thread data')
           } else if (data) {
             console.log("Seccess deleting thread")
+            console.log(typeof(res.json));
             return res.json('success')
           } else {
             console.log("Incorrect password while deleting thread")
-            return res.json('incorrect password, try again')
+            console.log(typeof(res.json));
+            return res.json('incorrect password')
           }
         }
       )
@@ -151,7 +149,7 @@ module.exports = function (app) {
             return res.json('success')
           } else {
             console.log("Incorrect password while delete reply")
-            return res.json('incorrect password, try again')
+            return res.json('incorrect password')
           }
         })
         .catch((err) => {
@@ -175,7 +173,7 @@ module.exports = function (app) {
       )
         .then(() => {
           console.log("Success - Reported Reply");
-          res.json('success')
+          res.json('reported')
         })
         .catch(() => {
           console.log("Error Reporting Reply: ", err)
