@@ -69,7 +69,13 @@ module.exports = function (app) {
     .put(async (req, res) => {
       try {
         const { thread_id } = req.body;
-        await Thread.findByIdAndUpdate(thread_id, { reported: true });
+        let thread = await Thread.findById(thread_id);
+        if (!thread) {
+          return res.status(404).send('No thread found with this id');
+        }
+        thread.reported = true;
+        await thread.save();
+        console.log('reported');
         res.send('reported');
       } catch (error) {
         console.error(error);
@@ -117,30 +123,27 @@ module.exports = function (app) {
       .then((d) => res.json(d))
       .catch(err => console.log(err))
   })
-  
-  .put((req, res) => {
-    // PUT: You can send a PUT request to /api/replies/{board} and pass along the thread_id & reply_id. 
-    // Returned will be the string reported. The reported value of the reply_id will be changed to true.
-    let putThread = req.body
-    console.log('Reporting Reply: ', putThread.reply_id);
-    Thread.findOneAndUpdate(
-      {
-        _id: putThread.thread_id,
-        'replies._id': mongodb.ObjectId(putThread.reply_id)
-      },
-      {
-        $set: {'replies.$.reported': true}
+  .put(async (req, res) => {
+    try {
+      let { thread_id, reply_id } = req.body;
+      let thread = await Thread.findById(thread_id);
+      if (!thread) {
+        return res.status(404).send('No thread found with this id');
       }
-    )
-      .then(() => {
-        console.log('Success - Reported Reply');
-        res.json('reported')
-      })
-      .catch(() => {
-        console.log('Error Reporting Reply: ', err)
-        return res.status(400).json('cannot report the reply thread');
-      })
+      let reply = thread.replies.find(reply => reply._id.toString() === reply_id);
+      if (!reply) {
+        return res.status(404).send('No reply found with this id');
+      }
+      reply.reported = true;
+      await thread.save();
+      console.log('Success - Reported Reply');
+      res.send('reported');
+    } catch (error) {
+      console.log('Error Reporting Reply: ', error)
+      return res.status(500).send('internal server error');
+    }
   })
+  
   .delete((req, res) => {
     let deleteThread = req.body;
     console.log('Deleting Reply: ', deleteThread.reply_id);
