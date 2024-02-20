@@ -123,6 +123,36 @@ module.exports = function (app) {
       .then((d) => res.json(d))
       .catch(err => console.log(err))
   })
+  .delete(async (req, res) => {
+    try {
+      let { thread_id, reply_id, delete_password } = req.body;
+      let updateResult = await Thread.findOneAndUpdate(
+        {
+          _id: thread_id,
+          replies: {
+            $elemMatch: {
+              _id: reply_id,
+              delete_password: delete_password
+            }
+          }
+        },
+        {
+          $set: {
+            "replies.$.text": "[deleted]"
+          }
+        }
+      );
+      if (!updateResult) {
+        return res.status(403).send('incorrect password');
+      }
+      console.log('Success - Deleted Reply');
+      res.send('success');
+    } catch (error) {
+      console.log('Error Deleting Reply: ', error);
+      return res.status(500).send('internal server error');
+    }
+  })
+
   .put(async (req, res) => {
     try {
       let { thread_id, reply_id } = req.body;
@@ -143,38 +173,4 @@ module.exports = function (app) {
       return res.status(500).send('internal server error');
     }
   })
-  
-  .delete((req, res) => {
-    let deleteThread = req.body;
-    console.log('Deleting Reply: ', deleteThread.reply_id);
-    Thread.findOne(
-      {
-        _id: mongodb.ObjectId(deleteThread.thread_id),
-        'replies._id': mongodb.ObjectId(deleteThread.reply_id)
-      }
-    )
-      .then((thread) => {
-        if(thread){
-          let reply = thread.replies.id(deleteThread.reply_id);
-          if(reply.delete_password === deleteThread.delete_password){
-            reply.text = '[deleted]';
-            thread.save().then(() => {
-              console.log('Success delete reply');
-              res.send('success');
-            });
-          } else {
-            console.log('Incorrect password while delete reply');
-            res.send('incorrect password');
-          }
-        } else {
-          console.log('Thread or reply not found');
-          res.send('thread or reply not found');
-        }
-      })
-      .catch((err) => {
-        console.log('Error deleting Reply: ', err);
-        res.status(400).json('cannot delete');
-      });
-  })
-
 };
