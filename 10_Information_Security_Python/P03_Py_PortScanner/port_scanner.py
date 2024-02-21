@@ -35,11 +35,6 @@ def get_open_ports(target, port_range, verbose=False):
 
     if verbose:
         if hostname is None:
-            return f"Open ports for {ip}\nPORT     SERVICE\n" + "\n".join(
-                [f"{port:<9}{socket.getservbyport(port)}" for port in open_ports]
-            )
-        return f"Open ports for {hostname} ({ip})\nPORT     SERVICE\n" + "\n".join(
-            [f"{port:<9}{socket.getservbyport(port)}" for port in open_ports]
-        )
-
+            return f"Open ports for {ip}\nPORT     SERVICE\n" + "\n".join([f"{port:<9}{socket.getservbyport(port)}" for port in open_ports])
+        return f"Open ports for {hostname} ({ip})\nPORT     SERVICE\n" + "\n".join([f"{port:<9}{socket.getservbyport(port)}" for port in open_ports])
     return open_ports
