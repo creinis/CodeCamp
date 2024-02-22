@@ -8,9 +8,10 @@ def get_open_ports(target, port_range, verbose=False):
     open_ports = []
     try:
         ip = socket.gethostbyname(target)
+        print(f"Hostname: {target}, IP: {ip}")  # Debug print
         for port in range(port_range[0], port_range[1] + 1):
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(5)
+            sock.settimeout(1)
             result = sock.connect_ex((ip, port))
             if result == 0:
                 print(f"Port {port} is open")  # Debug print
@@ -39,3 +40,4 @@ def get_open_ports(target, port_range, verbose=False):
         return f"Open ports for {hostname} ({ip})\nPORT     SERVICE\n" + "\n".join([f"{port:<9}{socket.getservbyport(port)}" for port in open_ports])
     
     return (open_ports)
+
