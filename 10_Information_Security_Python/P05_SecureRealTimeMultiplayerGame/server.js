@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const fccTestingRoutes = require('./routes/fcctesting.js');
 const runner = require('./test-runner.js');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -15,6 +16,17 @@ app.use('/assets', express.static(process.cwd() + '/assets'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Helmet settings
+app.use(helmet());
+// Prevent the client from trying to guess / sniff the MIME type
+app.use(helmet.noSniff());
+// Prevent cross-site scripting (XSS) attacks
+app.use(helmet.xssFilter());
+// Nothing from the website is cached in the client
+app.use(helmet.noCache());
+// The headers say that the site is powered by "PHP 7.4.3"
+app.use(helmet.hidePoweredBy({ setTo: 'PHP 7.4.3'}));
 
 //For FCC testing purposes and enables user to connect from outside the hosting platform
 app.use(cors({origin: '*'})); 
