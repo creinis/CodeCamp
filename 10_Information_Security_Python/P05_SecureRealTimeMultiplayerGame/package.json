@@ -23,5 +23,8 @@
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/code-frame": "^7.23.5"
+  }
 }
