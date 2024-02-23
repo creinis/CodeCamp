@@ -1,34 +1,31 @@
 import hashlib
 
-# Function to read the password file
-def read_passwords_file(file_path):
-    with open(file_path, 'r') as file:
-        passwords = [line.strip() for line in file]
-    return passwords
+def crack_sha1_hash(hash, use_salts=False):
+    with open('top-10000-passwords.txt', 'r') as f:
+        passwords = f.read().splitlines()
 
-# Test
-passwords = read_passwords_file('top-10000-passwords.txt')
-print("\n Test Reading Passwods DB file \n", passwords[:15], "\n")
+    if use_salts:
+        with open('known-salts.txt', 'r') as f:
+            salts = f.read().splitlines()
+    else:
+        salts = ['']
 
-# Function to read the salt file
-def read_salt_file(file_path):
-    with open(file_path, 'r') as file:
-        salts = [line.strip() for line in file]
-    return salts
-
-# Test
-salts = read_salt_file('known-salts.txt')
-print(" Test Reading known-salts file \n", salts[:5], "\n")
-
-def crack1(hash_to_crack, passwords):
     for password in passwords:
-        hashes_password = hashlib.sha1(password.encode()).hexdigest()
-        if hashed_password == hash_to_crack:
-            return password
+        for salt in salts:
+            # Testando todas as combinações possíveis de sal e senha
+            if hashlib.sha1((salt + password).encode('utf-8')).hexdigest() == hash:
+                return password
+            if hashlib.sha1((password + salt).encode('utf-8')).hexdigest() == hash:
+                return password
+            if hashlib.sha1((salt + password + salt).encode('utf-8')).hexdigest() == hash:
+                return password
+
     return "PASSWORD NOT IN DATABASE"
 
-#Test
-hashed_password = '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'
-password = crack1(hashed_password, passwords)
-print("Password cracked: ", password)
-
+# Testando a função
+print(crack_sha1_hash('b305921a3723cd5d70a375cd21a61e60aabb84ec'))  # Deve retornar 'sammy123'
+print(crack_sha1_hash('c7ab388a5ebefbf4d550652f1eb4d833e5316e3e'))  # Deve retornar 'abacab'
+print(crack_sha1_hash('5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'))  # Deve retornar 'password'
+print(crack_sha1_hash('53d8b3dc9d39f0184144674e310185e41a87ffd5', use_salts=True))  # Deve retornar 'superman'
+print(crack_sha1_hash('da5a4e8cf89539e66097acd2f8af128acae2f8ae', use_salts=True))  # Deve retornar 'q1w2e3r4t5'
+print(crack_sha1_hash('ea3f62d498e3b98557f9f9cd0d905028b3b019e1', use_salts=True))  # Deve retornar 'bubbles1'
