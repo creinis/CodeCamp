@@ -83,7 +83,7 @@ suite('Functional Tests', function() {
           test("View issues on a project: GET request to /api/issues/{project}", function (done) {
             chai
               .request(server)
-              .get("/api/issues/test-data-abc123")
+              .get("/api/issues/projects")
               .end(function (err, res) {
                 assert.equal(res.status, 200);
                 assert.equal(res.body.length, 4);
@@ -93,21 +93,18 @@ suite('Functional Tests', function() {
           test("View issues on a project with one filter: GET request to /api/issues/{project}", function (done) {
             chai
               .request(server)
-              .get("/api/issues/test-data-abc123")
+              .get("/api/issues/projects")
               .query({
-                _id: "5fe0c232dfbbf94b31b03649",
+                _id: "65dcb5a45398f0201fab2b49",
               })
               .end(function (err, res) {
                 assert.equal(res.status, 200);
                 assert.deepEqual(res.body[0], {
-                  _id: "5fe0c232dfbbf94b31b03649",
-                  issue_title: "Hey",
-                  issue_text: "some text",
-                  created_on: "2020-12-21T15:41:38.279Z",
-                  updated_on: "2020-12-21T15:41:38.279Z",
-                  created_by: "Landon",
-                  assigned_to: "",
-                  open: true,
+                  _id: "65dcb5a45398f0201fab2b49",
+                  issue_title: "Issue",
+                  issue_text: "Functional Test",
+                  created_on: "2024-02-26T16:00:37.000+00:00",
+                  updated_on: "2024-02-26T16:00:37.000+00:00",
                   status_text: "",
                 });
                 done();
@@ -116,22 +113,19 @@ suite('Functional Tests', function() {
           test("View issues on a project with multiple filters: GET request to /api/issues/{project}", function (done) {
             chai
               .request(server)
-              .get("/api/issues/test-data-abc123")
+              .get("/api/issues/projects")
               .query({
-                issue_title: "Hey",
-                issue_text: "testing",
+                issue_title: "Issue",
+                  issue_text: "Functional Test",
               })
               .end(function (err, res) {
                 assert.equal(res.status, 200);
                 assert.deepEqual(res.body[0], {
-                  _id: "5fe0c254dfbbf94b31b0364e",
-                  issue_title: "Hey",
-                  issue_text: "testing",
-                  created_on: "2020-12-21T15:42:12.393Z",
-                  updated_on: "2020-12-21T15:42:54.519Z",
-                  created_by: "Dom",
-                  assigned_to: "Landon",
-                  open: false,
+                  _id: "65dcb5a45398f0201fab2b49",
+                  issue_title: "Issue",
+                  issue_text: "Functional Test",
+                  created_on: "2024-02-26T16:00:37.000+00:00",
+                  updated_on: "2024-02-26T16:00:37.000+00:00",
                   status_text: "",
                 });
     
