@@ -21,7 +21,7 @@ suite('Functional Tests', function() {
   * ----[EXAMPLE TEST]----
   * Each test should completely test the response of the API end-point including response status code!
   */
-  test('#example Test GET /api/books', function(done){
+  /* test('#example Test GET /api/books', function(done){
      chai.request(server)
       .get('/api/books')
       .end(function(err, res){
@@ -32,7 +32,7 @@ suite('Functional Tests', function() {
         assert.property(res.body[0], '_id', 'Books in array should contain _id');
         done();
       });
-  });
+  }); */
   /*
   * ----[END of EXAMPLE TEST]----
   */
@@ -88,7 +88,7 @@ suite('Functional Tests', function() {
         .get("/api/books/withIdNotInDb")
         .end(function (err, res) {
           assert.equal(res.status, 200);
-          assert.equal(res.text, "book do not exists in db")
+          assert.equal(res.text, "no book exists")
           done();
         }) 
       });
@@ -137,7 +137,7 @@ suite('Functional Tests', function() {
         .send({ comment: "test comment"})
         .end( function (err, res) {
           assert.equal(res.status, 200);
-          assert.equal(res.text, "book do not exists in db");
+          assert.equal(res.text, "no book exists");
           done();
         })
       });
@@ -161,7 +161,7 @@ suite('Functional Tests', function() {
         .delete("/api/books/" + "withIdNotInDb")
         .end(function (err, res) {
           assert.equal(res.status, 200);
-          assert.equal(res.text, "book do not exists in db");
+          assert.equal(res.text, "no book exists");
           done();
         })
       });

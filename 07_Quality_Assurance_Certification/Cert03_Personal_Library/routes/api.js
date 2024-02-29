@@ -59,7 +59,7 @@ module.exports = function (app) {
       try {
         const deleted = await Book.deleteMany();
         console.log("deleted book from db: ", deleted);
-        res.send("delete successful");
+        res.send("complete delete successful");
       } catch (error) {
         res.send("error");
       }
@@ -74,7 +74,7 @@ module.exports = function (app) {
       try {
         const book = await Book.findById(bookid);
         if (!bookid) {
-          throw new Error(`book do not exists in db`)
+          throw new Error(`no book exists`)
         }
         res.json({
           _id: book._id,
@@ -83,7 +83,7 @@ module.exports = function (app) {
           commentcount: book.comments.length,
         });
       } catch (error) {
-        res.send(`book do not exists in db`)
+        res.send(`no book exists`)
       }
     })
     
@@ -97,7 +97,7 @@ module.exports = function (app) {
         try {
           let book = await Book.findById(bookid);
           if (!book) {
-            res.send(`book do not exists in db`);
+            res.send(`no book exists`);
             return;
           }
           book.comments.push(comment);
@@ -110,7 +110,7 @@ module.exports = function (app) {
             commentcount: book.comments.length,
           });
         } catch (error) {
-          res.send(`book do not exists in db`);
+          res.send(`no book exists`);
         }
       }
     })
@@ -122,11 +122,11 @@ module.exports = function (app) {
         const deleted = await Book.findByIdAndDelete(bookid);
         console.log("deleted book from db: ", deleted);
         if (!deleted) {
-          throw new Error("book do not exists in db")
+          throw new Error("no book exists")
         }
         res.send("delete successful");
       } catch (error) {
-        res.send("book do not exists in db");
+        res.send("no book exists");
         
       }
     });
