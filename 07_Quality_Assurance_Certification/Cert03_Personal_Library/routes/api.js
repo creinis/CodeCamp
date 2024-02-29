@@ -17,7 +17,7 @@ module.exports = function (app) {
       //response will be array of book objects
       //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
       try {
-          const books = await Book.find({});
+        const books = await Book.find({});
         if(!books) {
           res.json([]);
           return;
@@ -73,14 +73,17 @@ module.exports = function (app) {
       //json res format: {"_id": bookid, "title": book_title, "comments": [comment,comment,...]}
       try {
         const book = await Book.findById(bookid);
+        if (!bookid) {
+          throw new Error(`book do not exists in db`)
+        }
         res.json({
-          comments: book.comments,
           _id: book._id,
           title: book.title,
+          comments: book.comments,
           commentcount: book.comments.length,
         });
       } catch (error) {
-        res.send("book do not exists in db")
+        res.send(`book do not exists in db`)
       }
     })
     
@@ -88,22 +91,27 @@ module.exports = function (app) {
       let bookid = req.params.id;
       let comment = req.body.comment;
       //json res format same as .get
-      if(!comment) {
+      if (!comment) {
         res.send(`missing required field comment`);
-        return;
-      }
-      try {
-        let book = await Book.findById(bookid);
-        book.comments.push(comment);
-        book = await book.save();
-        res.json({
-          comments: book.comments,
-          _id: book._id,
-          title: book.title,
-          commentcount: book.comments.length,
-        });
-      } catch (error) {
-        res.send("book do not exists in db")
+      } else {
+        try {
+          let book = await Book.findById(bookid);
+          if (!book) {
+            res.send(`book do not exists in db`);
+            return;
+          }
+          book.comments.push(comment);
+          book = await book.save();
+          // Envie os detalhes atualizados do livro com os comentários
+          res.json({
+            _id: book._id,
+            title: book.title,
+            comments: book.comments,
+            commentcount: book.comments.length,
+          });
+        } catch (error) {
+          res.send(`book do not exists in db`);
+        }
       }
     })
     
@@ -113,6 +121,9 @@ module.exports = function (app) {
       try {
         const deleted = await Book.findByIdAndDelete(bookid);
         console.log("deleted book from db: ", deleted);
+        if (!deleted) {
+          throw new Error("book do not exists in db")
+        }
         res.send("delete successful");
       } catch (error) {
         res.send("book do not exists in db");
