@@ -1,13 +1,18 @@
+//db-connection.js
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-const db = mongoose.connect(process.env.DB, {});
+// Carrega as variáveis de ambiente do arquivo .env para process.env
+dotenv.config();
 
-// Check connection
+const uri = process.env.DB;
+const db = mongoose.connect(uri);
+
+// Verifica a conexão
 const connection = mongoose.connection;
-connection.on("error", console.error.bind(console, "DB connection error:"));
+connection.on("error", console.error.bind(console, "Erro de conexão DB:"));
 connection.once("open", () => {
-    console.log("App is connected to the DB.");
+    console.log("O aplicativo está conectado ao DB.");
 });
 
 module.exports = db;
