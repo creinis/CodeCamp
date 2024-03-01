@@ -8,19 +8,35 @@ module.exports = function (app) {
 
   app.route('/api/check')
     .post((req, res) => {
-      const puzzle = req.body.puzzle;
-      if (!puzzle) {
-        return res.json({ error: 'Required field missing' });
+      try {
+        const { puzzle, coordinate, value } = req.body;
+        if (!puzzle || !coordinate || !value) {
+          res.json({ error: 'Required field(s) missing' })
+        }
+        SudokuSolver.build(puzzle);
+        const check = SudokuSolver.checkCoordinatePlacement(coordinate, value);
+        res.json({...check});
+      } catch (error) {
+        res.json({ error: error.message });
       }
-      const solution = solver.solve(puzzle);
-      if(solution.error) {
-        return res.json(solution);
-      }
-      return res.json({ solution });
     });
     
   app.route('/api/solve')
     .post((req, res) => {
+      try {
+        const puzzleString = req.body.puzzle;
+        if (!puzzleString) {
+          res.json({ error: 'Required field(s) missing'});
+        }
+        SudokuSolver.build(puzzleString);
+        const solution = SudokuSolver.solve()
+        if (!solution) {
+          res.json({ error: 'Puzzle cannot be solved' });
+        }
+        res.json({ solution });
 
+      } catch (error) {
+        return res.json({ error: error.message });
+      }
     });
 };
