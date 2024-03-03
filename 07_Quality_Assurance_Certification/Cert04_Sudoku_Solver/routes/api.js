@@ -4,17 +4,17 @@ const SudokuSolver = require('../controllers/sudoku-solver.js');
 
 module.exports = function (app) {
   
-  let solver = new SudokuSolver();
+  let sudokuSolver = new SudokuSolver();
 
   app.route('/api/check')
     .post((req, res) => {
       try {
         const { puzzle, coordinate, value } = req.body;
         if (!puzzle || !coordinate || !value) {
-          res.json({ error: 'Required field(s) missing' })
+          throw new Error('Required field(s) missing')
         }
-        SudokuSolver.build(puzzle);
-        const check = SudokuSolver.checkCoordinatePlacement(coordinate, value);
+        sudokuSolver.build(puzzle);
+        const check = sudokuSolver.checkCoordinatePlacement(coordinate, value);
         res.json({...check});
       } catch (error) {
         res.json({ error: error.message });
@@ -26,12 +26,12 @@ module.exports = function (app) {
       try {
         const puzzleString = req.body.puzzle;
         if (!puzzleString) {
-          res.json({ error: 'Required field(s) missing'});
+          throw new Error( {error: 'Required field(s) missing'} );
         }
-        SudokuSolver.build(puzzleString);
-        const solution = SudokuSolver.solve()
+        sudokuSolver.build(puzzleString);
+        const solution = sudokuSolver.solve()
         if (!solution) {
-          res.json({ error: 'Puzzle cannot be solved' });
+          throw new Error('Puzzle cannot be solved');
         }
         res.json({ solution });
 

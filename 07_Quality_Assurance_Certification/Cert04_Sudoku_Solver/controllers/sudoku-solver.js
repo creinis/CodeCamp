@@ -7,25 +7,25 @@ class SudokuSolver {
   static validateCharacters(string) {
     const re = /[^1-9\.]/i;
     if (re.test(string)) {
-      return res.send({ error: 'Invalid characters in puzzle' });
+      throw new Error('Invalid characters in puzzle');
     }
   }
 
   validatePuzzleString(puzzleString) {
     SudokuSolver.validateCharacters(puzzleString);
     if (puzzleString.length != 81) {
-      res.send({ error: 'Expected puzzle to be 81 characters long' });
+      throw new Error('Expected puzzle to be 81 characters long');
     }
   }
 
   validadeCoordinateAndValue(coordinate, value) {
-    const validateCoordinate = /^[A-I][1-9]$/;
+    const validCoordinate = /^[A-I][1-9]$/;
     const notValidNum = /[^1-9]/;
-    if (validateCoordinate.test(coordinate)) {
-      res.send({ error: 'Invalid coordinate'});
+    if (validCoordinate.test(coordinate)) {
+      throw new Error('Invalid coordinate');
     }
     if (notValidNum.test(value)) {
-      res.json({ error: 'Invalid value'});
+      throw new Error('Invalid value');
     }
   }
 
@@ -74,11 +74,11 @@ class SudokuSolver {
       result.valid = false;
       result.conflict.push('row')
     }
-    if (!this.checkColPlacement(row, value)) {
+    if (!this.checkColPlacement(col, value)) {
       result.valid = false;
       result.conflict.push('column')
     }
-    if (!this.checkRegionPlacement(row, value)) {
+    if (!this.checkRegionPlacement(row, col, value)) {
       result.valid = false;
       result.conflict.push('region')
     }
@@ -89,20 +89,16 @@ class SudokuSolver {
   }
 
   checkPlacement(row, col, value) {
-    if (
-        this.checkRowPlacement(row, value) 
-        && this.checkColPlacement(col, value) 
-        && this.checkRegionPlacement(row, col, value)
-        ) {
+    if (this.checkRowPlacement(row, value) && this.checkColPlacement(col, value) && this.checkRegionPlacement(row, col, value)) {
       return true;
     }
     return false;
   }
 
   getSolution() {
-    const solArr = this.board.flat(9)
-    const solStr = solArr.join('')
-    return solStr
+    const solutionArray = this.board.flat(9);
+    const solutionString = solutionArray.join('');
+    return solutionString;
   }
 
   solve(row = 0, col = 0) {
