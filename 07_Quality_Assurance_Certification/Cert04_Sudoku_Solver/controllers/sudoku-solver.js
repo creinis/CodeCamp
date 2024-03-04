@@ -25,11 +25,9 @@ class SudokuSolver {
     const notValidValue = /[^1-9]/;
     if (!validCoordinate.test(coordinate)) {
       throw new Error("Invalid coordinate");
-      //res.send({ error: "Invalid coordinate" });
     }
     if (notValidValue.test(value)) {
       throw new Error("Invalid value");
-      //res.send({ error: "Invalid value" });
     }
   }
 
@@ -67,26 +65,6 @@ class SudokuSolver {
     }
     return true;
   }
-
-  /* checkCoordinatePlacement(coordinate, value) {
-    this.valiadateCoordinateAndValue(coordinate, value);
-    let result = {
-      valid: true,
-      conflict: [],
-    };
-    let [row, col] = cooordinate.split("");
-    row = row.charCodeAt(0) - 65;
-    col = parseInt(col) - 1;
-
-    if (this.board[row][col] === value) {
-      return result;
-    }
-    if (!this.checkRowPlacement(row, col, value)) {
-      result.valid = false;
-      result.conflict.push("row", "column", "region");
-    }
-    return result;
-  } */
 
   checkCoordinatePlacement(coordinate, value) {
     //checked
