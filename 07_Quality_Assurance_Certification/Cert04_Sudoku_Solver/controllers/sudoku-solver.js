@@ -25,9 +25,11 @@ class SudokuSolver {
     const notValidValue = /[^1-9]/;
     if (!validCoordinate.test(coordinate)) {
       throw new Error("Invalid coordinate");
+      //res.send({ error: "Invalid coordinate" });
     }
     if (notValidValue.test(value)) {
       throw new Error("Invalid value");
+      //res.send({ error: "Invalid value" });
     }
   }
 
@@ -35,7 +37,7 @@ class SudokuSolver {
     //checked
     const r = this.board[row];
     for (let idx in r) {
-      if (r[idx] === value) {
+      if (r[idx] === value.toString()) {
         return false;
       }
     }
@@ -45,7 +47,7 @@ class SudokuSolver {
   checkColPlacement(column, value) {
     //checked
     for (let i = 0; i < 9; i++) {
-      if (this.board[i][column] === value) {
+      if (this.board[i][column] === value.toString()) {
         return false;
       }
     }
@@ -58,7 +60,7 @@ class SudokuSolver {
     const regionColumn = parseInt(column / 3) * 3;
     for (let row = regionRow; row < regionRow + 3; row++) {
       for (let col = regionColumn; col < regionColumn + 3; col++) {
-        if (this.board[row][col] === value) {
+        if (this.board[row][col] === value.toString()) {
           return false;
         }
       }

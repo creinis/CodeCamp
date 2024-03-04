@@ -74,7 +74,7 @@ suite("Unit Tests", () => {
     let puzzleString = puzzlesAndSolutions[0][0];
     solver.build(puzzleString);
     let placement = solver.checkRowPlacement(0, 5);
-    //assert.isFalse(placement);
+    assert.isFalse(placement);
     done();
   });
 
@@ -91,8 +91,8 @@ suite("Unit Tests", () => {
   test("Test07 - Logic handles an invalid column placement", function (done) {
     let puzzleString = puzzlesAndSolutions[0][0];
     solver.build(puzzleString);
-    let placement = solver.checkColPlacement(0, 0, 1);
-    //assert.isFalse(placement);
+    let placement = solver.checkColPlacement(0, 1);
+    assert.isFalse(placement);
     done();
   });
 
@@ -109,8 +109,8 @@ suite("Unit Tests", () => {
   test("Test09 - Logic handles an invalid region (3x3 grid) placement", function (done) {
     let puzzleString = puzzlesAndSolutions[0][0];
     solver.build(puzzleString);
-    let placement = solver.checkRegionPlacement(0, 0, 7);
-    //assert.isFalse(placement);
+    let placement = solver.checkRegionPlacement(0, 0, 5);
+    assert.isFalse(placement);
     done();
   });
 
