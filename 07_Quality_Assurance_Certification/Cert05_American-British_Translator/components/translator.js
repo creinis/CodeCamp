@@ -1,71 +1,116 @@
-const americanOnly = require('./american-only.js');
-const americanToBritishSpelling = require('./american-to-british-spelling.js');
+const e = require("cors");
+const americanOnly = require("./american-only.js");
+const americanToBritishSpelling = require("./american-to-british-spelling.js");
 const americanToBritishTitles = require("./american-to-british-titles.js");
-const britishOnly = require('./british-only.js');
+const britishOnly = require("./british-only.js");
+
+const reverseDict = (obj) => {
+  return Object.assign(
+    {},
+    ...Object.entries(obj).map(([key, val]) => ({ [val]: key })),
+  );
+};
 
 class Translator {
+  // Função para tradução de texto de inglês americano para inglês britânico
+  translateAmericanToBritish(text) {
+    const dict = { ...americanOnly, ...americanToBritishSpelling };
+    const titles = americanToBritishTitles;
+    const timeRegex = /([1-9]|1[012]):[0-5][0-9]/g;
+    const translated = this.translate(
+      text,
+      dict,
+      titles,
+      timeRegex,
+      "AmericanToBritish",
+    );
+    if (!translated) {
+      return text;
+    }
+    return translated;
+  }
 
-    // Função para tradução de texto de inglês americano para inglês britânico
-    translateAmericanToBritish(text) {
-        let translatedText = text;
+  // Função para tradução de texto de inglês britânico para inglês americano
+  translateBritishToAmerican(text) {
+    const dict = { ...britishOnly, ...reverseDict(americanToBritishSpelling) };
+    const titles = reverseDict(americanToBritishTitles);
+    const timeRegex = /([1-9]|1[012]).[0-5][0-9]/g;
+    const translated = this.translate(
+      text,
+      dict,
+      titles,
+      timeRegex,
+      "BritishToAmerican",
+    );
+    if (!translated) {
+      return text;
+    }
+    return translated;
+  }
 
-        // Tradução de palavras exclusivas do inglês americano
-        for (const word in americanOnly) {
-            const regex = new RegExp('\\b' + word + '\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + americanOnly[word] + '</span>');
+  translate(text, dict, titles, timeRegex, locale) {
+    const lowerText = text.toLowerCase();
+    const matchesMap = {};
+
+    // Verificação de títulos
+    Object.entries(titles).map(([key, val]) => {
+      if (lowerText.includes(key)) {
+        matchesMap[key] = val.charAt(0).toUpperCase() + val.slice(1);
+      }
+    });
+    // Verificação de palavras com espaços no próprio dicionário
+    const wordsWithSpaces = Object.fromEntries(
+      Object.entries(dict).filter(([key, val]) => key.includes(" ")),
+    );
+
+    Object.entries(wordsWithSpaces).map(([key, val]) => {
+      if (lowerText.includes(key)) {
+        matchesMap[key] = val;
+      }
+    });
+    //Verificação de Hífem
+    lowerText.match(/(\w+([-'])(\w+)?['-]?(\w+))|\w+/g).forEach((word) => {
+      if (dict[word]) {
+        matchesMap[word] = dict[word];
+      }
+    });
+    // Verificação de horas
+    const matchedTimes = lowerText.match(timeRegex);
+
+    if (matchedTimes) {
+      matchedTimes.map((e) => {
+        if (locale === "AmericanToBritish") {
+          return (matchesMap[e] = e.replace(":", "."));
         }
-
-        // Tradução de palavras com grafia diferente entre inglês americano e britânico
-        for (const word in americanToBritishSpelling) {
-            const regex = new RegExp('\\b' + word + '\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + americanToBritishSpelling[word] + '</span>');
-        }
-
-        // Tradução de títulos/honoríficos abreviados
-        for (const title in americanToBritishTitles) {
-            const regex = new RegExp('\\b' + title + '\\.\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + americanToBritishTitles[title] + '</span>');
-        }
-
-        // Tradução de palavras exclusivas do inglês britânico
-        for (const word in britishOnly) {
-            const regex = new RegExp('\\b' + britishOnly[word] + '\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + word + '</span>');
-        }
-
-        return translatedText;
+        return (matchesMap[e] = e.replace(".", ":"));
+      });
     }
 
-    // Função para tradução de texto de inglês britânico para inglês americano
-    translateBritishToAmerican(text) {
-        let translatedText = text;
+    // No Matches
+    if (Object.keys(matchesMap).length === 0) return null;
+    console.log("matchesMap:", matchesMap);
+    const translation = this.replaceAll(text, matchesMap);
+    // Text Highlights
+    const translationWithHighlight = this.replaceAllWithHighlight(
+      text,
+      matchesMap,
+    );
+    return [translation, translationWithHighlight];
+  }
 
-        // Tradução de palavras exclusivas do inglês britânico
-        for (const word in britishOnly) {
-            const regex = new RegExp('\\b' + word + '\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + britishOnly[word] + '</span>');
-        }
+  replaceAll(text, matchesMap) {
+    const re = new RegExp(Object.keys(matchesMap).join("|"), "gi");
+    return text.replace(re, (matched) => matchesMap[matched.toLowerCase()]);
+  }
 
-        // Tradução de palavras com grafia diferente entre inglês britânico e americano
-        for (const word in americanToBritishSpelling) {
-            const regex = new RegExp('\\b' + americanToBritishSpelling[word] + '\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + word + '</span>');
-        }
-
-        // Tradução de títulos/honoríficos abreviados
-        for (const title in americanToBritishTitles) {
-            const regex = new RegExp('\\b' + americanToBritishTitles[title] + '\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + title + '</span>');
-        }
-
-        // Tradução de palavras exclusivas do inglês americano
-        for (const word in americanOnly) {
-            const regex = new RegExp('\\b' + americanOnly[word] + '\\b', 'gi');
-            translatedText = translatedText.replace(regex, '<span class="highlight">' + word + '</span>');
-        }
-
-        return translatedText;
-    }
+  replaceAllWithHighlight(text, matchesMap) {
+    const re = new RegExp(Object.keys(matchesMap).join("|"), "gi");
+    return text.replace(re, (matched) => {
+      return `<span class="highlight">${
+        matchesMap[matched.toLowerCase()]
+      }</span>`;
+    });
+  }
 }
 
 module.exports = Translator;
