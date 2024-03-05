@@ -179,14 +179,38 @@ suite('Unit Tests', () => {
         done();
     });
 
+    // Test 20 - Translate Tea time is usually around 4 or 4.30. to American English
+    test('Test 20 - Translate Tea time is usually around 4 or 4.30. to American English', (done) => {
+        const translator = new Translator();
+        const text = 'Tea time is usually around 4 or 4.30.';
+        const translation = translator.translateAmericanToBritish(text);
+        assert.equal(translation, 'Tea time is usually around 4 or 4:30.');
+        done();
+    });
 
+    // Test 21 - Highlight translation in Mangoes are my favorite fruit.
+    test('Test 21 - Highlight translation in Mangoes are my favorite fruit.', (done) => {
+        
+        done();
+    });
 
-// Test 20 - Translate Tea time is usually around 4 or 4.30. to American English
-// Test 21 - Highlight translation in Mangoes are my favorite fruit.
-// Test 22 - Highlight translation in I ate yogurt for breakfast.
-// Test 23 - Highlight translation in We watched the footie match for a while.
-// Test 24 - Highlight translation in Paracetamol takes up to an hour to work.
+    // Test 22 - Highlight translation in I ate yogurt for breakfast.
+    test('Test 22 - Highlight translation in I ate yogurt for breakfast.', (done) => {
+        
+        done();
+    });
 
-    // Outros testes similares para os outros casos de tradução...
+    // Test 23 - Highlight translation in We watched the footie match for a while.
+    test('Test 23 - Highlight translation in We watched the footie match for a while.', (done) => {
+        
+        done();
+    });
+
+    // Test 24 - Highlight translation in Paracetamol takes up to an hour to work.
+    test('Test 24 - Highlight translation in Paracetamol takes up to an hour to work.', (done) => {
+        
+        done();
+    });
+
 });
 
