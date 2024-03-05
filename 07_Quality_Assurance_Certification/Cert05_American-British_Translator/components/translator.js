@@ -12,7 +12,6 @@ const reverseDict = (obj) => {
 };
 
 class Translator {
-  // Função para tradução de texto de inglês americano para inglês britânico
   translateAmericanToBritish(text) {
     const dict = { ...americanOnly, ...americanToBritishSpelling };
     const titles = americanToBritishTitles;
@@ -30,7 +29,6 @@ class Translator {
     return translated;
   }
 
-  // Função para tradução de texto de inglês britânico para inglês americano
   translateBritishToAmerican(text) {
     const dict = { ...britishOnly, ...reverseDict(americanToBritishSpelling) };
     const titles = reverseDict(americanToBritishTitles);
@@ -53,12 +51,14 @@ class Translator {
     const matchesMap = {};
 
     // Verificação de títulos
-    Object.entries(titles).map(([key, val]) => {
-      if (lowerText.includes(key)) {
-        matchesMap[key] = val.charAt(0).toUpperCase() + val.slice(1);
-      }
-    });
-    // Verificação de palavras com espaços no próprio dicionário
+    Object.entries(titles)
+      .sort((a, b) => b[0].length - a[0].length)
+      .map(([key, val]) => {
+        if (lowerText.includes(key)) {
+          matchesMap[key] = val.charAt(0).toUpperCase() + val.slice(1);
+        }
+      });
+
     const wordsWithSpaces = Object.fromEntries(
       Object.entries(dict).filter(([key, val]) => key.includes(" ")),
     );
@@ -68,13 +68,13 @@ class Translator {
         matchesMap[key] = val;
       }
     });
-    //Verificação de Hífem
+
     lowerText.match(/(\w+([-'])(\w+)?['-]?(\w+))|\w+/g).forEach((word) => {
       if (dict[word]) {
         matchesMap[word] = dict[word];
       }
     });
-    // Verificação de horas
+
     const matchedTimes = lowerText.match(timeRegex);
 
     if (matchedTimes) {
@@ -86,11 +86,9 @@ class Translator {
       });
     }
 
-    // No Matches
     if (Object.keys(matchesMap).length === 0) return null;
-    console.log("matchesMap:", matchesMap);
+    console.log("Translation", matchesMap);
     const translation = this.replaceAll(text, matchesMap);
-    // Text Highlights
     const translationWithHighlight = this.replaceAllWithHighlight(
       text,
       matchesMap,
