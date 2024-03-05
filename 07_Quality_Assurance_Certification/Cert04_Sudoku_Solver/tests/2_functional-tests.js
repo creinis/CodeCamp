@@ -270,4 +270,3 @@ suite("Functional Tests", function () {
       });
   });
 });
-

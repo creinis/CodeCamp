@@ -5,21 +5,6 @@ const { puzzlesAndSolutions } = require("../controllers/puzzle-strings.js");
 const Solver = require("../controllers/sudoku-solver.js");
 let solver = new Solver();
 
-//Write the following tests in tests/1_unit-tests.js:
-
-// Test01 - Logic handles a valid puzzle string of 81 characters
-// Test02 - Logic handles a puzzle string with invalid characters (not 1-9 or .)
-// Test03 - Logic handles a puzzle string that is not 81 characters in length
-// Test04 - Logic handles a valid row placement
-// Test05 - Logic handles an invalid row placement
-// Test06 - Logic handles a valid column placement
-// Test07 - Logic handles an invalid column placement
-// Test08 - Logic handles a valid region (3x3 grid) placement
-// Test09 - Logic handles an invalid region (3x3 grid) placement
-// Test10 - Valid puzzle strings pass the solver
-// Test11 - Invalid puzzle strings fail the solver
-// Test12 - Solver returns the expected solution for an incomplete puzzle
-
 suite("Unit Tests", () => {
   // Test01 - Logic handles a valid puzzle string of 81 characters
   test("Test01 - Logic handles a valid puzzle string of 81 characters", function (done) {
