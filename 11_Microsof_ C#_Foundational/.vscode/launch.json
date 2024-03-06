@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational",
+      "program": "/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/build/Debug/outDebug"
+    }
+  ]
+}
