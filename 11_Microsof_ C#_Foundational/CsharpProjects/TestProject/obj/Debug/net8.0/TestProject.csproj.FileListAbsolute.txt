@@ -1,0 +1,15 @@
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/bin/Debug/net8.0/TestProject
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/bin/Debug/net8.0/TestProject.deps.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/bin/Debug/net8.0/TestProject.runtimeconfig.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/bin/Debug/net8.0/TestProject.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/bin/Debug/net8.0/TestProject.pdb
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.GeneratedMSBuildEditorConfig.editorconfig
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.AssemblyInfoInputs.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.AssemblyInfo.cs
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.csproj.CoreCompileInputs.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.sourcelink.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/refint/TestProject.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.pdb
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.genruntimeconfig.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/CsharpProjects/TestProject/obj/Debug/net8.0/ref/TestProject.dll
