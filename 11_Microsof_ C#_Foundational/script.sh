@@ -1,6 +1,6 @@
 # criar um novo projeto .net compilável
 dotnet new console -n GradesAverageApp
-dotnet new console -o ./CsharpProjects/TestProject
+dotnet new console -o ./ProjectName
 
 # compile and build output project
 dotnet build
