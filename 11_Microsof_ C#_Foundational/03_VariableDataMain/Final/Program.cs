@@ -107,83 +107,86 @@ do
         menuSelection = readResult.ToLower();
     }
 
-    // use switch-case to process the selected menu option
-    switch (menuSelection)
-    {
-        case "1":
-            // list all pet info
-            for (int i = 0; i < maxPets; i++)
+  // ... (o código anterior permanece o mesmo)
+
+// use switch-case to process the selected menu option
+switch (menuSelection)
+{
+    case "1":
+        // list all pet info
+        for (int i = 0; i < maxPets; i++)
+        {
+            if (ourAnimals[i, 0] != "ID #: ")
             {
-                if (ourAnimals[i, 0] != "ID #: ")
+                Console.WriteLine();
+                for (int j = 0; j < 7; j++)
                 {
-                    Console.WriteLine();
-                    for (int j = 0; j < 7; j++)
-                    {
-                        Console.WriteLine(ourAnimals[i, j].ToString());
-                    }
+                    Console.WriteLine(ourAnimals[i, j].ToString());
                 }
             }
-            Console.WriteLine("\n\rPress the Enter key to continue");
+        }
+        Console.WriteLine("\n\rPress the Enter key to continue");
+        readResult = Console.ReadLine();
+
+        break;
+
+    case "2":
+        // Display all dogs with a specified characteristic");
+
+        string dogCharacteristic = "";
+
+        while (dogCharacteristic == "")
+        {
+            // have the user enter physical characteristics to search for
+            Console.WriteLine($"\nEnter one desired dog characteristics to search for");
             readResult = Console.ReadLine();
-
-            break;
-
-        case "2":
-            // Display all dogs with a specified characteristic");
-
-            string dogCharacteristic = "";
-
-            while (dogCharacteristic == "")
+            if (readResult != null)
             {
-                // have the user enter physical characteristics to search for
-                Console.WriteLine($"\nEnter one desired dog characteristics to search for");
-                readResult = Console.ReadLine();
-                if (readResult != null)
-                {
-                    dogCharacteristic = readResult.ToLower().Trim();
-                }
+                dogCharacteristic = readResult.ToLower().Trim();
             }
+        }
 
-            bool noMatchesDog = true;
-            string dogDescription = "";
+        bool noMatchesDog = true;
+        string dogDescription = "";
 
-            // #6 loop through the ourAnimals array to search for matching animals
-            for (int i = 0; i < maxPets; i++)
+        // #6 loop through the ourAnimals array to search for matching animals
+        for (int i = 0; i < maxPets; i++)
+        {
+            bool dogMatch = true;
+
+            if (ourAnimals[i, 1].Contains("dog"))
             {
-                bool dogMatch = true;
-
-                if (ourAnimals[i, 1].Contains("dog"))
+                
+                if (dogMatch == true)
                 {
+                    // #7 Search combined descriptions and report results
+                    dogDescription = ourAnimals[i, 4] + "\n" + ourAnimals[i, 5];
                     
-                    if (dogMatch == true)
+
+                    if (dogDescription.Contains(dogCharacteristic))
                     {
-                        // #7 Search combined descriptions and report results
-                        dogDescription = ourAnimals[i, 4] + "\n" + ourAnimals[i, 5];
-                        
+                        Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!");
+                        Console.WriteLine(dogDescription);
 
-                        if (dogDescription.Contains(dogCharacteristic))
-                        {
-                            Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!");
-                            Console.WriteLine(dogDescription);
-
-                            noMatchesDog = false;
-                        }
+                        noMatchesDog = false;
                     }
                 }
             }
+        }
 
-            if (noMatchesDog)
-            {
-                Console.WriteLine("None of our dogs are a match found for: " + dogCharacteristic);
-            }
+        if (noMatchesDog)
+        {
+            Console.WriteLine("None of our dogs are a match found for: " + dogCharacteristic);
+        }
 
-            Console.WriteLine("\n\rPress the Enter key to continue");
-            readResult = Console.ReadLine();
+        Console.WriteLine("\n\rPress the Enter key to continue");
+        readResult = Console.ReadLine();
 
-            break;
+        break;
 
-        default:
-            break;
-    }
+    default:
+        break;
+}
+
 
 } while (menuSelection != "exit");
