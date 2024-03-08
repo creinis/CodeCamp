@@ -28,3 +28,12 @@ comparisonMessage += String.Format("{0:P}", newReturn).PadRight(10);
 comparisonMessage += String.Format("{0:C}", newProfit).PadRight(20);
 
 Console.WriteLine(comparisonMessage);
+
+comparisonMessage = currentProduct.PadRight(20);
+Console.WriteLine(comparisonMessage);
+
+comparisonMessage += String.Format("{0:P}", currentReturn).PadRight(10);
+Console.WriteLine(comparisonMessage);
+
+comparisonMessage += String.Format("{0:C}", currentProfit).PadRight(20);
+Console.WriteLine(comparisonMessage);
