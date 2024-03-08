@@ -1,0 +1,15 @@
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/bin/Debug/net7.0/Final
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/bin/Debug/net7.0/Final.deps.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/bin/Debug/net7.0/Final.runtimeconfig.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/bin/Debug/net7.0/Final.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/bin/Debug/net7.0/Final.pdb
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.GeneratedMSBuildEditorConfig.editorconfig
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.AssemblyInfoInputs.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.AssemblyInfo.cs
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.csproj.CoreCompileInputs.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.sourcelink.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/refint/Final.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.pdb
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/Final.genruntimeconfig.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/obj/Debug/net7.0/ref/Final.dll

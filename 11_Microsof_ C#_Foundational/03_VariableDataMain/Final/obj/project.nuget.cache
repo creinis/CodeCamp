@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vbt9UVPgOjwiS6ZvbrS3y2BWgM6c+LS6YhMm4b0HA/n7kfudMoIeo+b+C0kxg5t7d+oANu0vQXBxvNZwen2sOA==",
+  "success": true,
+  "projectFilePath": "/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/03_VariableDataMain/Final/Final.csproj",
+  "expectedPackageFiles": [
+    "/Users/carlosreinis/.nuget/packages/microsoft.netcore.app.ref/7.0.16/microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
+    "/Users/carlosreinis/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.16/microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512",
+    "/Users/carlosreinis/.nuget/packages/microsoft.netcore.app.host.osx-x64/7.0.16/microsoft.netcore.app.host.osx-x64.7.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}
