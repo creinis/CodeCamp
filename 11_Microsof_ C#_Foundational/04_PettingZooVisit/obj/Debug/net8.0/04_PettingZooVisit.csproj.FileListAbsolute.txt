@@ -1,0 +1,15 @@
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/bin/Debug/net8.0/04_PettingZooVisit
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/bin/Debug/net8.0/04_PettingZooVisit.deps.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/bin/Debug/net8.0/04_PettingZooVisit.runtimeconfig.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/bin/Debug/net8.0/04_PettingZooVisit.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/bin/Debug/net8.0/04_PettingZooVisit.pdb
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.GeneratedMSBuildEditorConfig.editorconfig
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.AssemblyInfoInputs.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.AssemblyInfo.cs
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.csproj.CoreCompileInputs.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.sourcelink.json
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/refint/04_PettingZooVisit.dll
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.pdb
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/04_PettingZooVisit.genruntimeconfig.cache
+/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_PettingZooVisit/obj/Debug/net8.0/ref/04_PettingZooVisit.dll
