@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "95Q0iyHcy5nIDe36zlBWszyrRK+htwhMMyOm/w0q4bzkjy3/9+iNyCVGwthg6MjuiVzPC4tfNFm74YTWs7lUXA==",
+  "success": true,
+  "projectFilePath": "/Users/carlosreinis/Projects/CodeCamp/11_Microsof_ C#_Foundational/04_MiniGame_Challenge/Starter/Starter.csproj",
+  "expectedPackageFiles": [
+    "/Users/carlosreinis/.nuget/packages/microsoft.netcore.app.ref/6.0.27/microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "/Users/carlosreinis/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.27/microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512",
+    "/Users/carlosreinis/.nuget/packages/microsoft.netcore.app.host.osx-x64/6.0.27/microsoft.netcore.app.host.osx-x64.6.0.27.nupkg.sha512"
+  ],
+  "logs": []
+}
