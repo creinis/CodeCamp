@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 char matrix[3][3];  // a matriz do jogo
 char player;  // 'X' ou 'O'
@@ -9,21 +10,25 @@ void init_matrix(void);
 void get_player_move(void);
 void get_computer_move(void);
 void disp_matrix(void);
+void clear_screen(void);
 
 int main(void)
 {
     char done;
 
+    clear_screen();
     printf("Este é o jogo do Jogo da Velha. Você estará\n");
     printf("jogando contra o computador. Boa sorte!\n");
 
     printf("Escolha sua peça (X ou O): ");
-    scanf("%c", &player);
+    scanf(" %c", &player);
+    player = toupper(player);
 
     done =  ' ';
     init_matrix();
 
     do {
+        clear_screen();
         disp_matrix();
         get_player_move();
         done = check(); /* vê se o vencedor é */
@@ -32,9 +37,10 @@ int main(void)
         done = check(); /* vê se o vencedor é */
     } while(done== ' ');
 
+    clear_screen();
+    disp_matrix(); /* mostra a posição final */
     if(done==player) printf("Você ganhou!\n");
     else printf("Eu ganhei!!!!\n");
-    disp_matrix(); /* mostra a posição final */
 
     return 0;
 }
@@ -60,7 +66,7 @@ void get_player_move(void)
     printf("Numero: ");
     scanf("%d", &y);
 
-    x = c - 'A';
+    x = toupper(c) - 'A';
     y--;
 
     if(matrix[x][y]!= ' '){
@@ -93,14 +99,14 @@ void disp_matrix(void)
 {
     int t;
 
-    printf("   A   B   C\n");
-    printf("  -----------\n");
+    printf("    A   B   C\n");
+    printf("  +---+---+---+\n");
     for(t=0; t<3; t++) {
-        printf("%d |%c | %c | %c |\n", t+1, matrix[t][0],
+        printf("%d | %c | %c | %c |\n", t+1, matrix[t][0],
                matrix[t][1], matrix [t][2]);
-        if(t!=2) printf("  ---|---|---\n");
+        if(t!=2) printf("  +---+---+---+\n");
     }
-    printf("  -----------\n");
+    printf("  +---+---+---+\n");
     printf("\n");
 }
 
@@ -129,3 +135,12 @@ char check(void)
     return ' ';
 }
 
+/* Limpa a tela */
+void clear_screen(void)
+{
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
