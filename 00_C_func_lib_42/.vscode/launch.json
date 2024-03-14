@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/carlosreinis/Projects/CodeCamp/00_C_func_lib_42",
+      "program": "/Users/carlosreinis/Projects/CodeCamp/00_C_func_lib_42/build/Debug/outDebug"
+    }
+  ]
+}
