@@ -1,4 +1,4 @@
 
-gcc main.c -o jogo
+gcc batalha_naval.c -o jogo
 ./jogo
 
