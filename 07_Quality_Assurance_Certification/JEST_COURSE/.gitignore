@@ -1,0 +1,30 @@
+# Arquivos de log
+*.log
+
+.env
+
+# Diretório de dependências
+/node_modules
+/packages
+
+# Código compilado
+*.o
+*.pyc
+*.class
+
+# Diretórios de saída de build
+/bin
+/out
+/target
+
+# Arquivos gerados no período de execução
+*.log
+*.lock
+*.tmp
+
+# Arquivos de sistema ocultos
+.DS_Store
+Thumbs.db
+
+# Arquivos pessoais de configuração do IDE
+.idea/workspace.xml
