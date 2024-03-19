@@ -76,10 +76,10 @@ int main() {
     system("cls || clear");
 
     // Elementos do tabuleiro
-    char *upper_legend = "\n    A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T                      HISTÓRICO DE JOGADAS\n";
-    char *upper_lines =  "  ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗                        P01  |   CPU\n";
-    char *middle_lines = "  ╟───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───╢                                    \n";
-    char *lower_lines =  "  ╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝                                    \n";
+    char *upper_legend = "\n    A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T                  HISTÓRICO DE JOGADAS\n";
+    char *upper_lines =  "  ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗                    P01  |   CPU\n";
+    char *middle_lines = "  ╟───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───╢                                \n";
+    char *lower_lines =  "  ╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝                                \n";
 
     // Tabuleiro
     char board[10][20];
