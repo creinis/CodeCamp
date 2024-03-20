@@ -1,0 +1,65 @@
+
+The 3 Pillars of API Security
+
+Governance:
+    developing secure APIs 
+
+    Benefits: 
+        consistency
+        settings expectations
+        estabilishing standard processes
+        enforcing Security
+    Awareness:
+        know your API
+        know your data
+        know your risks (identify, assess, probability, impact, mitigation)
+    Policy:
+        engeneering processes
+        API documentation (OpenAPI Specification - Swagger / is the market standard)
+        style guides (Design Guides: Promove Governance, Consistency)
+            AuthenticationAuthorization
+            Naming Conventions
+            Error Codes
+            Versioning
+            Units, Formats, Standards
+
+
+Testing:
+    Ensuring APIs are free of flaws 
+
+    Standard Playbook:
+        cross-site scripting, injections, buffer overflow
+        Important to run these tests to avoid bot-based attacks
+        API breaches rarely exploit these
+        Major breaches typcally business logic flaws
+    
+    API Security:
+        unsecured endpoints
+        authentication exploits
+        enumeration
+        App DOS, rate limiting
+        Missing TLS, SSL issues
+        Injection, fuzzing
+        Fuzzing, input validation
+        Server-side resource forgery
+        Server properties leaks
+    
+    Data Security:
+        Access control
+        Excessive data exposure
+        Sensitive data exposure
+        Personal, Health, Bank data
+        File, directory exposure
+        Encrypting at rest
+        data exfiltration
+
+    Business Logic:
+        Cross-account Access
+        API function abuse
+        role-based access control
+        pen-Testing
+        
+
+Monitoring:
+    Detecting threats in production
+
