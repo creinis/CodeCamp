@@ -58,3 +58,12 @@ test('the data is peanut', async () => {
     const data = await fetchPromise();
     expect(data).toBe('peanut');
 });
+
+// Mock
+test('mock implementation of a basic function', () => {
+    const mock = jest.fn(x => 42 + x);
+    expect(mock(1)).toBe(43);
+    expect(mock).toHaveBeenCalledWith(1);
+    expect(mock(42)).toBe(84);
+    expect(mock).toHaveBeenCalledWith(42);
+});
