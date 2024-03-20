@@ -1,4 +1,7 @@
+
 const sum = require('./sum');
+
+// Test Matchers
 test('adds 1 + 2 to equal 3', () => {
     expect(sum(1, 2)).toBe(3);
 });
@@ -17,4 +20,41 @@ test('null is falsy', () => {
 test('one is truthy', () => {
     const n = 1;
     expect(n).toBeTruthy();
+});
+
+
+const myFunction = require('./myFunction');
+
+test('throws on invalid input', () => {
+    expect(() => {
+        myFunction('asdf');
+    }).toThrow();
+});
+
+// callback functions
+const fetchData = require('./fetchData');
+
+test('the data is peanut', done => {
+    function callback(data) {
+        try {
+            expect(data).toBe('peanut');
+            done();
+        } catch (error) {
+            done(error);
+        }
+    }
+    fetchData(callback);
+});
+
+// Promise
+const fetchPromise = require('./fetchPromise');
+
+test('the data is peanut', () => {
+    return expect(fetchPromise()).resolves.toBe('peanut');
+});
+
+// Async Await
+test('the data is peanut', async () => {
+    const data = await fetchPromise();
+    expect(data).toBe('peanut');
 });
