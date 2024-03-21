@@ -58,8 +58,32 @@ Testing:
         API function abuse
         role-based access control
         pen-Testing
-        
+
 
 Monitoring:
     Detecting threats in production
+
+    Runtime Protectoin:
+        policy enforcement
+        authenticationtraffic filtering
+    
+    Threat Detection:
+        fraudulent traffic
+        distributed attacks
+        incident response
+
+    Control Validation:
+        verify API controls
+        uncover anomalies
+
+    Monitoring Approaches:
+    
+        Proactive: Blocking
+            API Gateway
+            Web App firewall
+
+        Reactive: Alerting
+            Logging, SIEM
+            Runtime API Threat Management
+
 
