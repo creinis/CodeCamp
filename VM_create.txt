@@ -1,0 +1,53 @@
+
+Criar Virtual Machine para Kali Linux adm64
+
+
+Baixe e instale o VirtualBox: 
+    https://www.virtualbox.org/wiki/Downloads
+
+Baixe a imagem do Kali Linux: 
+    https://www.kali.org/get-kali/#kali-virtual-machines
+
+Add Kali Virtual Machine na pasta: 
+    user/VirtualBox VMs 
+
+No Oracle VM VirtualBox Manager:
+    select kali-linux => start
+
+Update Kali
+
+Once you have your Kali VM up and running, open the Kali Linux Terminal and use the following commands 
+to update your system:
+
+    $ sudo apt update -y
+
+    $ sudo apt upgrade -y
+
+    $ sudo apt dist-upgrade -y
+
+ 
+Update User Accounts
+
+When starting a new operating system it is always a great idea to update default credentials:
+
+    $ sudo passwd kali    (enter in a new more complex password)
+
+    $ sudo useradd -m hapihacker
+
+    $ sudo usermod -a -G sudo hapihacker
+
+    $ sudo chsh -s /bin/zsh hapihacker
+
+  
+Burp Suite Community Edition
+
+Burp Suite should come stock with the latest version of Kali, but if it does not then use 
+the following command:
+
+    $ sudo apt-get install burpsuite -y
+
+Download Jython (https://www.jython.org/download.html) 
+and add the .jar file to the Extender Options:
+
+
+
