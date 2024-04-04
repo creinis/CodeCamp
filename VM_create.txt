@@ -71,11 +71,14 @@ Burp Suite Certificate
 
     Start Burp Suite.
     Open your browser of choice.
-    Using FoxyProxy, select the BurpSuite proxy. Navigate to http://burpsuite and click the CA Certificate. This should initiate the download of the Burp Suite CA certificate.
+    Using FoxyProxy, select the BurpSuite proxy. Navigate to http://burpsuite and click the CA Certificate. 
+    This should initiate the download of the Burp Suite CA certificate.
     Save the certificate somewhere you can find it.
-    Open your browser and import the certificate. In Firefox, open Preferences and use the search bar to look up certificates. Import the certificate.
+    Open your browser and import the certificate. In Firefox, open Preferences and use the search bar to 
+    look up certificates. Import the certificate.
     In Chrome, open Settings, use the search bar to look up certificates,
-    select More>Manage Certificates>Authorities, and import the certificate. If you do not see the BurpSuite cacert.der certificate. (You may need to expand the file type options to “DER” or “All files").
+    select More>Manage Certificates>Authorities, and import the certificate. 
+    If you do not see the BurpSuite cacert.der certificate. (You may need to expand the file type options to “DER” or “All files").
 
 Now that you have the PortSwigger CA certificate added to your browser, you should be able to intercept traffic without experiencing issues.
 
