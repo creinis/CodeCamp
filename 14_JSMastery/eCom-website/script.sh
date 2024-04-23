@@ -7,3 +7,6 @@ npm install -D tailwindcss postcss autoprefixer
 
 #! initialize
 npx tailwindcss init -p
+
+#! G-sap animation
+npm install gsap @gsap/react
