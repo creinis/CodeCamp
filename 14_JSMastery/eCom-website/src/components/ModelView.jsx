@@ -6,6 +6,7 @@ import Loader from './Loader';
 import IPhone from './IPhone';
 import { Suspense } from "react";
 
+// eslint-disable-next-line react/prop-types
 const ModelView = ({ index, groupRef, gsapType, controlRef, setRotationState, size, item }) => {
   return (
     <View
@@ -14,6 +15,7 @@ const ModelView = ({ index, groupRef, gsapType, controlRef, setRotationState, si
       className={`w-full h-full absolute ${index === 2 ? 'right-[-100%]' : ''}`}
     >
       {/* Ambient Light */}
+      // eslint-disable-next-line react/no-unknown-property
       <ambientLight intensity={0.3} />
 
       <PerspectiveCamera makeDefault position={[0, 0, 4]} />
