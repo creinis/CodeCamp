@@ -14,3 +14,7 @@ npm install gsap @gsap/react
 #! Three.js and utility helpers (3D)
 npm install three @react-three/drei @react-three/fiber
 
+#! Sentry
+npm install --save @sentry/react
+npx @sentry/wizard@latest -i sourcemaps
+
