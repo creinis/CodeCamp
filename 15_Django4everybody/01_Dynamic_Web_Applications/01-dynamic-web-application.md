@@ -7,7 +7,7 @@ web server: Django / Flask; sqlite3 / MySql
 HTTP: Hyper Text Transfer Protocol
 
 uniform resource locator:
-http://  | data.pr4e.org | /page1.html
+http://  | data.pr4e.org | /page1.htm
 protocol |     host      |  document
 
 make a connection => request a document => retrieve the document => close the connection
@@ -21,7 +21,7 @@ Internet Engineering Task Force
 www.ietf.org
 
 Standards are called RFCs - requests for comments
-```
+```bash
 telnet data.pr4e.org 80
 Trying 192.241.136.170...
 Connected to data.pr4e.org.
@@ -34,7 +34,7 @@ Content-Length: 308
 Connection: close
 Content-Type: text/html; charset=iso-8859-1
 ```
-```
+```html
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html><head>
 <title>400 Bad Request</title>
@@ -47,6 +47,8 @@ Content-Type: text/html; charset=iso-8859-1
 </body></html>
 Connection closed by foreign host.
 ```
+TCP connection / Sockets
+socket is an endpoint of a bidectional inter-process communication flow across internet protocol-based computer network 
 
 
 
