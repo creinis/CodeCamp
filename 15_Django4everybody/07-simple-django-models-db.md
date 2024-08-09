@@ -92,6 +92,36 @@ User.objects.values().order_by('email')
 User.objects.values().order_by('-name')
 ```
 
+### Model Field Types in ORM
+- AutoField
+- BigAutoField
+- BigIntegerField
+- BinaryField
+- BooleanField
+- CharField
+- DateField
+- DateTimeField
+- DecimalField
+- DurationField
+- EmailField
+- FileField
+- FilePathField
+- FloatField
+- ImageField
+- IntegerField
+- GenericIPAddressField
+- NullBooleanField
+- PositiveIntegerField
+- PositiveSmallIntegerField
+- SlugField
+- SmallIntegerField
+- TextField
+- TimeField
+- URLField
+- ForeignKey
+- ManyToManyField
+- OneToOneField
+
 
 
 
