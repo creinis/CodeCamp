@@ -122,6 +122,60 @@ User.objects.values().order_by('-name')
 - ManyToManyField
 - OneToOneField
 
+### Django for Everybody - Single Table Models
+
+https://www.dj4e.com/lectures/DJ-02-Model-Single.txt
+
+You can check out the Django code for this project at:
+
+https://github.com/csev/dj4e-samples
+
+Start the command line in a Linux/Bash shell and go into your project folder.
+Activate a virtual environment if needed.
+```bash
+cd dj4e-samples
+git pull                          # incase there are updates
+pip install -r requirements4.txt  # to make sure that all the utilities are there
+
+python manage.py check           # Make sure things are set up
+python manage.py makemigrations  # Probably won't find any changes
+rm db.sqlite3                     # In case you have done this before
+python manage.py migrate         # Create the database and table(s)
+
+Start the django shell:
+
+python manage.py shell
+
+# (In the shell at the prompt) 
+
+from users.models import User
+
+u = User(name='Kristen', email='kf@umich.edu')
+u.save()
+u = User(name='Chuck', email='csev@umich.edu')
+u.save()
+u = User(name='Colleen', email='cvl@umich.edu')
+u.save()
+u = User(name='Ted', email='ted@umich.edu')
+u.save()
+u = User(name='Sally', email='a2@umich.edu')
+u.save()
+
+User.objects.values()
+User.objects.filter(email='csev@umich.edu').values()
+
+User.objects.filter(email='ted@umich.edu').delete()
+User.objects.values()
+
+User.objects.filter(email='csev@umich.edu').update(name='Charles')
+User.objects.values()
+
+User.objects.values().order_by('email')
+User.objects.values().order_by('-name')
+
+quit()
+```
+
 
 
 
