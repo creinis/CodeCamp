@@ -73,8 +73,24 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
+## CRUD in the ORM
 
+```python
+u = User(name='Sally', email='sally@email')
+u.save()
 
+User.objects.values()
+User.objects.filter(email='sally@email').values()
+
+User.objects.filter(email='sally@email').delete()
+User.objects.values()
+
+User.objects.filter(email='sally@email').update(name='saly')
+User.objects.values()
+
+User.objects.values().order_by('email')
+User.objects.values().order_by('-name')
+```
 
 
 
