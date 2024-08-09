@@ -176,6 +176,16 @@ User.objects.values().order_by('-name')
 quit()
 ```
 
+## Sumary of ORM
+
+The Django Models feature implements an Object Relational Mapper
+Benefits of it:
+- can write only Python code, no need for explicit SQL codes;
+- gain in db portability
+- migrations both create and evolve the db schema
+- a sweet administration interface
+- automatic form generation and validation
+
 
 
 
