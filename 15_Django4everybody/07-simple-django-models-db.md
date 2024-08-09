@@ -41,6 +41,31 @@ DROP TABLE Users;
 .quit
 ```
 
+## Object Relational Mapping - ORM
+
+Allow to map tables to objects and columns
+Use those objects to store and retrieve data from the db
+improve portability across dbs dialects (SQLite, MySQL, Postgres, Oracle)
+Django create a model in top of the dbs dialects
+
+Python Model Library 
+    models.py           < == >      dbs / dialects
+
+#### Defining a Table:
+ ```SQL
+ CREATE TABLE Users(name VARCHAR(128), email VARCHAR(128));
+ ```
+ ```python
+ //models.py
+
+ from django.db import models
+
+ class User(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.CharField(max_length=128)
+```
+
+
 
 
 
