@@ -64,6 +64,14 @@ Python Model Library
     name = models.CharField(max_length=128)
     email = models.CharField(max_length=128)
 ```
+This is a migration explanation / implementation
+
+In practice we do:
+```python
+python3 manage.py makemigrations
+
+python3 manage.py migrate
+```
 
 
 
