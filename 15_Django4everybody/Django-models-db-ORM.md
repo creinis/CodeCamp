@@ -142,7 +142,7 @@ python manage.py makemigrations  # Probably won't find any changes
 rm db.sqlite3                     # In case you have done this before
 python manage.py migrate         # Create the database and table(s)
 
-Start the django shell:
+#Start the django shell:
 
 python manage.py shell
 
@@ -162,7 +162,12 @@ u = User(name='Sally', email='a2@umich.edu')
 u.save()
 
 User.objects.values()
+<QuerySet [{'id': 1, 'name': 'Kristen', 'email': 'kf@umich.edu'}, {'id': 2, 'name': 'Charles', 'email': 'csev@umich.edu'}, {'id': 3, 'name': 'Colleen', 'email': 'cvl@umich.edu'
+}, {'id': 5, 'name': 'Sally', 'email': 'a2@umich.edu'}, {'id': 6, 'name': 'Kristen', 'email': 'kf@umich.edu'}, {'id': 7, 'name': 'Chuck', 'email': 'csev@umich.edu'}, {'id': 8, 
+'name': 'Colleen', 'email': 'cvl@umich.edu'}, {'id': 9, 'name': 'Ted', 'email': 'ted@umich.edu'}, {'id': 10, 'name': 'Sally', 'email': 'a2@umich.edu'}]>
+
 User.objects.filter(email='csev@umich.edu').values()
+<QuerySet [{'id': 2, 'name': 'Charles', 'email': 'csev@umich.edu'}, {'id': 7, 'name': 'Chuck', 'email': 'csev@umich.edu'}]>
 
 User.objects.filter(email='ted@umich.edu').delete()
 User.objects.values()
@@ -185,6 +190,16 @@ Benefits of it:
 - migrations both create and evolve the db schema
 - a sweet administration interface
 - automatic form generation and validation
+
+
+# Migrations from Model to DB
+
+- The `makemigrations` command reads all the models.py files in all the applications, end creates / evolves the migration files
+- Guided by the applications listed in settings.py
+- Migrations are portable across dbs
+- The `migrate` command reads all the migrations folder in the application folders and creates / evolves the tables in the db.
+
+The sumary is: `makemigrations` runs all models.py files and transforme it in a file that can actualy use explicit dbs languages. Than run `migrate` command to to run these new files created by the previous `makemigration` and finally combine models and / or data to the db.
 
 
 
