@@ -155,6 +155,7 @@ The primary piece of information we have available to get URL is an identificati
 
 
 ## Generic Views:
+An exemple of appling inheritance
 
 ```python
 class CatListView(View):
@@ -162,7 +163,12 @@ class CatListView(View):
         stuff = Cat.objects.all()
         cntx = { 'cat_list': stuff }
         return render(request, 'gview/cat_list.html', cntx)
+```
 
+CatListView is an obvious solution but is not a DRY one. Because it fits only for this case.
+In the DogListView bellow we try to mahe method inside the class a little more flexible so we can apply to similar cases througth the `model` declaration.
+
+```python
 class DogListView(View):
     model = Dog
     def get(self, request):
@@ -171,7 +177,19 @@ class DogListView(View):
         cntx = { modelname+'_list' : stuff}
         return render(request, 'gview/'+modelname+'_list.html', cntx)
 ```
-An exemple of appling inheritance
+Now we can sofisticate more and transform it in a generic view as follows
+
+project/gviews/views.py
+```python
+class ListView(View):
+    def get(self, request):
+        modelname = self.model._meta.verbose_name.title().lower()
+        stuff = self.model.objects.all()
+        cntx = { modelname+'_list' : stuff}
+        return render(request, 'gview/'+modelname+'_list.html', cntx)
+```
+
+Here an exemple of how to reuse the generic class
 
 ```python
 from django.views import generic
