@@ -154,6 +154,31 @@ In other words, what's needed is a DRY mechanism. Among other advantages it woul
 The primary piece of information we have available to get URL is an identification (the name) of the view in charge of handling it. Other pieces of information that necessarily must participate in the lookup of the right URL are the types (positional, keyword) and values of the view arguments.
 
 
+## Generic Views:
+
+```python
+class CatListView(View):
+    def get(self, request):
+        stuff = Cat.objects.all()
+        cntx = { 'cat_list': stuff }
+        return render(request, 'gview/cat_list.html', cntx)
+
+class DogListView(View):
+    model = Dog
+    def get(self, request):
+        modelname = self.model._meta.verbose_name.title().lower()
+        stuff = self.model.objects.all()
+        cntx = { modelname+'_list' : stuff}
+        return render(request, 'gview/'+modelname+'_list.html', cntx)
+```
+An exemple of appling inheritance
+
+```python
+from django.views import generic
+
+class HorseListView(generic.ListView):
+    model = Horse
+```
 
 
 
