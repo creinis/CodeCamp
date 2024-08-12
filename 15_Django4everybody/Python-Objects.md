@@ -10,19 +10,118 @@ Defines the abstract characteristics of a thing (object), including the thing's 
 ### Method or Message
 a defined capability of a class - bark()
 
-
 ### Field or Attribute
 a bit of data in a class - length
-
 
 ### Object or Instance
 a particular instance of a class - Lassie
 
 One can have an instance of a Class or a particular objetc. The instance is the actual objetc created at runtime. In programmers jargon, the Lassie object is an instance of the Dog Class. The set of values of the attributes of a particular object is called its state. The object consists of state and the behavior that's defined in the object's class.
+Object and Instance are often used interchargeably.
+
+#### Sumary Definitions
+- Class: a template
+- Attribute: a variable within a class
+- Method: a function with a class
+- Object: a particular instance of a class
+- Constructor: code that runs when an objetc is created
+- Inheritance: the ability to extend a class to make a new class 
+
+
+## Object Lifecycle
+Constructor and Destructor.
+destructors are rarelly created, they are normaly called by default by python
+
+```python
+class PartyAnimal:
+
+    def __init__(self):
+        self.x = 0
+        print('constructed')
+    
+    def party(self):
+        self.x = self.x + 1
+        print('So far', self.x)
+    
+    def __del__(self):
+        print('destructed', self.x)
+
+an = PartyAnimal()
+an.party()
+an.party()
+an = 42
+print('an contains', an)
+```
+The constructor and destructor are optional. The constructor is typically used to set up variables. The destructor is seldom used.
+
+A Constructor is a special block of code to set up an object.
+In Object Oriented Programming a constructor in a class is a special block of statements called when an object is created.
+
+### Many Instances:
+
+```python
+class PartyAnimal:
+
+    def __init__(self, z):
+        self.x = 0
+        self.name = z
+        print(self.name, 'constructed')
+    
+    def party(self):
+        self.x = self.x + 1
+        print(self.name, 'party count', self.x)
+
+s = PartyAnimal("Sally")
+s.party()
+j = PartyAnimal("Jim")
+
+j.party()
+s.party()
+```
+Constructors can have additional parameters. These can be used to set up instance variables for the particular instance of the class (for the particular object).
+
+### Inheritance
+
+ - When we make a new class - we can reuse an existing class and inherit all the capabilities of an existing class and then add our own little bit to make our new class.
+ - Another form of store and reuse
+ - Write once - reuse many times
+ - The new class (child) has all the capabilities of the old class (parent) - and then some more
+
+```python
+class PartyAnimal:
+
+    def __init__(self, z):
+        self.x = 0
+        self.name = z
+        print(self.name, 'constructed')
+    
+    def party(self):
+        self.x = self.x + 1
+        print(self.name, 'party count', self.x)
+
+class FootballFan (PartyAnimal):
+
+    def __init__(self, nam):
+        super().__init__(nam)
+        self.points = 0
+    
+    def touchdown(self):
+        self.points = self.points + 7
+        self.party()
+        print(self.name, "points", self.points)
+
+s = PartyAnimal("Sally")
+s.party()
+
+j = FootballFan("Jim")
+j.party()
+j.touchdown()
+```
+FootballFan is a class which extends PartyAnimal. It has all the capabilities of PartyAnimal and more.
 
 
 
-5. Data Structures
+1. Data Structures
 
 This chapter describes some things you’ve learned about already in more detail, and adds some new things as well.
 5.1. More on Lists
