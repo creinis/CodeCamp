@@ -180,6 +180,7 @@ class DogListView(View):
 Now we can sofisticate more and transform it in a generic view as follows
 
 project/gviews/views.py
+
 ```python
 class ListView(View):
     def get(self, request):
@@ -198,6 +199,12 @@ class HorseListView(generic.ListView):
     model = Horse
 ```
 
+### Sumary:
+
+- Generic Views allow us to produce lots of similar pages without cutting, pasting and editing boiler plates
+- Quicker development
+- Consistent User Experience
+- Less lines of code means fewer mistakes
 
 
 
