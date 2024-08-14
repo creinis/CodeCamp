@@ -32,6 +32,73 @@
   - When the form is submitted th CSRF Token is sent as well as the cookie
   - The site looks up the session and rejects the request if the incoming CSRF Token does not match the session's CSRF Token
 
+#### Enabling CSRF defense in Django
+ - Django has built in support to generate, use, and check CSRF Tokens
+ - Activated by default in `settings.py`
+```python
+        MIDDLEWARE = [
+            ...
+            'django.middleware.csrf.CsrfViewMiddleware',
+            ...
+        ]
+```
+### CSRF in Forms
+
+Django CSRF in Template
+```python
+<p>Guessing Game</p>
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+<form method="post">
+<p><label for="guess"> Input Guess </label>
+{% csrf_token %}
+<input type="text" name="guess" size="40" id="guess"/></p>
+<input type="submit"/>
+</form>
+```
+
+getpost/view.py
+```python
+class ClassyView(View):
+    def get(self, request):
+        return render(request, 'getpost/guess.html')
+    
+    def post(self, request):
+        guess = request.POST.get('guess')
+        msg = checkguess(guess)
+        return render(request, 'getpost/guess.html', {'message' : msg})
+```
+
+## The POST Refresh Pattern
+
+By default if we have a 200 error after making a POST request and the user hit refresh buttom the browser will redo de POST action and this is a pattern that reveals a real problem. So don't allow double posts.
+ - typically POST request are adding or modifying data whilst GET request view data
+ - it may be dangerous to do the same POST twice (say withdrowing funds from a bank account)
+ - so the browser insists on asking the user (out of your control)
+ - kind of an ugly UX / bad usability
+ - as developers we work so this never can happen
+
+## POST-REDIRECT-GET-Refresh
+
+This solve the problem of POST Refresh Pattern
+POST Redirect Rule
+
+```python
+class ClassyView(View):
+    def get(self, request):
+        msg = request.session.get('msg', False)
+        if ( msg ) : del(request.session['msg'])
+        return render(request, 'getpost/guess.html', {'message' : msg})
+    
+    def post(self, request):
+        guess = request.POST.get('guess')
+        msg = checkguess(guess)
+        request.session['msg'] = msg
+        return redirect(request.path)
+```
+
+
 
 
 
