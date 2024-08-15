@@ -211,6 +211,9 @@ admin.py
  - Our goarl is to avoid the really bad mistakes and design clean and easily understood models
  - Model design starts with a sample data set and draws a picture
 
+![one-to-one-data-model](./assets/one-to-one-data-model.png)
+
+
 
 
 
