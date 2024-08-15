@@ -213,8 +213,15 @@ admin.py
 
 ![one-to-one-data-model](./assets/one-to-one-data-model.png)
 
+## Database Normalization (3NF)
+ - there is tons of database theory/math - we simplify this to a few rules
+ - Do not replicate data - reference data - point at data
+ - add a special unique key column to each table which we will make references to. By convention many programmers and frameworks call this column id
+ - use integers for to make links between tables - integers are fast and small
 
+![many-to-one-data-model](./assets/many-to-one-01.png)
 
+![many-to-one-data-model](./assets/many-to-one-02.png)
 
 
 
