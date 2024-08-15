@@ -201,6 +201,16 @@ Benefits of it:
 
 The sumary is: `makemigrations` runs all models.py files and transforme it in a file that can actualy use explicit dbs languages. Than run `migrate` command to to run these new files created by the previous `makemigration` and finally combine models and / or data to the db.
 
+# One-To-Many Data Models
+
+model.py
+admin.py
+
+## Model Design
+ - Model design is an art form of its own with particular skills and experience
+ - Our goarl is to avoid the really bad mistakes and design clean and easily understood models
+ - Model design starts with a sample data set and draws a picture
+
 
 
 

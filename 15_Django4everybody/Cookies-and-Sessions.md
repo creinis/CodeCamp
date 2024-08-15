@@ -33,6 +33,21 @@ def cookie(request):
 - Server software stores data in the sessions that it wants to have from one request to another from the same browser
 - Shopping cart or login information is stored in the session in the server
 
+#### Enabling Sessions in Django
+ - Activated by default in `settings.py` when we run `python3 manage.py migrate`
+
+```python
+    MIDDLEWARE = [
+        ...
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        ...
+    ]
+```
+### Django Sessions
+it's basically a dictionary, key value pairs
+
+ - The incoming request object has a request.session attribute that we can treat like a dictionary that persists from  one request to the next request
+ - As long we have the session middleware enabled in settings.py and the database table, and the browser allows cookies, we just store and read request.session inour views and pretend it is 'magic'
 
 
 
