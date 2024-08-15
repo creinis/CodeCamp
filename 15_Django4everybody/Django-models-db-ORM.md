@@ -223,8 +223,13 @@ admin.py
 
 ![many-to-one-data-model](./assets/many-to-one-02.png)
 
+## Representing Links (Relationships) in a Database
 
+First study, just slice the initial data set in as many tables as we need to do not repeat data
+![data-model-no-key](./assets/data-model.png)
 
+Applying concept of keys to link tables, primary-key and foreign-key
+![data-model-no-key](./assets/data-model-pk-fk.png)
 
 
 
