@@ -253,7 +253,49 @@ The data model diagram represents with the magenta arrow the `Book` data schema,
 
 ![data-model-no-key](./assets/Books-adn-Lang-tables.png)
 
+#### About on_delete
+ - on_delete = set_null # => keep the row but set foreign key to null
+ - on_delete = cascade # => delete the row
 
+It's very important to correct manage conditions for the foreign keys to keep the table and the relationship between tables valid on deleting.
+
+The conditions on_delete in the classes say:
+- If a Language is deleted is ok for a Book to do not have any language, because Books are allowed to do not have a language by saying null=True `lang = models.ForeignKey('Lang', on_delete=models.SET_NULL, null=True)`
+- If a Book is deleted we do not need an Instance for that particular Book, so we use cascade to delete all instances of the book that was deleted. `due_book = models.DataField(null=True, blank=True)`
+
+## Using Models in the Django Shell
+
+```shell
+cd ~/dj4e-samples
+python3 manage.py shell
+```
+```python
+from bookone.models import Book, Lang, Instace
+z = Lang(name='en')
+z.save()
+z.id
+
+x = Book(title='PY4E', isbn='42', lang=z)
+x.save()
+x.id
+
+a = Instance(due_back="2020-07-06", book=x)
+a.save()
+a.id
+
+quit()
+```
+
+## Demo Bash Loading from CSV
+```bash
+pip3 install django-extensions
+```
+#### Make a scripts folder
+```bash
+mkdir scripts
+touch scripts/__init__.py
+```
+We place empty __init__.py files in folders to indicate to Python that they contain files that hold modules and as such are suitable for importing into a Python application
 
 
 
