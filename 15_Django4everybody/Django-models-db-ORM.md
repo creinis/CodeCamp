@@ -231,6 +231,44 @@ First study, just slice the initial data set in as many tables as we need to do 
 Applying concept of keys to link tables, primary-key and foreign-key
 ![data-model-no-key](./assets/data-model-pk-fk.png)
 
+Basic modelling concept for the 3 tables we need, Languages, Books and Instance of Book
+
+```python
+from django.db import models
+
+class Lang(models.Model):
+    name = models.CharField(max_length=200)
+
+class Book(models.Model):
+    title = models.CharField(max_length=200) 
+    isbn = models.CharField(max_length=13) 
+    lang = models.ForeignKey('Lang', on_delete=models.SET_NULL, null=True) #allowing empty
+
+class Instance(models.Model):
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    due_book = models.DataField(null=True, blank=True)
+```
+
+The data model diagram represents with the magenta arrow the `Book` data schema, and with the yellow arrow the `Instance` schema.
+
+![data-model-no-key](./assets/Books-adn-Lang-tables.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
