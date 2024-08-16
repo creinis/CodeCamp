@@ -82,6 +82,7 @@ Here are some general specifications for this assignment:
             return self.nickname
 ```
     Run the commands to perform the migrations.
+
     Add a link to django_projects/mysite/home/templates/home/main.html that has the text for the top-level page.
 
 ```python
