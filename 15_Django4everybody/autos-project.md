@@ -75,13 +75,13 @@ OK    Edit the autos/models.py file to add Auto and Makes models with a foreign 
 A data model diagram showing Autos and Makes
 ![create-forms-flow](./assets/AutosMakeDiagram.png)
 
-    Run the python manage.py check until you see no errors
+OK    Run the python manage.py check until you see no errors
 
-    Run the python manage.py makemigrations until it has no errors. Sometimes when you make changes to models.py, the makemigrations will pick up on the changes and ask you for example if you want to rename a field. Sometimes you make a change to your models.py and makemigrations gets stuck or lost. If migrations gets stuck, you might need to start with a fresh database.
+OK    Run the python manage.py makemigrations until it has no errors. Sometimes when you make changes to models.py, the makemigrations will pick up on the changes and ask you for example if you want to rename a field. Sometimes you make a change to your models.py and makemigrations gets stuck or lost. If migrations gets stuck, you might need to start with a fresh database.
 
-    Run the python manage.py migrate to create the database.
+OK    Run the python manage.py migrate to create the database.
 
-    Edit autos/admin.py to add the Auto and Make models to the Django administration interface.
+OK    Edit autos/admin.py to add the Auto and Make models to the Django administration interface.
 
     Run the python manage.py check until you see no errors
 
