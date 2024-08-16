@@ -49,29 +49,31 @@ and make it work in your autos project. As always there is a lot of code in dj4e
 
 Here are some tasks:
 
-    Go into your dj4e-samples folder and do a git pull to get the latest version of the samples code.
+OK    Go into your dj4e-samples folder and do a git pull to get the latest version of the samples code.
 
-    Create mysite/home/templates/registration folders and copy the (login.html) template from dj4e-samples into mysite/home/templates/registration/login.html.
+OK    Create mysite/home/templates/registration folders and copy the (login.html) template from dj4e-samples into mysite/home/templates/registration/login.html.
 
-    Copy the file from dj4e-samples/home/templates/base_bootstrap.html into your mysite/home/templates/base_bootstrap.html - this will be used in your autos/templates and make our HTML look better by applying the Bootstrap and other styling libraries.
+OK    Copy the file from dj4e-samples/home/templates/base_bootstrap.html into your mysite/home/templates/base_bootstrap.html - this will be used in your autos/templates and make our HTML look better by applying the Bootstrap and other styling libraries.
 
-    Edit mysite/mysite/settings.py add the autos application to the list of INSTALLED_APPS. You can follow the pattern of the HomeConfig line in that file.
+OK    Edit mysite/mysite/settings.py add the autos application to the list of INSTALLED_APPS. You can follow the pattern of the HomeConfig line in that file.
 
-    Edit mysite/mysite/urls.py and add the accounts/ path so you can use the Django built in login features. (Authentication Views). Also edit mysite/mysite/urls.py to route autos/ urls to autos/urls.py file.
+OK    Edit mysite/mysite/urls.py and add the accounts/ path so you can use the Django built in login features. (Authentication Views). Also edit mysite/mysite/urls.py to route autos/ urls to autos/urls.py file.
 
     path('accounts/', include('django.contrib.auth.urls')),  # Add
     path('autos/', include('autos.urls')),                   # Add
 
-    Edit the autos/views.py file to add views for the list, create, update, and delete views for both autos and makes based on the sample code.
+OK    Edit the autos/views.py file to add views for the list, create, update, and delete views for both autos and makes based on the sample code.
 
-    Create/Edit the autos/urls.py file to add routes for views for both autos and makes
+OK    Create/Edit the autos/urls.py file to add routes for views for both autos and makes
 
-    Create/Edit the autos/forms.py file to add the form for MakeForm
+OK    Create/Edit the autos/forms.py file to add the form for MakeForm
 
-    In your views.py file, you can start out using the Make views from the sample code, but once you have the application working, you should come back and rewrite the Make views using the same patterns as the Auto views. If you switch to the pattern in the Autos views and use the generic edit views on your Make views you no longer need to have a MakeForm or forms.py. You can either write the long version of the views or the short version of the views - the short version is easier to code but more challenging to understand because it relies so heavily on a complex parent object and inheritance.
-    Edit the autos/models.py file to add Auto and Makes models with a foreign key from Autos to Makes.
+OK    In your views.py file, you can start out using the Make views from the sample code, but once you have the application working, you should come back and rewrite the Make views using the same patterns as the Auto views. If you switch to the pattern in the Autos views and use the generic edit views on your Make views you no longer need to have a MakeForm or forms.py. You can either write the long version of the views or the short version of the views - the short version is easier to code but more challenging to understand because it relies so heavily on a complex parent object and inheritance.
+
+OK    Edit the autos/models.py file to add Auto and Makes models with a foreign key from Autos to Makes.
 
 A data model diagram showing Autos and Makes
+![create-forms-flow](./assets/AutosMakeDiagram.png)
 
     Run the python manage.py check until you see no errors
 
