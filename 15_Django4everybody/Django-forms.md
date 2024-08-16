@@ -102,6 +102,34 @@ class ClassyView(View):
 
 ![create-forms-flow](./assets/FormFlow.png)
 
+## Data validation
+
+```python
+class Validate(View):
+    #GET
+    def get(self, request):
+        old_data = {
+            'title' : 'SakaiCar',
+            'mileage' : 42,
+            'purchase_date' : '2018-08-14'
+        }
+        form = BasicForm(initial=old_data)
+        ctx = { 'form' : form }
+        return render(request, 'form/form.html', ctx) #200
+    
+    # POST
+    def post(self, request):
+        form = BasicForm(request.POST)
+        if not form.is_valid():
+            ctx = { 'form' : form }
+            return render(request, 'form/form.html', ctx) #200
+        # if there are no errors, we would save the data
+        return redirect('/form/success') #302 and than redirect to success
+
+def success(request):
+    return HttpResponse('Thank you') #200
+
+```
 
 
 
