@@ -101,6 +101,7 @@ class ClassyView(View):
 # Forms in Django
 
 ![create-forms-flow](./assets/FormFlow.png)
+https://docs.djangoproject.com/en/4.2/ref/templates/builtins/
 
 ## Data validation
 
