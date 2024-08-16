@@ -98,7 +98,9 @@ class ClassyView(View):
         return redirect(request.path)
 ```
 
+# Forms in Django
 
+![create-forms-flow](./assets/FormFlow.png)
 
 
 
