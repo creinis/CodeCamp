@@ -83,11 +83,11 @@ OK    Run the python manage.py migrate to create the database.
 
 OK    Edit autos/admin.py to add the Auto and Make models to the Django administration interface.
 
-    Run the python manage.py check until you see no errors
+OK    Run the python manage.py check until you see no errors
 
-    Create a superuser so you can test the admin interface and log in to the application.
+OK    Create a superuser so you can test the admin interface and log in to the application.
 
-    Create the necessary template files in autos/templates/autos to support your views. Note that the the second sub folder under templates is there to make sure that templates are not inadvertently shared across multiple applications within a Django project.
+OK    Create the necessary template files in autos/templates/autos to support your views. Note that the the second sub folder under templates is there to make sure that templates are not inadvertently shared across multiple applications within a Django project.
 
     Find the line in your base_bootstrap.html that looks like this:
 
@@ -141,14 +141,6 @@ It is always a good idea to manually test your application before submitting it 
     Autos CRUD Sample Code - https://github.com/csev/dj4e-samples/tree/main/autos
     Installing Django Locally - https://www.dj4e.com/assn/dj4e_install.md
     Embedding SVG in Markdown - https://stackoverflow.com/questions/13808020/include-an-svg-hosted-on-github-in-markdown
-
-
-
-
-
-
-
-
 
 
 
