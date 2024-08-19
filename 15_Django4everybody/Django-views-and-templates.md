@@ -206,13 +206,165 @@ class HorseListView(generic.ListView):
 - Consistent User Experience
 - Less lines of code means fewer mistakes
 
+---
+
+# Inside a Generic Edit View
+
+`class django.views.generic.list.ListView`
+
+A page representing a list of objects. While this view is executing, self.object_list will contain the list of objects (usually, but no necessarily a queryset) that this view is operating upon.
+
+Method Flowchart
+1. setup()
+2. dispatch()
+3. http_method_not_allowed()
+4. get_template_names()
+5. get_queryset()
+6. get_context_object_name()
+7. get_context_data()
+8. get()
+9. render_to_response()
+
+![Method Flowchart](./assets/EditFormFlow_FlowChart.png)
 
 
+## Owner List View
 
 
+### Models:
+Codes from samples/myarts/models.py
+
+```python
+from django.db import models
+from django.core.validators import MinLengthValidator
+from django.contrib.auth.models import User
+from django.conf import settings
 
 
+class Article(models.Model):
+    title = models.CharField(
+            max_length=200,
+            validators=[MinLengthValidator(2, "Title must be greater than 2 characters")]
+    )
+    text = models.TextField()
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    # Shows up in the admin list
+    def __str__(self):
+        return self.title
+```
+
+owner represents a Foreign Key to a table that belongs to Django.
+
+
+### Views:
+Codes from samples/myarts/views.py
+
+```python
+from myarts.models import Article
+from myarts.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
+
+
+class ArticleListView(OwnerListView):
+    model = Article
+    # By convention:
+    # template_name = "myarts/article_list.html"
+
+class ArticleDetailView(OwnerDetailView):
+    model = Article
+
+class ArticleCreateView(OwnerCreateView):
+    model = Article
+    # List the fields to copy from the Article model to the Article form
+    fields = ['title', 'text']
+
+class ArticleUpdateView(OwnerUpdateView):
+    model = Article
+    fields = ['title', 'text']
+    # This would make more sense
+    # fields_exclude = ['owner', 'created_at', 'updated_at']
+
+class ArticleDeleteView(OwnerDeleteView):
+    model = Article
+```
+
+This codes show how to do not repeat yourself.
+Using the models to create all the new classes that we need (OwnerDeleteView, OwnerUpdateView, OwnerCreateView, OwnerDetailView, OwnerListView).
+
+And now:
+### Models:
+Codes from samples/myarts/owner.py
+
+```python
+
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class OwnerListView(ListView):
+    """
+    Sub-class the ListView to pass the request to the form.
+    """
+
+
+class OwnerDetailView(DetailView):
+    """
+    Sub-class the DetailView to pass the request to the form.
+    """
+
+
+class OwnerCreateView(LoginRequiredMixin, CreateView):
+    """
+    Sub-class of the CreateView to automatically pass the Request to the Form
+    and add the owner to the saved object.
+    """
+
+    # Saves the form instance, sets the current object for the view, and redirects to get_success_url().
+    def form_valid(self, form):
+        print('form_valid called')
+        object = form.save(commit=False)
+        object.owner = self.request.user
+        object.save()
+        return super(OwnerCreateView, self).form_valid(form)
+
+
+class OwnerUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Sub-class the UpdateView to pass the request to the form and limit the
+    queryset to the requesting user.
+    """
+
+    def get_queryset(self):
+        print('update get_queryset called')
+        """ Limit a User to only modifying their own data. """
+        qs = super(OwnerUpdateView, self).get_queryset()
+        return qs.filter(owner=self.request.user)
+
+
+class OwnerDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    Sub-class the DeleteView to restrict a User from deleting other
+    user's data.
+    """
+
+    def get_queryset(self):
+        print('delete get_queryset called')
+        qs = super(OwnerDeleteView, self).get_queryset()
+        return qs.filter(owner=self.request.user)
+```
+
+### References
+
+ https://docs.djangoproject.com/en/4.2/ref/class-based-views/mixins-editing/#django.views.generic.edit.ModelFormMixin.form_valid
+
+ https://stackoverflow.com/questions/862522/django-populate-user-id-when-saving-a-model
+
+ https://stackoverflow.com/a/15540149
+
+ https://stackoverflow.com/questions/5531258/example-of-django-class-based-deleteview
 
 
 
