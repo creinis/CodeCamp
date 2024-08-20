@@ -32,51 +32,51 @@
 
 ### Comparison Operators
 
->> j = 10
+'>> j = 10
 this is a statement. 
 j has been assigned to the value of 10.
 
->> j == 10
+'>> j == 10
 this is a verification.
 Is j iquals to 10?
 
->> j != 10
+'>> j != 10
 this is a verification.
 Is j not 10?
 
->> j === 10
+'>> j === 10
 this is a verification.
 Has j the value of 10 and also the same kind as 10.
 
 ### Logical Operators
 
->> k > 1 && j < 5 (AND)
+'>> k > 1 && j < 5 (AND)
 both sides must be true to evaluate the expression to true.
 if one of the sides or both of then are false the expression evaluates to false.
 
->> k > 1 || j < 5 (OR)
+'>> k > 1 || j < 5 (OR)
 just one of these sides must be true to evaluate the expression to true.
 if both are true the expression also evaluates to true.
 evaluates to false only if both sides are false.
 
->> ! (k > 10) (NOT)
+'>> ! (k > 10) (NOT)
 evaluates to true only if the condition k > 10 is false.
 
 ### Variable Conversion
 
 If a string cannot be converted to a number, you end up with "Not a Number" or "NaN". It is a value, but it is sticky - all operations with NaN as a operand end up with NaN.
 
->> x = "fred" + 1
+'>> x = "fred" + 1
 NaN
->> isNaN(x)
+'>> isNaN(x)
 NaN
->> x = x + 1
+'>> x = x + 1
 NaN
->> y = 42/0
+'>> y = 42/0
 Infinity
->> isNaN(y)
+'>> isNaN(y)
 false
->> isInfinity(y)
+'>> isInfinity(y)
 false
 
 ## Functions and Arrays
@@ -123,9 +123,9 @@ The return keyword functions as expected
      - ==   is it the same as
      - !=   not equal
      - <    less than
-     - >    greater than
+     - '>    greater than
      - <=   less or equal than
-     - >=   greater or equal than
+     - '>=   greater or equal than
      - &&   AND
      - ||   OR
      - !    NOT
