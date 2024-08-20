@@ -115,6 +115,68 @@ The return keyword functions as expected
 #### In Javascript we have Objects & Arrays
 ---
 
+## Control Structures
+
+### Conditionl - if
+
+ - Logical operators:
+     - ==   is it the same as
+     - !=   not equal
+     - <    less than
+     - >    greater than
+     - <=   less or equal than
+     - >=   greater or equal than
+     - &&   AND
+     - ||   OR
+     - !    NOT
+     - ===  same as and same type as
+     - !==  is it not the same as
+ - Curly braces
+
+```HTML
+<script type="text/javascript">
+    var ans = 42;
+    if (ans == 42) {
+        console.log("Hello world!");
+    } else {
+        console.log("Wrong answer");
+    }
+</script>
+```
+### Multi-way Ifs
+
+```HTML
+<script type="text/javascript">
+
+    var x = 7;
+
+    if (x < 2) {
+        console.log("Small");
+    } elseif ( x > 10) {
+        console.log("Medium");
+    } else {
+        console.log("Large");
+    }
+    console.log("All done");
+
+</script>
+```
+
+A While loop is a "zerp-trip" loop with the test at the top before the first iteration starts. 
+We hand a construct the iteration variable to implement a counted loop.
+
+```Javascript
+var fuel = 10;
+
+while (fuel > 2) {
+    console.log("Not in Reserve Alarm Mode")
+    fuel = fuel -1;
+}
+console.log("Reserve Mode - Refill the Tank!");
+```
+
+### for loop
+![for-loop](./assets/for-loop.png)
 
 
 
