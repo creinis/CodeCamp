@@ -179,6 +179,37 @@ console.log("Reserve Mode - Refill the Tank!");
 ![for-loop](./assets/for-loop.png)
 
 
+### Breaking Out of a loop
+The break statement ends the current loop and jumps to the statement immediately following the loop.
+
+---
+
+# Object Oriented Programming in JavaScript
+is exactly the same as in other languages!
+
+## Definitions:
+- Class: a temple - Dog
+- Method or Message - a defined capability of a class - bark()
+- Attribute - a definid data item in a class - color
+- Object or Instance - a particular instance of a class - Lassie
+
+## Terminology:
+
+### Instance:
+One can have an instance of a Class or a particular object. The instance is the actual object created at runtime, In programmer jargon, the Lassie object is an instance of the Dog class.The set of values of the attributes of a particular object is called its state. The object consists of state and the behavior that's defined in the object's class.
+
+### Method:
+An object's abilities. In language, methods are verbs. Lassie, being a Dog, has the ability to bark. So bark() is one of Lassie's methods. She may have other methods as well, for exemple sit() or eat() or walk(). Within the program, using a method usually affects only one particular object; all Dogs can bark, but you need only one particular dog to do the barking.
+
+### Objects in Javascript
+- The Object Oriented (OO) pattern in JS is a little different
+- The function is indeed a store and reuse pattern
+- The function keyword returns a value which is the function itself - it makes a function!
+
+### First-Class Functions
+In computer science, a programming language is said to have first-class functions if it treats functions as first-class citzens. Specifically, this means the language supports passing functions as arguments to other functions ,returning them as the values from other functions, and assigning them to variables or storing them in data structures.
+
+
 
 
 
