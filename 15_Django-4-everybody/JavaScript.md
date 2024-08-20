@@ -209,6 +209,46 @@ An object's abilities. In language, methods are verbs. Lassie, being a Dog, has 
 ### First-Class Functions
 In computer science, a programming language is said to have first-class functions if it treats functions as first-class citzens. Specifically, this means the language supports passing functions as arguments to other functions ,returning them as the values from other functions, and assigning them to variables or storing them in data structures.
 
+## Object Life Cycle
+- objects are created, used, and discarted
+- constructors are implicit in JS - natural
+    - A constructor in a class is a special block of statements called when an object is created
+- desconstructors are not provided by JS
+
+```javascript
+function PartyAnimal() {
+    this.x = 0;
+    console.log("In the 'constructor'");
+    this.party = function () {
+        this.x = this.x + 1;
+        console.log("So far "+this.x);
+    }
+}
+an = new PartyAnimal();
+an.party();
+an.party();
+an.party();
+```
+The purpose of a constructor in Object Oriented Programming is to set initial conditions of the Object.
+So the Object is ready to be used
+
+## Many Instances
+- we can create lots of objects - the class is the template for the object
+- we can store aech distinct object in its own variable
+- we call this having multiple instances of the same class
+- each instance has its own copy of the instance variables
+
+Constructors can have additional parameters. These can be used to set up instance variables for the particular instance of the class (for the particular object)
+
+```javascript
+s = new PartyAnimal("Sally");
+s.party();
+
+j = new PartyAnimal("Jim");
+j.party();
+s.party();
+```
+
 
 
 
