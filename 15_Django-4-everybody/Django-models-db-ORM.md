@@ -1,6 +1,11 @@
-## Simple Django Data Models db
+# Data Models - DB
 
-### SQL Sumary 
+# Table of Contents:
+- [SQL Sumary](# SQL Sumary)
+- [Object Relational Mapping - ORM](# Object Relational Mapping - ORM)
+-    
+
+# SQL Sumary 
 ```bash
 sqlite3 zip.sqlite3
 
@@ -41,7 +46,7 @@ DROP TABLE Users;
 .quit
 ```
 
-## Object Relational Mapping - ORM
+# Object Relational Mapping - ORM
 
 Allow to map tables to objects and columns
 Use those objects to store and retrieve data from the db
