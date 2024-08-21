@@ -32,6 +32,10 @@
   - [Demo Bash Loading from CSV](#demo-bash-loading-from-csv)
       - [Make a scripts folder](#make-a-scripts-folder)
 - [Many-To-Many Data Models](#many-to-many-data-models)
+  - [Complex Many-To-Many Exemple](#complex-many-to-many-exemple)
+    - [References](#references)
+  - [Demo Batch Loading from CSV](#demo-batch-loading-from-csv)
+    - [Loading Data from a File](#loading-data-from-a-file)
 - [Django Views and Templates](#django-views-and-templates)
   - [Secure Applications:](#secure-applications)
     - [XXS - Cross-Site Scripting](#xxs---cross-site-scripting)
@@ -54,7 +58,7 @@
     - [Models:](#models)
     - [Views:](#views)
     - [Models:](#models-1)
-    - [References](#references)
+    - [References](#references-1)
 - [Cookies and Sessions](#cookies-and-sessions)
   - [Multi-User / Multi-Browser](#multi-user--multi-browser)
   - [Django Cookies:](#django-cookies)
@@ -850,6 +854,161 @@ There is usually no separete primary key.
 We need two one-to-many relationships to capture a many-to-many.
 
 ![Many-to-many](./assets/ManyToMany02.png)
+
+Many-to-many Local library
+
+![Many-to-many](./assets/ManyToMany03.png)
+Legend:
+1..* Many with a minimum of 1
+0..* Many with a minimum of 0
+
+One Book must have at least one Author
+One Book may do not have a Genre
+
+```python
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    authors = models.ManyToManyField('Author', through='Authored')
+
+class Author(models.Model):
+    name = models.CharField(max_length=200)
+    books = models.ManyToManyField('Book', through='Authored')
+
+class Authored(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+```
+Django calls this relationship table as "through", so in Author and Books we have to parse through='Authored'.
+
+## Complex Many-To-Many Exemple
+
+![Many-to-many](./assets/ManyToMany04.png)
+
+```python
+class Person(models.Model):
+    email = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128, null=True)
+    courses = models.ManyToManyField('Course', through='Membership')
+
+    def __str__(self):
+        return self.email
+
+class Course(models.Model):
+    title = models.CharField(max_length=128, unique=True)
+    members = models.ManyToManyField('Person', through='Membership')
+
+    def __str__(self):
+        return self.title
+```
+
+![Many-to-many](./assets/ManyToMany05.png)
+
+```python
+class Membership(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    LEARNER = 1
+    IA = 1000
+    GSI = 2000
+    INSTRUCTOR = 5000
+    ADMIN = 10000
+
+    MEMBER_CHOICES = (
+        ( LEARNER, 'Learner'),
+        ( IA, 'Instructional Assistant' ),
+        ( GSI, 'Grad Student Instructor' ),
+        ( INSTRUCTOR, 'Instructor' ),
+        ( ADMIN, 'Administrator' ),
+    )
+    
+    role = models.IntegerField(
+        choices=MEMBER_CHOICES,
+        default=LEARNER,
+    )
+
+    def __str__(self):
+        return "Person "+ str(self.person.id) + " <--> Course " + str(self.course.id)
+```
+### References
+https://docs.djangoproject.com/en/4.2/topics/db/models/#extra-fields-on-many-to-many-relationships
+https://docs.djangoproject.com/en/4.2/ref/models/fields/#choices
+https://docs.djangoproject.com/en/4.2/topics/db/examples/many_to_many/
+https://docs.djangoproject.com/en/4.2/ref/models/fields/#datefield
+
+## Demo Batch Loading from CSV
+
+### Loading Data from a File
+- Sometimes we need to pre-load data into our Django database
+- This data might come from an API or a file
+- we need to write a Python program to function like the Django Shell
+
+Fluxogram Model:
+
+many/load.csv  =>  script/many_load.py  => db (sql database)
+                            ^
+                     many/models.py
+
+important to use django-extensions
+`pip3 install django-extensions`
+
+After installed you will need to edit settings.py in your project.
+```python
+...
+INSTALLED_APPS = [
+    #Extensions
+    'django_extensions",
+    ...
+]
+```
+
+Make a Script folder
+```bash
+mkdir scripts
+touch scripts/__init__.py
+```
+We place empty __init__.py files in folders to indicate to Python that they contain files that hold modules and as such are suitable for importing into a Python application.
+
+The Data File
+```bash
+cat many/load.csv
+```
+
+scripts/many_load.py
+```python
+import csv
+
+from many.m import Person, Course, Membership
+
+def run():
+    # open file and read
+    fhand = open('many/load.csv')
+    reader = csv.reader(fhand)
+
+    # clear data
+    Person.objects.all().delete()
+    Course.objects.all().delete()
+    Membership.objects.all().delete()
+
+    # fullfill db with the data in the file
+    for row in reader:
+        print(row)
+
+        # No vertical replication allowed, so check first and than create if don't exists
+        p, created = Person.objects.get_or_create(email=row[0])
+        c, created = Course.objects.get_or_create(title=row[2])
+
+        # membership conditions by role in throught table
+        r = Membership.LEARNER
+        if row[1] == 'I' : r = Membership.INSTRUCTOR
+        m = Membership(role=r, person=p, course=c)
+        m.save()
+
+```
+
+
 
 
 
