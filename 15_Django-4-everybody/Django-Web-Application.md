@@ -36,6 +36,7 @@
     - [References](#references)
   - [Demo Batch Loading from CSV](#demo-batch-loading-from-csv)
     - [Loading Data from a File](#loading-data-from-a-file)
+    - [Sumary of Many-to-Many data models](#sumary-of-many-to-many-data-models)
 - [Django Views and Templates](#django-views-and-templates)
   - [Secure Applications:](#secure-applications)
     - [XXS - Cross-Site Scripting](#xxs---cross-site-scripting)
@@ -1007,14 +1008,15 @@ def run():
         m.save()
 
 ```
-
-
-
-
-
-
-
-
+### Sumary of Many-to-Many data models
+- data modeling in both simplle and complex
+- don't allow string data to be replicated
+- we use keys and relationships
+    - primary key
+    - foreign key
+- relationships
+    - one-to-many
+    - many-to-many
 
 # Django Views and Templates
 
