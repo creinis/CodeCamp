@@ -1,9 +1,14 @@
 # Data Models - DB
 
 # Table of Contents:
-- [SQL Sumary](# SQL Sumary)
-- [Object Relational Mapping - ORM](# Object Relational Mapping - ORM)
--    
+- [SQL Sumary](#SQL-Sumary)
+- [Object Relational Mapping - ORM](#Object-Relational-Mapping---ORM)
+  - [Defining a Table](#Defining-a-Table)
+  - [CRUD in the ORM](#CRUD-in-the-ORM)
+  - [Sumary of ORM](#Sumary-of-ORM)
+- [Migrations from Model to DB](Migrations-from-Model-to-DB)
+- [One-To-Many Data Models](One-To-Many-Data-Models)
+- 
 
 # SQL Sumary 
 ```bash
@@ -56,7 +61,7 @@ Django create a model in top of the dbs dialects
 Python Model Library 
     models.py           < == >      dbs / dialects
 
-#### Defining a Table:
+## Defining a Table
  ```SQL
  CREATE TABLE Users(name VARCHAR(128), email VARCHAR(128));
  ```
