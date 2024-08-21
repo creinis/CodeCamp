@@ -1,14 +1,24 @@
 # Data Models - DB
 
 # Table of Contents:
-- [SQL Sumary](#SQL-Sumary)
-- [Object Relational Mapping - ORM](#Object-Relational-Mapping---ORM)
-  - [Defining a Table](#Defining-a-Table)
-  - [CRUD in the ORM](#CRUD-in-the-ORM)
-  - [Sumary of ORM](#Sumary-of-ORM)
-- [Migrations from Model to DB](Migrations-from-Model-to-DB)
-- [One-To-Many Data Models](One-To-Many-Data-Models)
-- 
+- [Data Models - DB](#data-models---db)
+- [Table of Contents:](#table-of-contents)
+- [SQL Sumary](#sql-sumary)
+- [Object Relational Mapping - ORM](#object-relational-mapping---orm)
+  - [Defining a Table](#defining-a-table)
+  - [CRUD in the ORM](#crud-in-the-orm)
+    - [Model Field Types in ORM](#model-field-types-in-orm)
+    - [Django for Everybody - Single Table Models](#django-for-everybody---single-table-models)
+  - [Sumary of ORM](#sumary-of-orm)
+- [Migrations from Model to DB](#migrations-from-model-to-db)
+- [One-To-Many Data Models](#one-to-many-data-models)
+  - [Model Design](#model-design)
+  - [Database Normalization (3NF)](#database-normalization-3nf)
+  - [Representing Links (Relationships) in a Database](#representing-links-relationships-in-a-database)
+      - [About on\_delete](#about-on_delete)
+  - [Using Models in the Django Shell](#using-models-in-the-django-shell)
+  - [Demo Bash Loading from CSV](#demo-bash-loading-from-csv)
+      - [Make a scripts folder](#make-a-scripts-folder)
 
 # SQL Sumary 
 ```bash
