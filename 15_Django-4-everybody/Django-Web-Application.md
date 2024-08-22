@@ -131,6 +131,8 @@
 - [JavaScript and the Browser](#javascript-and-the-browser)
   - [DOM - Document object Model](#dom---document-object-model)
     - [Modify the DOM:](#modify-the-dom)
+    - [Content Load Complete Event](#content-load-complete-event)
+    - [Network Events](#network-events)
 
 
 
@@ -2699,6 +2701,67 @@ function add() {
 </script>
 ```
 ![DOM](./assets/DOM02.png)
+
+We have been using events all along!
+ - Register a Click Event handler via an onClick attribute
+ - Setting a timer to run some of our code at some point in the future
+
+More pure Javascript event modal:
+```html
+<h1>A header</h1>
+<p><a id="zap">Click Me</a></p>
+<script>
+    function myFunc() {
+        console.log("I was clicked");
+    }
+    document.getElementById('zap')
+        .addEventListener('click', myFunc);
+</script>
+```
+
+Agood exemple of how an window event allow a responsive design
+```html
+<h1>A header</h1>
+<script>
+    function myFunc() {
+        console.log("Window size", 
+            window.innerHeight, window.innerWidth);
+    }
+    window.addEventListener('resize', myFunc);
+</script>
+```
+
+### Content Load Complete Event
+- Modern web pages are complex
+    - HTML
+    - CSS
+    - Images
+    - JavaScript Libraries
+- to display a page, sometimes > 100 assets are downloaded
+- There is a special DOM event that triggers when the browser is done
+
+```html
+<h1>A header</h1>
+<script>
+    function myFunc() {
+        console.log("The DOM has landed!");
+    }
+    document.addEventListener('DOMContentLoaded', myFunc);
+</script>
+```
+The special DOM is DOMContentLoaded
+
+### Network Events
+Network Operations in JavaScript - Asynchronous process
+ - Javascript can make network requests, receive those requests, and use the response data to alter the DOM
+ - Since network requests take time, we must use events
+   - Start the request
+   - Receive the request
+   - Process the request
+ - Each step is separete and completing one step atars the next
+
+
+
 
 
 
