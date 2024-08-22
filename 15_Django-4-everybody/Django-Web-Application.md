@@ -1008,6 +1008,10 @@ def run():
         m.save()
 
 ```
+
+![Many-to-many](./assets/ManyToMany06.png)
+
+
 ### Sumary of Many-to-Many data models
 - data modeling in both simplle and complex
 - don't allow string data to be replicated
@@ -1017,6 +1021,7 @@ def run():
 - relationships
     - one-to-many
     - many-to-many
+
 
 # Django Views and Templates
 
