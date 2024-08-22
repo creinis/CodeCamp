@@ -2801,6 +2801,34 @@ Network Operations in JavaScript - Asynchronous process
 
 # JSON / AJAX
 
+![Django-Model](./assets/DjangoModel.png)
+
+Data on the Web (2003):
+- With the HTTP Request/Response well understood and well supported, there was a natural move toward exchanging data between programs using these protocols
+- We needed to como up with an agreed way to represent data going getween applications and across network
+- The agreement is JSON - JavaScript Object Notation
+    - Douglas Crockford - "Discovered" JSON
+    - Object literal notation in Javascript (A constant basically)
+
+```javascript
+who = {
+    "name": "Chuck",
+    "age": 29, 
+    "college": true,
+    "offices" : [ "3350DMC", "3437NQ" ],
+    "skills" : { "fortran": 10, "C": 10, 
+        "C++": 5, "python" : 7 }
+};
+```
+content-type: application/json
+
+A Good Exemplo is the Chat project in samples directory
+`dj4e-samples/chat`
+
+
+
+
+
 
 
 
