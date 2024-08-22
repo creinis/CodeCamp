@@ -133,6 +133,8 @@
     - [Modify the DOM:](#modify-the-dom)
     - [Content Load Complete Event](#content-load-complete-event)
     - [Network Events](#network-events)
+    - [Sumary](#sumary-1)
+- [JSON / AJAX](#json--ajax)
 
 
 
@@ -2759,6 +2761,45 @@ Network Operations in JavaScript - Asynchronous process
    - Receive the request
    - Process the request
  - Each step is separete and completing one step atars the next
+
+```html
+<p>A Paragraph</p>
+<script>
+    fetch('secret.txt')
+        .then(response => {
+            console.log(response); return response.text()
+        }) 
+        .then(textString => {
+            console.log(textString);
+        });
+</script>
+```
+
+```html
+<p>A Paragraph</p>
+<p id="zap"></p>
+<script>
+    fetch('secret.txt')
+        .then(response => response.text() )
+        .then(textString => {
+            document.getElementById("zap")
+                .innerText = textString;
+        });
+</script>
+```
+
+### Sumary
+- Document Object Model (DOM)
+- Browser Window
+- UI Event Handlers
+- DOM Event Handlers
+- Window Event Handlers
+- Selectiong and changing an element / tag
+- Adding an element / tag to the DOM
+- Changing the CSS of an element
+- Making network requests from Javascript
+
+# JSON / AJAX
 
 
 
