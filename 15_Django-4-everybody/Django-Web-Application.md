@@ -128,7 +128,7 @@
     - [First-Class Functions](#first-class-functions)
   - [Object Life Cycle](#object-life-cycle)
   - [Many Instances](#many-instances-1)
-- [](#)
+- [JavaScript and the Browser](#javascript-and-the-browser)
 
 
 
@@ -2647,7 +2647,9 @@ j.party();
 s.party();
 ```
 
-# 
+# JavaScript and the Browser
+
+
 
 
 
