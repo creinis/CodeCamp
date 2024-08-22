@@ -129,6 +129,8 @@
   - [Object Life Cycle](#object-life-cycle)
   - [Many Instances](#many-instances-1)
 - [JavaScript and the Browser](#javascript-and-the-browser)
+  - [DOM - Document object Model](#dom---document-object-model)
+    - [Modify the DOM:](#modify-the-dom)
 
 
 
@@ -2649,6 +2651,54 @@ s.party();
 
 # JavaScript and the Browser
 
+In a desktop or server, you have an operating system like Windows, Linux, or MacOS and a Language like Python, PHP, and Java. Javascript is both the programming language in a browser and some of the operating system.
+- Document object Model (DOM)
+- Visible Window (Window)
+- Tabs
+- Events
+- Timers
+
+When does Javascript Executes?
+- Inline as the document in been parsed
+- As a result of some kind of UI Event (Click)
+- As a result of a timer expiring (setTimeout)
+- As a result os an asynchronous activity finishing (async.. await..)
+- First Class functions and "code as data" are essential to this execution model
+
+## DOM - Document object Model
+
+- the browser (and sometimes our Javascript) parses the HTML and produces a Document object Model which is then displayed to the user through a window
+- In our event and/or timer code ,we can read and manipulate the DOM
+- As the DOM is updated, the user sees the new UI through the window
+- Using a debugger, we can direcly manipulate the DOM
+
+DOM is an abstraction - The Window is where we can see it
+![DOM](./assets/DOM01.png)
+
+### Modify the DOM:
+ - When the DOM is modified and that portion of the DOM is viwable through the window the user sees the change in the UI
+ - we need to trigger some bit of our Javascript to make these changes
+ - we need a "handle" to find things in the DOM
+
+```html
+<p>
+<a href="#" onclick="add();return false;">More</a>
+</p>
+<ul id="zap">
+<li>First Item</li>
+</ul>
+<script>
+var counter = 1;
+function add() {
+    var x = document.createElement('li');
+    x.className = "list-item";
+    x.innerHTML = "The counter is "+counter;
+    document.getElementById('zap').appendChild(x);
+    counter++;
+}
+</script>
+```
+![DOM](./assets/DOM02.png)
 
 
 
