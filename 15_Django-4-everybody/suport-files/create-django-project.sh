@@ -58,6 +58,13 @@ pip freeze
 #LOGOUT_URL = 'logout'
 #LOGIN_REDIRECT_URL = '/'
 
+# Executa as migrações para configurar o banco de dados inicial
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+
+
 
 
 
